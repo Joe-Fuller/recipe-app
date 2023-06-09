@@ -5,20 +5,6 @@ import axios from "axios";
 const AddRecipeScreen = () => {
   const [url, setUrl] = useState("");
 
-  const getAllRecipes = async () => {
-    try {
-      const response = await axios
-        .get("https://recipe-app.cyclic.app/recipes")
-        .then((res) => {
-          console.log(res);
-        });
-
-      console.log(response);
-    } catch (error) {
-      console.error("Failed to get recipes:", error);
-    }
-  };
-
   const handleAddRecipe = async () => {
     try {
       const response = await axios.post(
@@ -27,6 +13,8 @@ const AddRecipeScreen = () => {
           url,
         }
       );
+
+      console.log(response);
 
       if (response.status === 201) {
         // Recipe added successfully
