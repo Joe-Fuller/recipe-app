@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import AddRecipeScreen from "./screens/AddRecipeScreen";
+import GetRecipesScreen from "./screens/GetRecipesScreen";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>Recipe App</Text>
-      <AddRecipeScreen></AddRecipeScreen>
+      <GetRecipesScreen></GetRecipesScreen>
       <StatusBar style="auto" />
     </View>
   );
