@@ -7,18 +7,12 @@ const AddRecipeScreen = () => {
 
   const handleAddRecipe = async () => {
     try {
-      //   const response = await axios.post(
-      //     "https://recipe-app.cyclic.app/recipes",
-      //     {
-      //       url,
-      //     }
-      //   );
-
-      const response = await axios.post("https://localhost:3000/recipes", {
-        url,
-      });
-
-      console.log(response);
+      const response = await axios.post(
+        "https://recipe-app.cyclic.app/recipes",
+        {
+          url,
+        }
+      );
 
       if (response.status === 201) {
         // Recipe added successfully
