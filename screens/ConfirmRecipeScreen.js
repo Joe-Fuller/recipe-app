@@ -36,23 +36,30 @@ const ConfirmRecipeScreen = (props) => {
   // Render ingredient inputs
   const renderIngredients = () => {
     return ingredients.map((ingredient, index) => (
-      <View key={index}>
+      <View key={index} style={styles.ingredientContainer}>
         <TextInput
-          placeholder="Ingredient Name"
-          value={ingredient.name}
-          onChangeText={(text) => updateIngredient(index, "name", text)}
-        />
-        <TextInput
+          style={styles.amountInput}
           placeholder="Amount"
           value={ingredient.amount}
           onChangeText={(text) => updateIngredient(index, "amount", text)}
         />
         <TextInput
+          style={styles.unitsInput}
           placeholder="Units"
           value={ingredient.units}
           onChangeText={(text) => updateIngredient(index, "units", text)}
         />
-        <Button title="Remove" onPress={() => removeIngredient(index)} />
+        <TextInput
+          style={styles.nameInput}
+          placeholder="Ingredient Name"
+          value={ingredient.name}
+          onChangeText={(text) => updateIngredient(index, "name", text)}
+        />
+        <Button
+          title="Remove"
+          onPress={() => removeIngredient(index)}
+          style={styles.removeButton}
+        />
       </View>
     ));
   };
@@ -93,12 +100,6 @@ const ConfirmRecipeScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   formContainer: {
     width: "100%",
     borderWidth: 1,
@@ -106,12 +107,32 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 10,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
-    padding: 10,
-    marginBottom: 10,
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 16,
+  },
+  ingredientContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  amountInput: {
+    width: 80,
+    marginRight: 8,
+  },
+  unitsInput: {
+    width: 80,
+    marginRight: 8,
+  },
+  nameInput: {
+    flex: 1,
+    marginRight: 8,
+  },
+  removeButton: {
+    marginLeft: "auto",
   },
 });
 
