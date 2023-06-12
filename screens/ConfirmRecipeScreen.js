@@ -13,6 +13,7 @@ const ConfirmRecipeScreen = (props) => {
   const [recipeName, setRecipeName] = useState(recipe.name);
   const [timeToCook, setTimeToCook] = useState(recipe.timeToCook);
   const [ingredients, setIngredients] = useState(recipe.ingredients);
+  const [instructions, setInstructions] = useState(recipe.instructions);
 
   // Helper function to handle adding new ingredient
   const addIngredient = () => {
@@ -64,6 +65,46 @@ const ConfirmRecipeScreen = (props) => {
     ));
   };
 
+  // Helper function to handle adding new instruction
+  const addInstruction = () => {
+    setInstructions([...instructions, ""]);
+  };
+
+  // Helper function to handle updating instruction
+  const updateInstruction = (index, value) => {
+    const updatedInstructions = [...instructions];
+    updatedInstructions[index] = value;
+    setInstructions(updatedInstructions);
+  };
+
+  // Helper function to handle removing instruction
+  const removeInstruction = (index) => {
+    const updatedInstructions = [...instructions];
+    updatedInstructions.splice(index, 1);
+    setInstructions(updatedInstructions);
+  };
+
+  // Render instructions inputs
+  const renderInstructions = () => {
+    return instructions.map((instruction, index) => (
+      <View key={index} style={styles.instructionItem}>
+        <Text style={styles.instructionIndex}>{index + 1}.</Text>
+        <TextInput
+          placeholder={`Step ${index + 1}`}
+          value={instruction}
+          onChangeText={(text) => updateInstruction(index, text)}
+          multiline={true}
+          style={[styles.instructionText, { maxHeight: 15 * 20 }]} // Adjust the line height here (e.g., 20)
+        />
+        <Button
+          title="Remove"
+          onPress={() => removeInstruction(index)}
+          style={styles.removeButton}
+        />
+      </View>
+    ));
+  };
+
   return (
     <View contentContainerStyle={styles.container}>
       <ScrollView style={styles.formContainer}>
@@ -85,8 +126,11 @@ const ConfirmRecipeScreen = (props) => {
         {renderIngredients()}
         <Button title="Add Ingredient" onPress={addIngredient} />
 
-        <Text>Instructions:</Text>
-        {/* Render instructions component or input field */}
+        <View style={styles.instructionsContainer}>
+          <Text style={styles.sectionTitle}>Instructions</Text>
+          {renderInstructions()}
+        </View>
+        <Button title="Add Instruction" onPress={addInstruction} />
 
         <Button
           title="Save Recipe"
@@ -120,11 +164,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   amountInput: {
-    width: 80,
+    width: 50,
     marginRight: 8,
   },
   unitsInput: {
-    width: 80,
+    width: 50,
     marginRight: 8,
   },
   nameInput: {
@@ -133,6 +177,28 @@ const styles = StyleSheet.create({
   },
   removeButton: {
     marginLeft: "auto",
+  },
+  instructionsContainer: {
+    marginTop: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  instructionItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  instructionIndex: {
+    width: 32,
+    marginRight: 8,
+    textAlign: "right",
+  },
+  instructionText: {
+    flex: 1,
+    marginRight: 8,
   },
 });
 
