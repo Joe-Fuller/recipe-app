@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { View, TextInput, Button } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const AddRecipeScreen = () => {
+  const navigation = useNavigation();
   const [url, setUrl] = useState("");
 
   const handleAddRecipe = async () => {
@@ -20,6 +22,9 @@ const AddRecipeScreen = () => {
         console.log("Recipe added successfully!");
         // Reset the input field
         setUrl("");
+
+        // Go to ConfirmRecipeScreen
+        navigation.navigate("ConfirmRecipe");
       }
     } catch (error) {
       console.log(error);
