@@ -58,8 +58,8 @@ const ConfirmRecipeScreen = (props) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.formContainer}>
+    <View contentContainerStyle={styles.container}>
+      <ScrollView style={styles.formContainer}>
         <Text>Recipe Name:</Text>
         <TextInput
           value={recipeName}
@@ -87,8 +87,8 @@ const ConfirmRecipeScreen = (props) => {
             /* Save recipe logic */
           }}
         />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
