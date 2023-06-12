@@ -8,7 +8,8 @@ import {
   StyleSheet,
 } from "react-native";
 
-const ConfirmRecipeScreen = (recipe) => {
+const ConfirmRecipeScreen = (props) => {
+  const recipe = props.route.params.recipe;
   const [recipeName, setRecipeName] = useState(recipe.name);
   const [timeToCook, setTimeToCook] = useState(recipe.timeToCook);
   const [ingredients, setIngredients] = useState(recipe.ingredients);
