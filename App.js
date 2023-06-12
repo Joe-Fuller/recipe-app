@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/native-stack";
 
 import GetRecipesScreen from "./screens/GetRecipesScreen";
 import AddRecipeScreen from "./screens/AddRecipeScreen";
@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="AddRecipe">
         <Stack.Screen
           name="AddRecipe"
           component={AddRecipeScreen}
