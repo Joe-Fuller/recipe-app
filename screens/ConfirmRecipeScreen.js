@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { sortIngredients } from "../utils/sortIngredients";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
@@ -41,7 +42,8 @@ const ConfirmRecipeScreen = (props) => {
 
   // Render ingredient inputs
   const renderIngredients = () => {
-    return ingredients.map((ingredient, index) => (
+    const sortedIngredients = sortIngredients(ingredients);
+    return sortedIngredients.map((ingredient, index) => (
       <View key={index} style={styles.ingredientContainer}>
         <TextInput
           style={styles.amountInput}
