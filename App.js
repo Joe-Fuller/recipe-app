@@ -9,13 +9,19 @@ import AddRecipeScreen from "./screens/AddRecipeScreen";
 import ConfirmRecipeScreen from "./screens/ConfirmRecipeScreen";
 import RecipesScreen from "./screens/RecipesScreen";
 import SingleRecipeScreen from "./screens/SingleRecipeScreen";
+import HomeScreen from "./screens/HomeScreen";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="AddRecipe">
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Home Screen" }}
+        />
         <Stack.Screen
           name="AddRecipe"
           component={AddRecipeScreen}
