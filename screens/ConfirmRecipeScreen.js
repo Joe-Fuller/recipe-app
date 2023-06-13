@@ -7,8 +7,10 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
+import axios from "axios";
 
 const ConfirmRecipeScreen = (props) => {
+  const recipeId = props.route.params.recipeId;
   const recipe = props.route.params.recipe;
   const [recipeName, setRecipeName] = useState(recipe.name);
   const [timeToCook, setTimeToCook] = useState(recipe.timeToCook);
@@ -107,8 +109,6 @@ const ConfirmRecipeScreen = (props) => {
 
   // Update Recipe Logic
   const handleConfirmRecipe = async () => {
-    const recipeId = recipe.recipeId;
-
     const recipeData = {
       name: recipeName,
       timeToCook: timeToCook,
@@ -164,12 +164,7 @@ const ConfirmRecipeScreen = (props) => {
         </View>
         <Button title="Add Instruction" onPress={addInstruction} />
 
-        <Button
-          title="Save Recipe"
-          onPress={() => {
-            handleConfirmRecipe;
-          }}
-        />
+        <Button title="Save Recipe" onPress={handleConfirmRecipe} />
       </ScrollView>
     </View>
   );
