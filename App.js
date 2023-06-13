@@ -8,6 +8,7 @@ import GetRecipesScreen from "./screens/GetRecipesScreen";
 import AddRecipeScreen from "./screens/AddRecipeScreen";
 import ConfirmRecipeScreen from "./screens/ConfirmRecipeScreen";
 import RecipesScreen from "./screens/RecipesScreen";
+import SingleRecipeScreen from "./screens/SingleRecipeScreen";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,11 @@ export default function App() {
           name="Recipes"
           component={RecipesScreen}
           options={{ title: "Recipes" }}
+        />
+        <Stack.Screen
+          name="SingleRecipe"
+          component={SingleRecipeScreen}
+          options={{ title: "Recipe" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

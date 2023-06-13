@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const RecipesScreen = () => {
+  const navigation = useNavigation();
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -23,12 +25,23 @@ const RecipesScreen = () => {
     }
   };
 
+  const navigateToRecipe = (recipeId) => {
+    navigation.navigate("SingleRecipe", { recipeId });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Recipes:</Text>
       <FlatList
         data={recipes}
-        renderItem={({ item }) => <Text>{item.recipe_name}</Text>}
+        renderItem={({ item }) => (
+          <Text
+            style={styles.recipeName}
+            onPress={() => navigateToRecipe(item.recipe_id)}
+          >
+            {item.recipe_name}
+          </Text>
+        )}
         keyExtractor={(item) => item.recipe_id}
       />
     </View>
