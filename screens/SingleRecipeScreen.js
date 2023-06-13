@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const SingleRecipeScreen = ({ route }) => {
+  const navigation = useNavigation();
   const [recipe, setRecipe] = useState(null);
   const { recipeId } = route.params;
 
@@ -43,6 +51,13 @@ const SingleRecipeScreen = ({ route }) => {
     }
   };
 
+  const handleEditRecipe = () => {
+    navigation.navigate("ConfirmRecipe", {
+      recipeId: recipeId,
+      recipe: recipe,
+    });
+  };
+
   if (!recipe) {
     return <Text>Loading...</Text>;
   }
@@ -65,6 +80,10 @@ const SingleRecipeScreen = ({ route }) => {
           instruction.instruction_text
         }`}</Text>
       ))}
+
+      <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
+        <Text style={styles.buttonText}>Edit Recipe</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -88,6 +107,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 16,
     marginBottom: 8,
+  },
+  button: {
+    backgroundColor: "#f4511e",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 16,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 
