@@ -23,7 +23,7 @@ const AddRecipeScreen = () => {
         // Reset the input field
         setUrl("");
 
-        const recipe = response.data.recipe;
+        const recipe = response.recipe;
 
         // Go to ConfirmRecipeScreen
         navigation.navigate("ConfirmRecipe", { recipe });
