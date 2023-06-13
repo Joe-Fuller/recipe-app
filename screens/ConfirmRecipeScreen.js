@@ -177,7 +177,9 @@ const ConfirmRecipeScreen = (props) => {
         </View>
         <Button title="Add Instruction" onPress={addInstruction} />
 
-        <Button title="Save Recipe" onPress={handleConfirmRecipe} />
+        <View style={styles.buttonContainer}>
+          <Button title="Save Recipe" onPress={handleConfirmRecipe} />
+        </View>
       </ScrollView>
     </View>
   );
@@ -195,8 +197,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 16,
+    justifyContent: "space-between",
+    padding: 16,
   },
   ingredientContainer: {
     flexDirection: "row",
@@ -244,6 +246,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: 200,
+  },
+  buttonContainer: {
+    marginTop: 16,
+    marginBottom: 50,
   },
 });
 
