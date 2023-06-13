@@ -6,6 +6,7 @@ import {
   Button,
   ScrollView,
   StyleSheet,
+  Image,
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +17,7 @@ const ConfirmRecipeScreen = (props) => {
 
   const recipeId = props.route.params.recipeId;
   const recipe = props.route.params.recipe;
+
   const [recipeName, setRecipeName] = useState(recipe.name);
   const [timeToCook, setTimeToCook] = useState(recipe.timeToCook);
   const [ingredients, setIngredients] = useState(recipe.ingredients);
@@ -148,14 +150,17 @@ const ConfirmRecipeScreen = (props) => {
   return (
     <View contentContainerStyle={styles.container}>
       <ScrollView style={styles.formContainer}>
-        <Text>Recipe Name:</Text>
+        <Image
+          source={{ uri: recipe.imageLink }}
+          style={styles.image}
+          resizeMode={"contain"}
+        />
         <TextInput
           value={recipeName}
           onChangeText={(text) => setRecipeName(text)}
           style={styles.input}
         />
 
-        <Text>Time to Cook:</Text>
         <TextInput
           value={timeToCook}
           onChangeText={(text) => setTimeToCook(text)}
@@ -234,6 +239,11 @@ const styles = StyleSheet.create({
   instructionText: {
     flex: 1,
     marginRight: 8,
+  },
+  image: {
+    flex: 1,
+    width: "100%",
+    height: 200,
   },
 });
 
