@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,20 +15,16 @@ const RecipesScreen = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    fetchRecipeNames();
+    fetchRecipeData();
   }, []);
 
-  const fetchRecipeNames = async () => {
+  const fetchRecipeData = async () => {
     try {
       const response = await axios.get("https://recipe-app.cyclic.app/recipes");
       const recipeData = response.data;
-      const fetchedRecipes = [];
-      recipeData.forEach((recipe) => {
-        fetchedRecipes.push(recipe);
-      });
-      setRecipes([...fetchedRecipes]);
+      setRecipes(recipeData);
     } catch (error) {
-      console.error("Error fetching recipe names:", error);
+      console.error("Error fetching recipe data:", error);
     }
   };
 
@@ -29,20 +32,24 @@ const RecipesScreen = () => {
     navigation.navigate("SingleRecipe", { recipeId });
   };
 
+  const renderRecipeItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.recipeContainer}
+      onPress={() => navigateToRecipe(item.recipe_id)}
+    >
+      <Image source={{ uri: item.image_link }} style={styles.recipeImage} />
+      <Text style={styles.recipeTitle}>{item.recipe_name}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Recipes:</Text>
       <FlatList
         data={recipes}
-        renderItem={({ item }) => (
-          <Text
-            style={styles.recipeName}
-            onPress={() => navigateToRecipe(item.recipe_id)}
-          >
-            {item.recipe_name}
-          </Text>
-        )}
-        keyExtractor={(item) => item.recipe_id}
+        renderItem={renderRecipeItem}
+        keyExtractor={(item) => item.recipe_id.toString()}
+        numColumns={2}
       />
     </View>
   );
@@ -51,14 +58,29 @@ const RecipesScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     padding: 16,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+  },
+  recipeContainer: {
+    flex: 1,
+    margin: 8,
+    alignItems: "center",
+  },
+  recipeImage: {
+    width: "100%",
+    height: "auto",
+    aspectRatio: 1,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  recipeTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 
