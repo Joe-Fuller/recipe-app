@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { sortIngredients } from "../utils/sortIngredients";
 
 const SingleRecipeScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -68,7 +69,7 @@ const SingleRecipeScreen = ({ route }) => {
       <Text style={styles.subtitle}>Time to Cook: {recipe.time_to_cook}</Text>
 
       <Text style={styles.sectionTitle}>Ingredients:</Text>
-      {recipe.ingredients.map((ingredient, index) => (
+      {sortIngredients(recipe.ingredients).map((ingredient, index) => (
         <Text
           key={index}
         >{`${ingredient.ingredient_amount} ${ingredient.ingredient_units} - ${ingredient.ingredient_name}`}</Text>

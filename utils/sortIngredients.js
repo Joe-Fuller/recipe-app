@@ -1,6 +1,8 @@
 const sortIngredients = (ingredients) => {
   return ingredients.sort((a, b) => {
-    return a.name.localeCompare(b.name);
+    const nameA = a.name || a.ingredient_name;
+    const nameB = b.name || b.ingredient_name;
+    return nameA.localeCompare(nameB);
   });
 };
 
