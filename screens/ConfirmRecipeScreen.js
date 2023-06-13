@@ -59,7 +59,7 @@ const ConfirmRecipeScreen = (props) => {
           onChangeText={(text) => updateIngredient(index, "name", text)}
         />
         <Button
-          title="Remove"
+          title="X"
           onPress={() => removeIngredient(index)}
           style={styles.removeButton}
         />
@@ -99,7 +99,7 @@ const ConfirmRecipeScreen = (props) => {
           style={[styles.instructionText, { maxHeight: 15 * 20 }]} // Adjust the line height here (e.g., 20)
         />
         <Button
-          title="Remove"
+          title="X"
           onPress={() => removeInstruction(index)}
           style={styles.removeButton}
         />
