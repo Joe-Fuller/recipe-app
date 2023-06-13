@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import GetRecipesScreen from "./screens/GetRecipesScreen";
 import AddRecipeScreen from "./screens/AddRecipeScreen";
 import ConfirmRecipeScreen from "./screens/ConfirmRecipeScreen";
 import RecipesScreen from "./screens/RecipesScreen";
