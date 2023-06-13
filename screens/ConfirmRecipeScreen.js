@@ -8,8 +8,11 @@ import {
   StyleSheet,
 } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const ConfirmRecipeScreen = (props) => {
+  const navigation = useNavigation();
+
   const recipeId = props.route.params.recipeId;
   const recipe = props.route.params.recipe;
   const [recipeName, setRecipeName] = useState(recipe.name);
@@ -124,10 +127,13 @@ const ConfirmRecipeScreen = (props) => {
         }
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         // Recipe updated successfully
         // You can provide feedback to the user, such as displaying a success message
         console.log("Recipe updated successfully!");
+
+        // Go to RecipesScreen
+        navigation.navigate("Recipes");
       }
     } catch (error) {
       console.log(error);

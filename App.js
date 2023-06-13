@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import GetRecipesScreen from "./screens/GetRecipesScreen";
 import AddRecipeScreen from "./screens/AddRecipeScreen";
 import ConfirmRecipeScreen from "./screens/ConfirmRecipeScreen";
+import RecipesScreen from "./screens/RecipesScreen";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,11 @@ export default function App() {
           name="ConfirmRecipe"
           component={ConfirmRecipeScreen}
           options={{ title: "Confirm Recipe" }}
+        />
+        <Stack.Screen
+          name="Recipes"
+          component={RecipesScreen}
+          options={{ title: "Recipes" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
