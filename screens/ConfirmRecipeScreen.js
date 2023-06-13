@@ -105,6 +105,38 @@ const ConfirmRecipeScreen = (props) => {
     ));
   };
 
+  // Update Recipe Logic
+  const handleConfirmRecipe = async () => {
+    const recipeId = recipe.recipeId;
+
+    const recipeData = {
+      name: recipeName,
+      timeToCook: timeToCook,
+      ingredients: ingredients,
+      instructions: instructions,
+    };
+
+    try {
+      const response = await axios.put(
+        `https://recipe-app.cyclic.app/recipes/${recipeId}`,
+        {
+          recipeData,
+        }
+      );
+
+      if (response.status === 201) {
+        // Recipe updated successfully
+        // You can provide feedback to the user, such as displaying a success message
+        console.log("Recipe updated successfully!");
+      }
+    } catch (error) {
+      console.log(error);
+      // Error occurred while adding the recipe
+      // You can handle the error and provide appropriate feedback to the user
+      console.error("Failed to add recipe:", error);
+    }
+  };
+
   return (
     <View contentContainerStyle={styles.container}>
       <ScrollView style={styles.formContainer}>
@@ -135,7 +167,7 @@ const ConfirmRecipeScreen = (props) => {
         <Button
           title="Save Recipe"
           onPress={() => {
-            /* Save recipe logic */
+            handleConfirmRecipe;
           }}
         />
       </ScrollView>
