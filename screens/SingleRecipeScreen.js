@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  View,
+  Image,
   Text,
   StyleSheet,
   ScrollView,
@@ -65,8 +65,13 @@ const SingleRecipeScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Image
+        source={{ uri: recipe.image_link }}
+        style={styles.image}
+        resizeMode={"contain"}
+      />
       <Text style={styles.title}>{recipe.recipe_name}</Text>
-      <Text style={styles.subtitle}>Time to Cook: {recipe.time_to_cook}</Text>
+      <Text style={styles.subtitle}>{recipe.time_to_cook}</Text>
 
       <Text style={styles.sectionTitle}>Ingredients:</Text>
       {sortIngredients(recipe.ingredients).map((ingredient, index) => (
@@ -120,6 +125,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  image: {
+    flex: 1,
+    width: "100%",
+    height: 200,
   },
 });
 
