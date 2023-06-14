@@ -38,7 +38,7 @@ const AddRecipeScreen = () => {
     }
   };
 
-  const handlePasteURL = async (event) => {
+  const handlePasteURL = async () => {
     try {
       // Read the text from the clipboard
       const clipboardText = await Clipboard.getStringAsync();
