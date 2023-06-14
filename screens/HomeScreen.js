@@ -13,6 +13,10 @@ const HomeScreen = () => {
     navigation.navigate("AddRecipe");
   };
 
+  const handleMakeAShoppingList = () => {
+    navigation.navigate("RecipeSelection");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Recipe App</Text>
@@ -23,6 +27,10 @@ const HomeScreen = () => {
 
       <TouchableOpacity style={styles.button} onPress={handleAddRecipe}>
         <Text style={styles.buttonText}>Add a Recipe</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleMakeAShoppingList}>
+        <Text style={styles.buttonText}>Make A Shopping List</Text>
       </TouchableOpacity>
     </View>
   );
