@@ -9,6 +9,7 @@ import RecipesScreen from "./screens/RecipesScreen";
 import SingleRecipeScreen from "./screens/SingleRecipeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import RecipeSelectionScreen from "./screens/RecipeSelectionScreen";
+import ShoppingListScreen from "./screens/ShoppingListScreen";
 
 const Stack = createStackNavigator();
 
@@ -44,7 +45,12 @@ export default function App() {
         <Stack.Screen
           name="RecipeSelection"
           component={RecipeSelectionScreen}
-          options={{ title: "RecipeSelection" }}
+          options={{ title: "Recipe Selection" }}
+        />
+        <Stack.Screen
+          name="ShoppingList"
+          component={ShoppingListScreen}
+          options={{ title: "Shopping List" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

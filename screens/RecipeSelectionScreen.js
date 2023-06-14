@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
-const RecipesScreen = () => {
+const RecipeSelectionScreen = () => {
   const navigation = useNavigation();
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
@@ -75,8 +75,8 @@ const RecipesScreen = () => {
         });
       }
 
-      // Display the shopping list to the user
-      console.log("Shopping List:", shoppingList);
+      // Navigate to the ShoppingListScreen and pass the shopping list data as a parameter
+      navigation.navigate("ShoppingList", { shoppingList: shoppingList });
     } catch (error) {
       console.error("Error fetching recipe details:", error);
     }
@@ -143,4 +143,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecipesScreen;
+export default RecipeSelectionScreen;
