@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const ShoppingListScreen = ({ route }) => {
@@ -29,29 +35,31 @@ const ShoppingListScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Shopping List</Text>
-      {sortedList.map((item) => (
-        <TouchableOpacity
-          key={item.ingredient}
-          style={styles.itemContainer}
-          onPress={() => toggleCheckbox(item)}
-        >
-          <View style={styles.itemDetailsContainer}>
-            <Text style={styles.itemIngredient}>{item.ingredient}</Text>
-            <Text style={styles.itemAmount}>
-              {item.amount} {item.units}
-            </Text>
-          </View>
-          <View style={styles.checkboxContainer}>
-            <MaterialIcons
-              name={
-                isItemChecked(item) ? "check-box" : "check-box-outline-blank"
-              }
-              size={24}
-              color={isItemChecked(item) ? "#5F9EA0" : "#A9A9A9"}
-            />
-          </View>
-        </TouchableOpacity>
-      ))}
+      <ScrollView style={styles.scrollContainer}>
+        {sortedList.map((item) => (
+          <TouchableOpacity
+            key={item.ingredient}
+            style={styles.itemContainer}
+            onPress={() => toggleCheckbox(item)}
+          >
+            <View style={styles.itemDetailsContainer}>
+              <Text style={styles.itemIngredient}>{item.ingredient}</Text>
+              <Text style={styles.itemAmount}>
+                {item.amount} {item.units}
+              </Text>
+            </View>
+            <View style={styles.checkboxContainer}>
+              <MaterialIcons
+                name={
+                  isItemChecked(item) ? "check-box" : "check-box-outline-blank"
+                }
+                size={24}
+                color={isItemChecked(item) ? "#5F9EA0" : "#A9A9A9"}
+              />
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -65,6 +73,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+  },
+  scrollContainer: {
+    flex: 1,
   },
   itemContainer: {
     flexDirection: "row",
