@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Button } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import * as Clipboard from "expo-clipboard";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
@@ -37,6 +38,17 @@ const AddRecipeScreen = () => {
     }
   };
 
+  const handlePasteURL = async (event) => {
+    try {
+      // Read the text from the clipboard
+      const clipboardText = await Clipboard.getStringAsync();
+      // Set the clipboard content into the recipeURL state
+      setUrl(clipboardText);
+    } catch (error) {
+      console.error("Failed to read clipboard: ", error);
+    }
+  };
+
   return (
     <View>
       <TextInput
@@ -44,6 +56,9 @@ const AddRecipeScreen = () => {
         value={url}
         onChangeText={setUrl}
       />
+      <Button title="Paste" onPress={handlePasteURL}>
+        Paste Recipe URL
+      </Button>
       <Button title="Add Recipe" onPress={handleAddRecipe} />
     </View>
   );
