@@ -21,10 +21,15 @@ const ShoppingListScreen = ({ route }) => {
     return checkedItems.includes(item);
   };
 
+  // Sort the shopping list alphabetically by ingredient
+  const sortedList = shoppingList.sort((a, b) =>
+    a.ingredient.localeCompare(b.ingredient)
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Shopping List</Text>
-      {shoppingList.map((item) => (
+      {sortedList.map((item) => (
         <TouchableOpacity
           key={item.ingredient}
           style={styles.itemContainer}
