@@ -14,8 +14,14 @@ import * as Clipboard from "expo-clipboard";
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
   const [url, setUrl] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleAddRecipe = async () => {
+    if (!url.trim()) {
+      // URL is empty, show error styling
+      setIsError(true);
+      return;
+    }
     try {
       const response = await axios.post(
         "https://recipe-app.cyclic.app/recipes",
@@ -63,7 +69,7 @@ const AddRecipeScreen = () => {
           placeholder="Enter Recipe URL"
           value={url}
           onChangeText={setUrl}
-          style={styles.input}
+          style={[styles.input, isError && styles.errorInput]}
         />
         <TouchableOpacity style={styles.pasteButton} onPress={handlePasteURL}>
           <Text style={styles.pasteButtonText}>Paste</Text>
@@ -95,6 +101,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginRight: 0, // Remove the marginRight
+  },
+  errorInput: {
+    borderColor: "red",
+    borderWidth: 2,
   },
   pasteButton: {
     backgroundColor: "#f4511e",
