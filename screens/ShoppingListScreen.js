@@ -30,6 +30,12 @@ const ShoppingListScreen = ({ route }) => {
           style={styles.itemContainer}
           onPress={() => toggleCheckbox(item)}
         >
+          <View style={styles.itemDetailsContainer}>
+            <Text style={styles.itemIngredient}>{item.ingredient}</Text>
+            <Text style={styles.itemAmount}>
+              {item.amount} {item.units}
+            </Text>
+          </View>
           <View style={styles.checkboxContainer}>
             <MaterialIcons
               name={
@@ -38,12 +44,6 @@ const ShoppingListScreen = ({ route }) => {
               size={24}
               color={isItemChecked(item) ? "#5F9EA0" : "#A9A9A9"}
             />
-          </View>
-          <View style={styles.itemDetailsContainer}>
-            <Text style={styles.itemIngredient}>{item.ingredient}</Text>
-            <Text style={styles.itemAmount}>
-              {item.amount} {item.units}
-            </Text>
           </View>
         </TouchableOpacity>
       ))}
@@ -64,13 +64,15 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 8,
   },
   checkboxContainer: {
-    marginRight: 16,
+    marginLeft: 16,
   },
   itemDetailsContainer: {
     flex: 1,
+    marginRight: 16,
   },
   itemIngredient: {
     fontSize: 16,
