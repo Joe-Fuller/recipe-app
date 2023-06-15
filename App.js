@@ -10,6 +10,7 @@ import SingleRecipeScreen from "./screens/SingleRecipeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import RecipeSelectionScreen from "./screens/RecipeSelectionScreen";
 import ShoppingListScreen from "./screens/ShoppingListScreen";
+import NavBar from "./components/NavBar";
 
 const Stack = createStackNavigator();
 
@@ -20,39 +21,40 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "Home Screen" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="AddRecipe"
           component={AddRecipeScreen}
-          options={{ title: "Add Recipe" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ConfirmRecipe"
           component={ConfirmRecipeScreen}
-          options={{ title: "Confirm Recipe" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Recipes"
           component={RecipesScreen}
-          options={{ title: "Recipes" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="SingleRecipe"
           component={SingleRecipeScreen}
-          options={{ title: "Recipe" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="RecipeSelection"
           component={RecipeSelectionScreen}
-          options={{ title: "Recipe Selection" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ShoppingList"
           component={ShoppingListScreen}
-          options={{ title: "Shopping List" }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
+      <NavBar />
     </NavigationContainer>
   );
 }
