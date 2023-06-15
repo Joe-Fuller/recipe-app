@@ -7,9 +7,10 @@ import {
   ScrollView,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import Storage from "../storage/Storage";
 
 const ShoppingListScreen = () => {
-  const [shoppingList, setShoppingList] = useState({});
+  const [shoppingList, setShoppingList] = useState([]);
 
   useEffect(() => {
     const fetchShoppingList = async () => {
@@ -49,7 +50,7 @@ const ShoppingListScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Shopping List</Text>
       <ScrollView style={styles.scrollContainer}>
-        {sortedList.map((item) => (
+        {shoppingList.map((item) => (
           <TouchableOpacity
             key={item.ingredient}
             style={styles.itemContainer}
