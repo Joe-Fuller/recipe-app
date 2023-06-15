@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,7 +17,12 @@ const ShoppingListScreen = () => {
       const savedShoppingList = await Storage.getData("shoppingList");
 
       if (savedShoppingList) {
-        setShoppingList(savedShoppingList);
+        // Sort the shopping list alphabetically by ingredient
+        const sortedList = savedShoppingList.sort((a, b) =>
+          a.ingredient.localeCompare(b.ingredient)
+        );
+
+        setShoppingList(sortedList);
       }
     };
 
@@ -39,11 +44,6 @@ const ShoppingListScreen = () => {
   const isItemChecked = (item) => {
     return checkedItems.includes(item);
   };
-
-  // Sort the shopping list alphabetically by ingredient
-  const sortedList = shoppingList.sort((a, b) =>
-    a.ingredient.localeCompare(b.ingredient)
-  );
 
   return (
     <View style={styles.container}>
