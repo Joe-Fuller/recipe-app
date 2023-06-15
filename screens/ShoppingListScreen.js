@@ -8,8 +8,21 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const ShoppingListScreen = ({ route }) => {
-  const { shoppingList } = route.params;
+const ShoppingListScreen = () => {
+  const [shoppingList, setShoppingList] = useState({});
+
+  useEffect(() => {
+    const fetchShoppingList = async () => {
+      // Retrieve the shopping list from AsyncStorage
+      const savedShoppingList = await Storage.getData("shoppingList");
+
+      if (savedShoppingList) {
+        setShoppingList(savedShoppingList);
+      }
+    };
+
+    fetchShoppingList();
+  }, []);
 
   const [checkedItems, setCheckedItems] = useState([]);
 
