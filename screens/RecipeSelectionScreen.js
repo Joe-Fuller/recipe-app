@@ -79,7 +79,7 @@ const RecipeSelectionScreen = () => {
       await Storage.saveData("shoppingList", shoppingList);
 
       // Navigate to the ShoppingListScreen and pass the shopping list data as a parameter
-      navigation.navigate("ShoppingList", { shoppingList: shoppingList });
+      navigation.navigate("ShoppingList");
     } catch (error) {
       console.error("Error fetching recipe details:", error);
     }
