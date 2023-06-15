@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  StatusBar,
+  SafeAreaView,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../storage/Storage";
@@ -47,7 +49,7 @@ const ShoppingListScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Shopping List</Text>
       <ScrollView style={styles.scrollContainer}>
         {shoppingList.map((item) => (
@@ -74,7 +76,7 @@ const ShoppingListScreen = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -82,6 +84,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    marginTop: StatusBar.currentHeight,
   },
   title: {
     fontSize: 24,
