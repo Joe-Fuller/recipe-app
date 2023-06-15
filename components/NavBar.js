@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     height: 60,
-    backgroundColor: "#f4f4f4",
+    backgroundColor: "#2c3e50",
   },
   button: {
     paddingHorizontal: 16,
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
+    color: "#ffffff",
   },
 });
 
