@@ -6,7 +6,6 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
-  SafeAreaView,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../storage/Storage";
@@ -49,7 +48,7 @@ const ShoppingListScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Shopping List</Text>
       <ScrollView style={styles.scrollContainer}>
         {shoppingList.map((item) => (
@@ -76,7 +75,7 @@ const ShoppingListScreen = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

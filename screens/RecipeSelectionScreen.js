@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Button,
+  StatusBar,
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    marginTop: StatusBar.currentHeight,
   },
   title: {
     fontSize: 24,
