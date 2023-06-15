@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import Storage from "../storage/Storage";
 
 const RecipeSelectionScreen = () => {
   const navigation = useNavigation();
@@ -74,6 +75,8 @@ const RecipeSelectionScreen = () => {
           }
         });
       }
+
+      await Storage.saveData("shoppingList", shoppingList);
 
       // Navigate to the ShoppingListScreen and pass the shopping list data as a parameter
       navigation.navigate("ShoppingList", { shoppingList: shoppingList });
