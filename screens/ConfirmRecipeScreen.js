@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  StatusBar,
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
@@ -192,6 +193,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 4,
     padding: 10,
+    marginTop: StatusBar.currentHeight,
   },
   container: {
     flex: 1,
