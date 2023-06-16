@@ -6,9 +6,12 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
+  Button,
+  Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Storage from "../storage/Storage";
+import Dialog from "react-native-dialog";
 
 const ShoppingListScreen = () => {
   const [shoppingList, setShoppingList] = useState([]);
@@ -47,6 +50,54 @@ const ShoppingListScreen = () => {
     return checkedItems.includes(item);
   };
 
+  const handleAddItem = () => {
+    setShoppingList([
+      ...shoppingList,
+      { ingredient: "", amount: "", units: "" },
+    ]);
+  };
+
+  const [dialogProperties, setDialogProperties] = useState({
+    visible: false,
+    item: { ingredient: "", amount: "", units: "" },
+  });
+  const [selectedItem, setSelectedItem] = useState({
+    ingredient: "",
+    amount: "",
+    units: "",
+  });
+
+  const handleEditItem = (item) => {
+    setSelectedItem(item);
+    setDialogProperties({ visible: true, item: item });
+  };
+
+  const handleCloseDialog = () => {
+    setDialogProperties({ ...dialogProperties, visible: false });
+  };
+
+  const updateField = (property, text) => {
+    const newItem = { ...dialogProperties.item };
+    newItem[property] = text;
+    setDialogProperties({
+      ...dialogProperties,
+      item: newItem,
+    });
+  };
+
+  const handleSaveItem = () => {
+    // Remove the item from the shopping list
+    const updatedShoppingList = shoppingList.filter(
+      (listItem) => listItem !== selectedItem
+    );
+
+    // And then add the new one in
+    setShoppingList([...updatedShoppingList, dialogProperties.item]);
+
+    // Hide the dialog
+    setDialogProperties({ ...dialogProperties, visible: false });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Shopping List</Text>
@@ -56,6 +107,7 @@ const ShoppingListScreen = () => {
             key={item.ingredient}
             style={styles.itemContainer}
             onPress={() => toggleCheckbox(item)}
+            onLongPress={() => handleEditItem(item)}
           >
             <View style={styles.itemDetailsContainer}>
               <Text style={styles.itemIngredient}>{item.ingredient}</Text>
@@ -74,7 +126,24 @@ const ShoppingListScreen = () => {
             </View>
           </TouchableOpacity>
         ))}
+        <Button title="Add Item" onPress={handleAddItem} />
       </ScrollView>
+      <Dialog.Container visible={dialogProperties.visible}>
+        <Dialog.Input onChangeText={(text) => updateField("ingredient", text)}>
+          {dialogProperties.item.ingredient}
+        </Dialog.Input>
+        <Dialog.Input onChangeText={(text) => updateField("amount", text)}>
+          {dialogProperties.item.amount}
+        </Dialog.Input>
+        <Dialog.Input onChangeText={(text) => updateField("units", text)}>
+          {dialogProperties.item.units}
+        </Dialog.Input>
+        <Dialog.Button
+          label="Cancel"
+          onPress={handleCloseDialog}
+        ></Dialog.Button>
+        <Dialog.Button label="Save" onPress={handleSaveItem}></Dialog.Button>
+      </Dialog.Container>
     </View>
   );
 };
