@@ -22,7 +22,6 @@ const RecipesScreen = () => {
   const fetchRecipeData = async () => {
     const recipeData = await RecipeStorage.getAllRecipes();
     setRecipes(recipeData);
-    console.log(recipeData);
   };
 
   const navigateToRecipe = (name) => {
