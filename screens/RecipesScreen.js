@@ -25,7 +25,7 @@ const RecipesScreen = () => {
   };
 
   const navigateToRecipe = (name) => {
-    navigation.navigate("SingleRecipe", { recipeName: name });
+    navigation.navigate("SingleRecipe", name);
   };
 
   const renderRecipeItem = ({ item }) => (
