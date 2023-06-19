@@ -25,8 +25,8 @@ const RecipesScreen = () => {
     console.log(recipeData);
   };
 
-  const navigateToRecipe = (recipeId) => {
-    navigation.navigate("SingleRecipe", { recipeId });
+  const navigateToRecipe = (name) => {
+    navigation.navigate("SingleRecipe", { name });
   };
 
   const renderRecipeItem = ({ item }) => (
