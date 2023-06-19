@@ -7,7 +7,6 @@ import {
   ScrollView,
   StatusBar,
   Button,
-  Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
