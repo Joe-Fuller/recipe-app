@@ -26,7 +26,7 @@ const AddRecipeScreen = () => {
     try {
       const response = await scrapeRecipeFromUrl(url);
 
-      console.log(response);
+      console.log("response: ", response);
 
       if (response.status === 201) {
         // Recipe added successfully
