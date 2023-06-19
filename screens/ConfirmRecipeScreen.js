@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { sortIngredients } from "../utils/sortIngredients";
+import RecipeStorage from "../storage/RecipeStorage";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
@@ -123,28 +124,13 @@ const ConfirmRecipeScreen = (props) => {
       instructions: instructions,
     };
 
-    try {
-      const response = await axios.put(
-        `https://recipe-app.cyclic.app/recipes/${recipeId}`,
-        {
-          recipeData,
-        }
-      );
+    await RecipeStorage.saveRecipe(recipeName, {
+      timeToCook,
+      ingredients,
+      instructions,
+    });
 
-      if (response.status === 200) {
-        // Recipe updated successfully
-        // You can provide feedback to the user, such as displaying a success message
-        console.log("Recipe updated successfully!");
-
-        // Go to RecipesScreen
-        navigation.navigate("Recipes");
-      }
-    } catch (error) {
-      console.log(error);
-      // Error occurred while adding the recipe
-      // You can handle the error and provide appropriate feedback to the user
-      console.error("Failed to add recipe:", error);
-    }
+    navigation.navigate("Recipes");
   };
 
   return (
