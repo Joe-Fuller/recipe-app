@@ -10,9 +10,6 @@ export const saveRecipe = async (key, data) => {
 };
 
 export const getRecipe = async (key) => {
-  console.log("+");
-  console.log(key);
-  console.log("+");
   try {
     const dataString = await AsyncStorage.getItem(key);
     if (dataString !== null) {
