@@ -118,9 +118,10 @@ function findScriptWithSchema($) {
 
 async function scrapeRecipeFromUrl(url) {
   try {
-    console.log("in");
+    console.log("in", url);
+    console.log(axios.get);
+    console.log(await fetch(url));
     const response = await axios.get(url);
-    console.log(response);
     const html = response.data;
 
     const $ = cheerio.load(html);
