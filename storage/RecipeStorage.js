@@ -15,7 +15,7 @@ export const getRecipe = async (key) => {
     if (dataString !== null) {
       const data = JSON.parse(dataString);
       console.log(`Data retrieved successfully with key: ${key}`);
-      return data;
+      return { name: key, ...data };
     }
   } catch (error) {
     console.error("Error retrieving data:", error);
