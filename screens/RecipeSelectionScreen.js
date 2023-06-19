@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import Storage from "../storage/Storage";
+import ShoppingListStorage from "../storage/ShoppingListStorage";
+import RecipeStorage from "../storage/RecipeStorage";
 
 const RecipeSelectionScreen = () => {
   const navigation = useNavigation();
@@ -23,17 +24,12 @@ const RecipeSelectionScreen = () => {
   }, []);
 
   const fetchRecipeData = async () => {
-    try {
-      const response = await axios.get("https://recipe-app.cyclic.app/recipes");
-      const recipeData = response.data;
-      setRecipes(recipeData);
-    } catch (error) {
-      console.error("Error fetching recipe data:", error);
-    }
+    const recipeData = await RecipeStorage.getAllRecipes();
+    setRecipes(recipeData);
   };
 
-  const navigateToRecipe = (recipeId) => {
-    navigation.navigate("SingleRecipe", { recipeId });
+  const navigateToRecipe = (recipeName) => {
+    navigation.navigate("SingleRecipe", recipeName);
   };
 
   const handleRecipeSelection = (recipeId) => {
