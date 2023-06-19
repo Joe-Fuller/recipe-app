@@ -9,7 +9,6 @@ import {
   Button,
   StatusBar,
 } from "react-native";
-import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import RecipeStorage from "../storage/RecipeStorage";
@@ -49,12 +48,9 @@ const RecipeSelectionScreen = () => {
 
       // Fetch selected recipe details from the server
       for (const recipe of selectedRecipes) {
-        const response = await axios.get(
-          `https://recipe-app.cyclic.app/ingredients/${recipeId}`
-        );
-        const recipeDetails = response.data;
-
-        recipeDetails.forEach((ingredient) => {
+        console.log(recipe);
+        recipe.ingredients.forEach((ingredient) => {
+          console.log(ingredient);
           const { ingredient_name, ingredient_amount, ingredient_units } =
             ingredient;
           const existingItem = shoppingList.find(
@@ -73,7 +69,7 @@ const RecipeSelectionScreen = () => {
         });
       }
 
-      await Storage.saveData("shoppingList", shoppingList);
+      await ShoppingListStorage.saveShoppingList(shoppingList);
 
       // Navigate to the ShoppingListScreen and pass the shopping list data as a parameter
       navigation.navigate("ShoppingList");
@@ -85,13 +81,13 @@ const RecipeSelectionScreen = () => {
   const renderRecipeItem = ({ item }) => (
     <TouchableOpacity
       style={styles.recipeContainer}
-      onPress={() => navigateToRecipe(item.recipe_id)}
+      onPress={() => navigateToRecipe(item.name)}
     >
-      <Image source={{ uri: item.image_link }} style={styles.recipeImage} />
-      <Text style={styles.recipeTitle}>{item.recipe_name}</Text>
+      <Image source={{ uri: item.imageLink }} style={styles.recipeImage} />
+      <Text style={styles.recipeTitle}>{item.name}</Text>
       <Button
-        title={selectedRecipes.includes(item.recipe_id) ? "Selected" : "Select"}
-        onPress={() => handleRecipeSelection(item.recipe_id)}
+        title={selectedRecipes.includes(item) ? "Selected" : "Select"}
+        onPress={() => handleRecipeSelection(item)}
       />
     </TouchableOpacity>
   );
@@ -102,7 +98,7 @@ const RecipeSelectionScreen = () => {
       <FlatList
         data={recipes}
         renderItem={renderRecipeItem}
-        keyExtractor={(item) => item.recipe_id.toString()}
+        keyExtractor={(item) => item.name.toString()}
         numColumns={2}
       />
       <Button
