@@ -8,8 +8,8 @@ import {
   Image,
   StatusBar,
 } from "react-native";
-import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import RecipeStorage from "../storage/RecipeStorage";
 
 const RecipesScreen = () => {
   const navigation = useNavigation();
@@ -20,13 +20,9 @@ const RecipesScreen = () => {
   }, []);
 
   const fetchRecipeData = async () => {
-    try {
-      const response = await axios.get("https://recipe-app.cyclic.app/recipes");
-      const recipeData = response.data;
-      setRecipes(recipeData);
-    } catch (error) {
-      console.error("Error fetching recipe data:", error);
-    }
+    const recipeData = await RecipeStorage.getAllRecipes();
+    setRecipes(recipeData);
+    console.log(recipeData);
   };
 
   const navigateToRecipe = (recipeId) => {
@@ -36,10 +32,10 @@ const RecipesScreen = () => {
   const renderRecipeItem = ({ item }) => (
     <TouchableOpacity
       style={styles.recipeContainer}
-      onPress={() => navigateToRecipe(item.recipe_id)}
+      onPress={() => navigateToRecipe(item.name)}
     >
-      <Image source={{ uri: item.image_link }} style={styles.recipeImage} />
-      <Text style={styles.recipeTitle}>{item.recipe_name}</Text>
+      <Image source={{ uri: item.imageLink }} style={styles.recipeImage} />
+      <Text style={styles.recipeTitle}>{item.name}</Text>
     </TouchableOpacity>
   );
 
@@ -49,7 +45,7 @@ const RecipesScreen = () => {
       <FlatList
         data={recipes}
         renderItem={renderRecipeItem}
-        keyExtractor={(item) => item.recipe_id.toString()}
+        keyExtractor={(item) => item.name.toString()}
         numColumns={2}
       />
     </View>
