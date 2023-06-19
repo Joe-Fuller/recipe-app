@@ -48,9 +48,7 @@ const RecipeSelectionScreen = () => {
 
       // Fetch selected recipe details from the server
       for (const recipe of selectedRecipes) {
-        console.log(recipe);
         recipe.ingredients.forEach((ingredient) => {
-          console.log(ingredient);
           const { ingredient_name, ingredient_amount, ingredient_units } =
             ingredient;
           const existingItem = shoppingList.find(
