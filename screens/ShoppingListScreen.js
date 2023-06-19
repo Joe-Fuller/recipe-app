@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import Storage from "../storage/Storage";
+import ShoppingListStorage from "../storage/ShoppingListStorage";
 import Dialog from "react-native-dialog";
 
 const ShoppingListScreen = () => {
@@ -19,7 +19,7 @@ const ShoppingListScreen = () => {
   useEffect(() => {
     const fetchShoppingList = async () => {
       // Retrieve the shopping list from AsyncStorage
-      const savedShoppingList = await Storage.getData("shoppingList");
+      const savedShoppingList = await ShoppingListStorage.getShoppingList();
 
       if (savedShoppingList) {
         // Sort the shopping list alphabetically by ingredient
@@ -96,6 +96,11 @@ const ShoppingListScreen = () => {
 
     // Hide the dialog
     setDialogProperties({ ...dialogProperties, visible: false });
+
+    ShoppingListStorage.saveShoppingList([
+      ...updatedShoppingList,
+      dialogProperties.item,
+    ]);
   };
 
   return (
