@@ -125,6 +125,7 @@ const ConfirmRecipeScreen = (props) => {
       timeToCook,
       ingredients,
       instructions,
+      imageLink: recipe.imageLink,
     });
 
     navigation.navigate("Recipes");
