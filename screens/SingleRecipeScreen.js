@@ -7,14 +7,14 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import { sortIngredients } from "../utils/sortIngredients";
+import sortIngredients from "../utils/sortIngredients";
+import RecipeStorage from "../storage/RecipeStorage";
 
-const SingleRecipeScreen = ({ route }) => {
+const SingleRecipeScreen = (props) => {
   const navigation = useNavigation();
   const [recipe, setRecipe] = useState(null);
-  const { recipeId } = route.params;
+  const recipeName = props.route.params.recipeName;
 
   useEffect(() => {
     fetchRecipeData();
@@ -22,32 +22,9 @@ const SingleRecipeScreen = ({ route }) => {
 
   const fetchRecipeData = async () => {
     try {
-      // Fetch the recipe details from the backend
-      const recipeResponse = await axios.get(
-        `https://recipe-app.cyclic.app/recipes/${recipeId}`
-      );
-      const recipe = recipeResponse.data;
+      const recipeData = await RecipeStorage.getRecipe(recipeName);
 
-      // Fetch the ingredients for the recipe
-      const ingredientsResponse = await axios.get(
-        `https://recipe-app.cyclic.app/ingredients/${recipeId}`
-      );
-      const ingredients = ingredientsResponse.data;
-
-      // Fetch the instructions for the recipe
-      const instructionsResponse = await axios.get(
-        `https://recipe-app.cyclic.app/instructions/${recipeId}`
-      );
-      const instructions = instructionsResponse.data;
-
-      // Add the ingredients and instructions to the recipe object
-      const recipeWithDetails = {
-        ...recipe,
-        ingredients,
-        instructions,
-      };
-
-      setRecipe(recipeWithDetails);
+      setRecipe(recipeData);
     } catch (error) {
       console.error("Error fetching recipe:", error);
     }
@@ -55,8 +32,7 @@ const SingleRecipeScreen = ({ route }) => {
 
   const handleEditRecipe = () => {
     navigation.navigate("ConfirmRecipe", {
-      recipeId: recipeId,
-      recipe: recipe,
+      recipe,
     });
   };
 
@@ -67,25 +43,23 @@ const SingleRecipeScreen = ({ route }) => {
   return (
     <ScrollView style={styles.container}>
       <Image
-        source={{ uri: recipe.image_link }}
+        source={{ uri: recipe.imageLink }}
         style={styles.image}
         resizeMode={"contain"}
       />
-      <Text style={styles.title}>{recipe.recipe_name}</Text>
-      <Text style={styles.subtitle}>{recipe.time_to_cook}</Text>
+      <Text style={styles.title}>{recipe.name}</Text>
+      <Text style={styles.subtitle}>{recipe.timeToCook}</Text>
 
       <Text style={styles.sectionTitle}>Ingredients:</Text>
       {sortIngredients(recipe.ingredients).map((ingredient, index) => (
         <Text
           key={index}
-        >{`${ingredient.ingredient_amount} ${ingredient.ingredient_units} - ${ingredient.ingredient_name}`}</Text>
+        >{`${ingredient.amount} ${ingredient.units} - ${ingredient.name}`}</Text>
       ))}
 
       <Text style={styles.sectionTitle}>Instructions:</Text>
       {recipe.instructions.map((instruction, index) => (
-        <Text key={index}>{`${index + 1}. ${
-          instruction.instruction_text
-        }`}</Text>
+        <Text key={index}>{`${index + 1}. ${instruction}`}</Text>
       ))}
 
       <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
