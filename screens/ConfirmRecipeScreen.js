@@ -10,7 +10,6 @@ import {
   StatusBar,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { sortIngredients } from "../utils/sortIngredients";
 import RecipeStorage from "../storage/RecipeStorage";
 
 const ConfirmRecipeScreen = (props) => {
