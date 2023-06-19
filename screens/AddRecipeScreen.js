@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
-  Button,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
+import scrapeRecipeFromUrl from "../utils/scrapeRecipe";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
@@ -24,12 +24,9 @@ const AddRecipeScreen = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        "https://recipe-app.cyclic.app/recipes",
-        {
-          url,
-        }
-      );
+      const response = await scrapeRecipeFromUrl(url);
+
+      console.log(response);
 
       if (response.status === 201) {
         // Recipe added successfully
