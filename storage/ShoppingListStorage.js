@@ -3,9 +3,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const saveShoppingList = async (data) => {
   try {
     await AsyncStorage.setItem("shoppingList", JSON.stringify(data));
-    console.log(`Data saved successfully with key: ${key}`);
+    console.log("Shopping List Data saved successfully");
   } catch (error) {
-    console.error("Error saving data:", error);
+    console.error("Error saving shopping list data:", error);
   }
 };
 
@@ -14,11 +14,11 @@ export const getShoppingList = async () => {
     const dataString = await AsyncStorage.getItem("shoppingList");
     if (dataString !== null) {
       const data = JSON.parse(dataString);
-      console.log(`Data retrieved successfully with key: ${key}`);
+      console.log("Shopping List Data retrieved successfully");
       return data;
     }
   } catch (error) {
-    console.error("Error retrieving data:", error);
+    console.error("Error retrieving shopping list data:", error);
   }
   return null;
 };
