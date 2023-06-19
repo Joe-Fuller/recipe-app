@@ -16,7 +16,6 @@ import { sortIngredients } from "../utils/sortIngredients";
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
 
-  const recipeId = props.route.params.recipeId;
   const recipe = props.route.params.recipe;
 
   const [recipeName, setRecipeName] = useState(recipe.name);
