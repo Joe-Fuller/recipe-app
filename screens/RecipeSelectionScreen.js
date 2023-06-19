@@ -49,19 +49,18 @@ const RecipeSelectionScreen = () => {
       // Fetch selected recipe details from the server
       for (const recipe of selectedRecipes) {
         recipe.ingredients.forEach((ingredient) => {
-          const { ingredient_name, ingredient_amount, ingredient_units } =
-            ingredient;
           const existingItem = shoppingList.find(
-            (item) => item.ingredient === ingredient_name
+            (item) => item.ingredient === ingredient.name
           );
 
-          if (existingItem && existingItem.units === ingredient_units) {
-            existingItem.amount += ingredient_amount;
+          if (existingItem && existingItem.units === ingredient.units) {
+            existingItem.amount =
+              parseFloat(existingItem.amount) + parseFloat(ingredient.amount);
           } else {
             shoppingList.push({
-              ingredient: ingredient_name,
-              amount: ingredient_amount,
-              units: ingredient_units,
+              ingredient: ingredient.name,
+              amount: ingredient.amount,
+              units: ingredient.units,
             });
           }
         });
