@@ -14,7 +14,7 @@ import RecipeStorage from "../storage/RecipeStorage";
 const SingleRecipeScreen = (props) => {
   const navigation = useNavigation();
   const [recipe, setRecipe] = useState(null);
-  const recipeName = props.route.params.recipeName;
+  const recipeName = props.route.params;
 
   useEffect(() => {
     fetchRecipeData();
