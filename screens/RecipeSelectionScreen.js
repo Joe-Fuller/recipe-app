@@ -32,14 +32,14 @@ const RecipeSelectionScreen = () => {
     navigation.navigate("SingleRecipe", recipeName);
   };
 
-  const handleRecipeSelection = (recipeId) => {
+  const handleRecipeSelection = (recipe) => {
     // Toggle recipe selection
-    if (selectedRecipes.includes(recipeId)) {
+    if (selectedRecipes.includes(recipe)) {
       setSelectedRecipes(
-        selectedRecipes.filter((selected) => selected !== recipeId)
+        selectedRecipes.filter((selected) => selected.name !== recipe.name)
       );
     } else {
-      setSelectedRecipes([...selectedRecipes, recipeId]);
+      setSelectedRecipes([...selectedRecipes, recipe]);
     }
   };
 
@@ -48,7 +48,7 @@ const RecipeSelectionScreen = () => {
       const shoppingList = [];
 
       // Fetch selected recipe details from the server
-      for (const recipeId of selectedRecipes) {
+      for (const recipe of selectedRecipes) {
         const response = await axios.get(
           `https://recipe-app.cyclic.app/ingredients/${recipeId}`
         );
