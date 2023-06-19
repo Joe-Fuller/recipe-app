@@ -28,7 +28,10 @@ export const getAllRecipes = async () => {
     const allKeys = await AsyncStorage.getAllKeys();
     const recipeKeys = allKeys.filter((key) => key !== "shoppingList");
     const recipeData = await AsyncStorage.multiGet(recipeKeys);
-    const recipes = recipeData.map(([key, value]) => JSON.parse(value));
+    const recipes = recipeData.map(([key, value]) => ({
+      name: key,
+      ...JSON.parse(value),
+    }));
     console.log("All recipes retrieved successfully");
     return recipes;
   } catch (error) {
