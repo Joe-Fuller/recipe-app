@@ -1,6 +1,6 @@
-const axios = require("axios");
 const cheerio = require("cheerio");
 const splitIngredientString = require("./splitIngredientString");
+const sortIngredients = require("./sortIngredients");
 const he = require("he");
 
 // Unit correlation mapping
@@ -144,6 +144,7 @@ async function scrapeRecipeFromUrl(url) {
     });
 
     const aggregatedIngredients = aggregateIngredientAmounts(ingredients);
+    const sortedIngredients = sortIngredients(aggregatedIngredients);
 
     // Make sure the image is a string, not an array
     if (Array.isArray(recipeImage)) {
@@ -154,7 +155,7 @@ async function scrapeRecipeFromUrl(url) {
     const recipe = {
       name: recipeName,
       timeToCook: recipeTime,
-      ingredients: aggregatedIngredients,
+      ingredients: sortedIngredients,
       instructions: recipeInstructions,
       imageLink: recipeImage,
     };
