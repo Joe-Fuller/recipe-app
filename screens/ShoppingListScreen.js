@@ -6,11 +6,11 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
-  Button,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import Dialog from "react-native-dialog";
+import commonStyles from "../styles/commonStyles";
 
 const ShoppingListScreen = () => {
   const [shoppingList, setShoppingList] = useState([]);
@@ -50,10 +50,9 @@ const ShoppingListScreen = () => {
   };
 
   const handleAddItem = () => {
-    setShoppingList([
-      ...shoppingList,
-      { ingredient: "", amount: "", units: "" },
-    ]);
+    const newItem = { ingredient: "", amount: "", units: "" };
+    setShoppingList([...shoppingList, newItem]);
+    handleEditItem(newItem);
   };
 
   const [dialogProperties, setDialogProperties] = useState({
@@ -104,7 +103,7 @@ const ShoppingListScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Shopping List</Text>
+      <Text style={commonStyles.title}>Shopping List</Text>
       <ScrollView style={styles.scrollContainer}>
         {shoppingList.map((item) => (
           <TouchableOpacity
@@ -130,23 +129,34 @@ const ShoppingListScreen = () => {
             </View>
           </TouchableOpacity>
         ))}
-        <Button title="Add Item" onPress={handleAddItem} />
+
+        <TouchableOpacity style={commonStyles.button} onPress={handleAddItem}>
+          <Text style={commonStyles.buttonText}>Add Item</Text>
+        </TouchableOpacity>
       </ScrollView>
       <Dialog.Container visible={dialogProperties.visible}>
-        <Dialog.Input onChangeText={(text) => updateField("ingredient", text)}>
-          {dialogProperties.item.ingredient}
-        </Dialog.Input>
-        <Dialog.Input onChangeText={(text) => updateField("amount", text)}>
-          {dialogProperties.item.amount}
-        </Dialog.Input>
-        <Dialog.Input onChangeText={(text) => updateField("units", text)}>
-          {dialogProperties.item.units}
-        </Dialog.Input>
-        <Dialog.Button
-          label="Cancel"
-          onPress={handleCloseDialog}
-        ></Dialog.Button>
-        <Dialog.Button label="Save" onPress={handleSaveItem}></Dialog.Button>
+        <View>
+          <Text>Ingredient:</Text>
+          <Dialog.Input
+            onChangeText={(text) => updateField("ingredient", text)}
+          >
+            {dialogProperties.item.ingredient}
+          </Dialog.Input>
+        </View>
+        <View>
+          <Text>Amount:</Text>
+          <Dialog.Input onChangeText={(text) => updateField("amount", text)}>
+            {dialogProperties.item.amount}
+          </Dialog.Input>
+        </View>
+        <View>
+          <Text>Units:</Text>
+          <Dialog.Input onChangeText={(text) => updateField("units", text)}>
+            {dialogProperties.item.units}
+          </Dialog.Input>
+        </View>
+        <Dialog.Button label="Cancel" onPress={handleCloseDialog} />
+        <Dialog.Button label="Save" onPress={handleSaveItem} />
       </Dialog.Container>
     </View>
   );
