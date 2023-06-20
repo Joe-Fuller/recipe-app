@@ -10,6 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import scrapeRecipeFromUrl from "../utils/scrapeRecipe";
+import commonStyles from "../styles/commonStyles";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
@@ -46,7 +47,7 @@ const AddRecipeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={commonStyles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Enter Recipe URL"
@@ -58,21 +59,14 @@ const AddRecipeScreen = () => {
           <Text style={styles.pasteButtonText}>Paste</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleAddRecipe}>
-        <Text style={styles.buttonText}>Add Recipe</Text>
+      <TouchableOpacity style={commonStyles.button} onPress={handleAddRecipe}>
+        <Text style={commonStyles.buttonText}>Add Recipe</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-    marginTop: StatusBar.currentHeight,
-  },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -84,7 +78,7 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     borderRadius: 5,
     padding: 10,
-    marginRight: 0, // Remove the marginRight
+    marginRight: 0,
   },
   errorInput: {
     borderColor: "red",
@@ -94,28 +88,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4511e",
     padding: 10,
     borderRadius: 5,
-    height: 50, // Set the desired height
-    marginLeft: 2, // Add marginLeft to create no gap
-  },
-  button: {
-    backgroundColor: "#f4511e",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 16,
-    width: "100%",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
+    height: 50,
+    marginLeft: 2,
   },
   pasteButtonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
-    lineHeight: 26, // Set the lineHeight to match the button height
+    lineHeight: 26,
   },
 });
 
