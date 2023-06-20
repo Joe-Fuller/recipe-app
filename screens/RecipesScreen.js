@@ -16,7 +16,11 @@ const RecipesScreen = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    fetchRecipeData();
+    const onFocus = navigation.addListener("focus", () => {
+      fetchRecipeData();
+    });
+
+    return onFocus;
   }, []);
 
   const fetchRecipeData = async () => {

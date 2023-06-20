@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  View,
   Image,
   Text,
   StyleSheet,
@@ -10,10 +11,12 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import sortIngredients from "../utils/sortIngredients";
 import RecipeStorage from "../storage/RecipeStorage";
+import Dialog from "react-native-dialog";
 
 const SingleRecipeScreen = (props) => {
   const navigation = useNavigation();
   const [recipe, setRecipe] = useState(null);
+  const [dialogVisible, setDialogVisible] = useState(false);
   const recipeName = props.route.params;
 
   useEffect(() => {
@@ -39,6 +42,7 @@ const SingleRecipeScreen = (props) => {
   const handleDeleteRecipe = async () => {
     try {
       await RecipeStorage.deleteRecipe(recipe.name);
+
       navigation.navigate("Recipes");
     } catch (error) {
       console.log("Error deleting recipe:", error);
@@ -50,35 +54,48 @@ const SingleRecipeScreen = (props) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Image
-        source={{ uri: recipe.imageLink }}
-        style={styles.image}
-        resizeMode={"contain"}
-      />
-      <Text style={styles.title}>{recipe.name}</Text>
-      <Text style={styles.subtitle}>{recipe.timeToCook}</Text>
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollContainer}>
+        <Image
+          source={{ uri: recipe.imageLink }}
+          style={styles.image}
+          resizeMode={"contain"}
+        />
+        <Text style={styles.title}>{recipe.name}</Text>
+        <Text style={styles.subtitle}>{recipe.timeToCook}</Text>
 
-      <Text style={styles.sectionTitle}>Ingredients:</Text>
-      {sortIngredients(recipe.ingredients).map((ingredient, index) => (
-        <Text
-          key={index}
-        >{`${ingredient.amount} ${ingredient.units} - ${ingredient.name}`}</Text>
-      ))}
+        <Text style={styles.sectionTitle}>Ingredients:</Text>
+        {sortIngredients(recipe.ingredients).map((ingredient, index) => (
+          <Text
+            key={index}
+          >{`${ingredient.amount} ${ingredient.units} - ${ingredient.name}`}</Text>
+        ))}
 
-      <Text style={styles.sectionTitle}>Instructions:</Text>
-      {recipe.instructions.map((instruction, index) => (
-        <Text key={index}>{`${index + 1}. ${instruction}`}</Text>
-      ))}
+        <Text style={styles.sectionTitle}>Instructions:</Text>
+        {recipe.instructions.map((instruction, index) => (
+          <Text key={index}>{`${index + 1}. ${instruction}`}</Text>
+        ))}
 
-      <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
-        <Text style={styles.buttonText}>Edit Recipe</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
+          <Text style={styles.buttonText}>Edit Recipe</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleDeleteRecipe}>
-        <Text style={styles.buttonText}>Delete Recipe</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setDialogVisible(true)}
+        >
+          <Text style={styles.buttonText}>Delete Recipe</Text>
+        </TouchableOpacity>
+      </ScrollView>
+      <Dialog.Container visible={dialogVisible}>
+        <Dialog.Title>Delete Recipe?</Dialog.Title>
+        <Dialog.Button label="Yes" onPress={handleDeleteRecipe}></Dialog.Button>
+        <Dialog.Button
+          label="No"
+          onPress={() => setDialogVisible(false)}
+        ></Dialog.Button>
+      </Dialog.Container>
+    </View>
   );
 };
 
@@ -87,6 +104,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     marginTop: StatusBar.currentHeight,
+  },
+  scrollContainer: {
+    flex: 1,
   },
   title: {
     fontSize: 24,
