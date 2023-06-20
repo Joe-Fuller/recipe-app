@@ -5,32 +5,37 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  StatusBar,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import scrapeRecipeFromUrl from "../utils/scrapeRecipe";
 import commonStyles from "../styles/commonStyles";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
   const [url, setUrl] = useState("");
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleAddRecipe = async () => {
+    setIsLoading(true);
     if (!url.trim()) {
       // URL is empty, show error styling
       setIsError(true);
+      setIsLoading(false);
       return;
     }
     try {
       const recipe = await scrapeRecipeFromUrl(url);
 
       if (recipe) {
+        setIsLoading(false);
         // Go to ConfirmRecipeScreen
         navigation.navigate("ConfirmRecipe", { recipe });
       }
     } catch (error) {
+      setIsLoading(false);
       console.error("Failed to add recipe:", error);
     }
   };
@@ -48,6 +53,7 @@ const AddRecipeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
+      {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Enter Recipe URL"
