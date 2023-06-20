@@ -101,6 +101,21 @@ const ShoppingListScreen = () => {
     ]);
   };
 
+  const handleDeleteItem = () => {
+    // Remove the item from the shopping list
+    const updatedShoppingList = shoppingList.filter(
+      (listItem) => listItem !== selectedItem
+    );
+
+    // And then save it
+    setShoppingList([...updatedShoppingList]);
+
+    // Hide the dialog
+    setDialogProperties({ ...dialogProperties, visible: false });
+
+    ShoppingListStorage.saveShoppingList([...updatedShoppingList]);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={commonStyles.title}>Shopping List</Text>
@@ -155,6 +170,7 @@ const ShoppingListScreen = () => {
             {dialogProperties.item.units}
           </Dialog.Input>
         </View>
+        <Dialog.Button label="Delete" onPress={handleDeleteItem} />
         <Dialog.Button label="Cancel" onPress={handleCloseDialog} />
         <Dialog.Button label="Save" onPress={handleSaveItem} />
       </Dialog.Container>
