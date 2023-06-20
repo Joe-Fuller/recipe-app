@@ -3,7 +3,6 @@ import recipeCardStyles from "../styles/recipeCardStyles";
 import { useNavigation } from "@react-navigation/core";
 
 const RecipeCard = ({ recipe }) => {
-  console.log(recipe);
   const navigation = useNavigation();
 
   const navigateToRecipe = () => {
