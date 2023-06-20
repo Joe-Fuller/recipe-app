@@ -11,18 +11,20 @@ import * as Clipboard from "expo-clipboard";
 import scrapeRecipeFromUrl from "../utils/scrapeRecipe";
 import commonStyles from "../styles/commonStyles";
 import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorMessage from "../components/ErrorMessage";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
   const [url, setUrl] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [isEmptyUrl, setIsEmptyUrl] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleAddRecipe = async () => {
     setIsLoading(true);
     if (!url.trim()) {
       // URL is empty, show error styling
-      setIsError(true);
+      setIsEmptyUrl(true);
       setIsLoading(false);
       return;
     }
@@ -30,13 +32,15 @@ const AddRecipeScreen = () => {
       const recipe = await scrapeRecipeFromUrl(url);
 
       if (recipe) {
-        setIsLoading(false);
         // Go to ConfirmRecipeScreen
         navigation.navigate("ConfirmRecipe", { recipe });
       }
     } catch (error) {
-      setIsLoading(false);
+      setIsError(true);
       console.error("Failed to add recipe:", error);
+    } finally {
+      setIsError(true);
+      setIsLoading(false);
     }
   };
 
@@ -51,15 +55,25 @@ const AddRecipeScreen = () => {
     }
   };
 
+  const handleHideError = () => {
+    setIsError(false);
+  };
+
   return (
     <View style={commonStyles.container}>
       {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
+      {isError ? (
+        <ErrorMessage
+          errorText="Please enter a valid url"
+          onHide={handleHideError}
+        ></ErrorMessage>
+      ) : null}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Enter Recipe URL"
           value={url}
           onChangeText={setUrl}
-          style={[styles.input, isError && styles.errorInput]}
+          style={[styles.input, isEmptyUrl && styles.errorInput]}
         />
         <TouchableOpacity style={styles.pasteButton} onPress={handlePasteURL}>
           <Text style={styles.pasteButtonText}>Paste</Text>
