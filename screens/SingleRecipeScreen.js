@@ -36,6 +36,15 @@ const SingleRecipeScreen = (props) => {
     });
   };
 
+  const handleDeleteRecipe = async () => {
+    try {
+      await RecipeStorage.deleteRecipe(recipe.name);
+      navigation.navigate("Recipes");
+    } catch (error) {
+      console.log("Error deleting recipe:", error);
+    }
+  };
+
   if (!recipe) {
     return <Text>Loading...</Text>;
   }
@@ -64,6 +73,10 @@ const SingleRecipeScreen = (props) => {
 
       <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
         <Text style={styles.buttonText}>Edit Recipe</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleDeleteRecipe}>
+        <Text style={styles.buttonText}>Delete Recipe</Text>
       </TouchableOpacity>
     </ScrollView>
   );
