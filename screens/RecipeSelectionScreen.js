@@ -6,13 +6,13 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  Button,
   StatusBar,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import RecipeStorage from "../storage/RecipeStorage";
 import commonStyles from "../styles/commonStyles";
+import recipeCardStyles from "../styles/recipeCardStyles";
 
 const RecipeSelectionScreen = () => {
   const navigation = useNavigation();
@@ -78,11 +78,14 @@ const RecipeSelectionScreen = () => {
 
   const renderRecipeItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.recipeContainer}
+      style={recipeCardStyles.recipeContainer}
       onPress={() => navigateToRecipe(item.name)}
     >
-      <Image source={{ uri: item.imageLink }} style={styles.recipeImage} />
-      <Text style={styles.recipeTitle}>{item.name}</Text>
+      <Image
+        source={{ uri: item.imageLink }}
+        style={recipeCardStyles.recipeImage}
+      />
+      <Text style={recipeCardStyles.recipeTitle}>{item.name}</Text>
 
       <TouchableOpacity
         style={[commonStyles.button]}
@@ -125,23 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     marginTop: StatusBar.currentHeight,
-  },
-  recipeContainer: {
-    flex: 1,
-    margin: 8,
-    alignItems: "center",
-  },
-  recipeImage: {
-    width: "100%",
-    height: "auto",
-    aspectRatio: 1,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  recipeTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
   },
 });
 
