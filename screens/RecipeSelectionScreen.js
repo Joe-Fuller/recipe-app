@@ -13,6 +13,7 @@ import ShoppingListStorage from "../storage/ShoppingListStorage";
 import RecipeStorage from "../storage/RecipeStorage";
 import commonStyles from "../styles/commonStyles";
 import recipeCardStyles from "../styles/recipeCardStyles";
+import RecipeCard from "../components/RecipeCard";
 
 const RecipeSelectionScreen = () => {
   const navigation = useNavigation();
@@ -26,10 +27,6 @@ const RecipeSelectionScreen = () => {
   const fetchRecipeData = async () => {
     const recipeData = await RecipeStorage.getAllRecipes();
     setRecipes(recipeData);
-  };
-
-  const navigateToRecipe = (recipeName) => {
-    navigation.navigate("SingleRecipe", recipeName);
   };
 
   const handleRecipeSelection = (recipe) => {
@@ -76,34 +73,28 @@ const RecipeSelectionScreen = () => {
     }
   };
 
-  const renderRecipeItem = ({ item }) => (
-    <TouchableOpacity
-      style={recipeCardStyles.recipeContainer}
-      onPress={() => navigateToRecipe(item.name)}
-    >
-      <Image
-        source={{ uri: item.imageLink }}
-        style={recipeCardStyles.recipeImage}
-      />
-      <Text style={recipeCardStyles.recipeTitle}>{item.name}</Text>
-
-      <TouchableOpacity
-        style={[commonStyles.button]}
-        onPress={() => handleRecipeSelection(item)}
-      >
-        <Text style={commonStyles.buttonText}>
-          {selectedRecipes.includes(item) ? "Selected" : "Select"}
-        </Text>
-      </TouchableOpacity>
-    </TouchableOpacity>
-  );
+  const renderRecipeCard = ({ item }) => {
+    return (
+      <View style={commonStyles.container}>
+        <RecipeCard recipe={item} />
+        <TouchableOpacity
+          style={[commonStyles.button]}
+          onPress={() => handleRecipeSelection(item)}
+        >
+          <Text style={commonStyles.buttonText}>
+            {selectedRecipes.includes(item) ? "Selected" : "Select"}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
       <Text style={commonStyles.title}>Recipes:</Text>
       <FlatList
         data={recipes}
-        renderItem={renderRecipeItem}
+        renderItem={renderRecipeCard}
         keyExtractor={(item) => item.name.toString()}
         numColumns={2}
       />
