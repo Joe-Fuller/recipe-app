@@ -12,6 +12,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import RecipeStorage from "../storage/RecipeStorage";
+import commonStyles from "../styles/commonStyles";
 
 const RecipeSelectionScreen = () => {
   const navigation = useNavigation();
@@ -82,27 +83,39 @@ const RecipeSelectionScreen = () => {
     >
       <Image source={{ uri: item.imageLink }} style={styles.recipeImage} />
       <Text style={styles.recipeTitle}>{item.name}</Text>
-      <Button
-        title={selectedRecipes.includes(item) ? "Selected" : "Select"}
+
+      <TouchableOpacity
+        style={[commonStyles.button]}
         onPress={() => handleRecipeSelection(item)}
-      />
+      >
+        <Text style={commonStyles.buttonText}>
+          {selectedRecipes.includes(item) ? "Selected" : "Select"}
+        </Text>
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Recipes:</Text>
+      <Text style={commonStyles.title}>Recipes:</Text>
       <FlatList
         data={recipes}
         renderItem={renderRecipeItem}
         keyExtractor={(item) => item.name.toString()}
         numColumns={2}
       />
-      <Button
-        title="Generate Shopping List"
+      <TouchableOpacity
+        style={[
+          commonStyles.button,
+          {
+            backgroundColor: selectedRecipes.length === 0 ? "#ccc" : "#f4511e",
+          },
+        ]}
         onPress={handleGenerateShoppingList}
         disabled={selectedRecipes.length === 0}
-      />
+      >
+        <Text style={commonStyles.buttonText}>Generate Shopping List</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -112,11 +125,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     marginTop: StatusBar.currentHeight,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
   },
   recipeContainer: {
     flex: 1,
