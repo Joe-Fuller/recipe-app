@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import navBarStyles from "../styles/navBarStyles";
 
 const NavBar = () => {
   const navigation = useNavigation();
@@ -18,37 +19,21 @@ const NavBar = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={navigateToHome} style={styles.button}>
-        <Text style={styles.buttonText}>Home</Text>
+    <View style={navBarStyles.container}>
+      <TouchableOpacity onPress={navigateToHome} style={navBarStyles.button}>
+        <Text style={navBarStyles.buttonText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToRecipes} style={styles.button}>
-        <Text style={styles.buttonText}>Recipes</Text>
+      <TouchableOpacity onPress={navigateToRecipes} style={navBarStyles.button}>
+        <Text style={navBarStyles.buttonText}>Recipes</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToShoppingList} style={styles.button}>
-        <Text style={styles.buttonText}>Shopping List</Text>
+      <TouchableOpacity
+        onPress={navigateToShoppingList}
+        style={navBarStyles.button}
+      >
+        <Text style={navBarStyles.buttonText}>Shopping List</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    height: 60,
-    backgroundColor: "#2c3e50",
-  },
-  button: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#ffffff",
-  },
-});
 
 export default NavBar;
