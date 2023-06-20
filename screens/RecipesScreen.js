@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  StatusBar,
-} from "react-native";
+import { View, Text, FlatList, StyleSheet, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
 import commonStyles from "../styles/commonStyles";
-import recipeCardStyles from "../styles/recipeCardStyles";
 import RecipeCard from "../components/RecipeCard";
 
 const RecipesScreen = () => {
