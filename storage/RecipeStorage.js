@@ -51,6 +51,7 @@ export const getAllRecipes = async () => {
 
 export default {
   saveRecipe,
+  deleteRecipe,
   getRecipe,
   getAllRecipes,
 };
