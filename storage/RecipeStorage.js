@@ -3,9 +3,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const saveRecipe = async (recipeName, data) => {
   try {
     await AsyncStorage.setItem(recipeName, JSON.stringify(data));
-    console.log(`Data saved successfully with key: ${recipeName}`);
+    console.log(`Successfully saved recipe ${recipeName}`);
   } catch (error) {
-    console.error("Error saving data:", error);
+    console.error("Error saving recipe ", error);
   }
 };
 
@@ -23,11 +23,11 @@ export const getRecipe = async (recipeName) => {
     const dataString = await AsyncStorage.getItem(recipeName);
     if (dataString !== null) {
       const data = JSON.parse(dataString);
-      console.log(`Data retrieved successfully with key: ${recipeName}`);
+      console.log(`Successfully retrieved recipe ${recipeName}`);
       return { name: recipeName, ...data };
     }
   } catch (error) {
-    console.error("Error retrieving data:", error);
+    console.error("Error retrieving recipe ", error);
   }
   return null;
 };
