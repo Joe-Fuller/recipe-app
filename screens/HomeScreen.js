@@ -7,6 +7,7 @@ import {
   StatusBar,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import commonStyles from "../styles/commonStyles";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -24,50 +25,25 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Recipe App</Text>
+    <View style={commonStyles.container}>
+      <Text style={commonStyles.title}>Welcome to Recipe App</Text>
 
-      <TouchableOpacity style={styles.button} onPress={handleAllRecipes}>
-        <Text style={styles.buttonText}>View All Recipes</Text>
+      <TouchableOpacity style={commonStyles.button} onPress={handleAllRecipes}>
+        <Text style={commonStyles.buttonText}>View All Recipes</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleAddRecipe}>
-        <Text style={styles.buttonText}>Add a Recipe</Text>
+      <TouchableOpacity style={commonStyles.button} onPress={handleAddRecipe}>
+        <Text style={commonStyles.buttonText}>Add a Recipe</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleMakeAShoppingList}>
-        <Text style={styles.buttonText}>Make A Shopping List</Text>
+      <TouchableOpacity
+        style={commonStyles.button}
+        onPress={handleMakeAShoppingList}
+      >
+        <Text style={commonStyles.buttonText}>Make A Shopping List</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-    marginTop: StatusBar.currentHeight,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 32,
-  },
-  button: {
-    backgroundColor: "#f4511e",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 16,
-    width: "100%",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-});
 
 export default HomeScreen;
