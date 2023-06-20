@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
 import commonStyles from "../styles/commonStyles";
 import recipeCardStyles from "../styles/recipeCardStyles";
+import RecipeCard from "../components/RecipeCard";
 
 const RecipesScreen = () => {
   const navigation = useNavigation();
@@ -30,29 +31,16 @@ const RecipesScreen = () => {
     setRecipes(recipeData);
   };
 
-  const navigateToRecipe = (name) => {
-    navigation.navigate("SingleRecipe", name);
+  const renderRecipeCard = ({ item }) => {
+    return <RecipeCard recipe={item} />;
   };
-
-  const renderRecipeItem = ({ item }) => (
-    <TouchableOpacity
-      style={recipeCardStyles.recipeContainer}
-      onPress={() => navigateToRecipe(item.name)}
-    >
-      <Image
-        source={{ uri: item.imageLink }}
-        style={recipeCardStyles.recipeImage}
-      />
-      <Text style={recipeCardStyles.recipeTitle}>{item.name}</Text>
-    </TouchableOpacity>
-  );
 
   return (
     <View style={styles.container}>
       <Text style={commonStyles.title}>Recipes:</Text>
       <FlatList
         data={recipes}
-        renderItem={renderRecipeItem}
+        renderItem={renderRecipeCard}
         keyExtractor={(item) => item.name.toString()}
         numColumns={2}
       />
