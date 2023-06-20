@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
+import commonStyles from "../styles/commonStyles";
+import recipeCardStyles from "../styles/recipeCardStyles";
 
 const RecipesScreen = () => {
   const navigation = useNavigation();
@@ -34,17 +36,20 @@ const RecipesScreen = () => {
 
   const renderRecipeItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.recipeContainer}
+      style={recipeCardStyles.recipeContainer}
       onPress={() => navigateToRecipe(item.name)}
     >
-      <Image source={{ uri: item.imageLink }} style={styles.recipeImage} />
-      <Text style={styles.recipeTitle}>{item.name}</Text>
+      <Image
+        source={{ uri: item.imageLink }}
+        style={recipeCardStyles.recipeImage}
+      />
+      <Text style={recipeCardStyles.recipeTitle}>{item.name}</Text>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Recipes:</Text>
+      <Text style={commonStyles.title}>Recipes:</Text>
       <FlatList
         data={recipes}
         renderItem={renderRecipeItem}
@@ -60,28 +65,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     marginTop: StatusBar.currentHeight,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
-  },
-  recipeContainer: {
-    flex: 1,
-    margin: 8,
-    alignItems: "center",
-  },
-  recipeImage: {
-    width: "100%",
-    height: "auto",
-    aspectRatio: 1,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  recipeTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
   },
 });
 
