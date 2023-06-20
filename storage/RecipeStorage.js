@@ -9,6 +9,15 @@ export const saveRecipe = async (recipeName, data) => {
   }
 };
 
+export const deleteRecipe = async (recipeName) => {
+  try {
+    await AsyncStorage.removeItem(recipeName);
+    console.log(`Successfully deleted recipe ${recipeName}`);
+  } catch (error) {
+    console.error(`Error deleting recipe: ${recipeName}`);
+  }
+};
+
 export const getRecipe = async (recipeName) => {
   try {
     const dataString = await AsyncStorage.getItem(recipeName);
