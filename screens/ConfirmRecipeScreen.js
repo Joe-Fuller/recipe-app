@@ -8,9 +8,11 @@ import {
   StyleSheet,
   Image,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
+import commonStyles from "../styles/commonStyles";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
@@ -63,11 +65,12 @@ const ConfirmRecipeScreen = (props) => {
           value={ingredient.name}
           onChangeText={(text) => updateIngredient(index, "name", text)}
         />
-        <Button
-          title="X"
+        <TouchableOpacity
+          style={commonStyles.removeButton}
           onPress={() => removeIngredient(index)}
-          style={styles.removeButton}
-        />
+        >
+          <Text style={commonStyles.buttonText}>X</Text>
+        </TouchableOpacity>
       </View>
     ));
   };
@@ -101,26 +104,20 @@ const ConfirmRecipeScreen = (props) => {
           value={instruction}
           onChangeText={(text) => updateInstruction(index, text)}
           multiline={true}
-          style={[styles.instructionText, { maxHeight: 15 * 20 }]} // Adjust the line height here (e.g., 20)
+          style={[styles.instructionText, { maxHeight: 15 * 20 }]}
         />
-        <Button
-          title="X"
+        <TouchableOpacity
+          style={commonStyles.removeButton}
           onPress={() => removeInstruction(index)}
-          style={styles.removeButton}
-        />
+        >
+          <Text style={commonStyles.buttonText}>X</Text>
+        </TouchableOpacity>
       </View>
     ));
   };
 
   // Update Recipe Logic
   const handleConfirmRecipe = async () => {
-    const recipeData = {
-      name: recipeName,
-      timeToCook: timeToCook,
-      ingredients: ingredients,
-      instructions: instructions,
-    };
-
     await RecipeStorage.saveRecipe(recipeName, {
       timeToCook,
       ingredients,
@@ -132,7 +129,7 @@ const ConfirmRecipeScreen = (props) => {
   };
 
   return (
-    <View contentContainerStyle={styles.container}>
+    <View contentContainerStyle={commonStyles.container}>
       <ScrollView style={styles.formContainer}>
         <Image
           source={{ uri: recipe.imageLink }}
@@ -153,17 +150,30 @@ const ConfirmRecipeScreen = (props) => {
 
         <Text>Ingredients:</Text>
         {renderIngredients()}
-        <Button title="Add Ingredient" onPress={addIngredient} />
+        <TouchableOpacity
+          style={commonStyles.button}
+          onPress={() => addIngredient()}
+        >
+          <Text style={commonStyles.buttonText}>Add Ingredient</Text>
+        </TouchableOpacity>
 
         <View style={styles.instructionsContainer}>
           <Text style={styles.sectionTitle}>Instructions</Text>
           {renderInstructions()}
         </View>
-        <Button title="Add Instruction" onPress={addInstruction} />
+        <TouchableOpacity
+          style={commonStyles.button}
+          onPress={() => addInstruction()}
+        >
+          <Text style={commonStyles.buttonText}>Add Instruction</Text>
+        </TouchableOpacity>
 
-        <View style={styles.buttonContainer}>
-          <Button title="Save Recipe" onPress={handleConfirmRecipe} />
-        </View>
+        <TouchableOpacity
+          style={commonStyles.button}
+          onPress={handleConfirmRecipe}
+        >
+          <Text style={commonStyles.buttonText}>Save Recipe</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -202,9 +212,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 8,
   },
-  removeButton: {
-    marginLeft: "auto",
-  },
+
   instructionsContainer: {
     marginTop: 16,
   },

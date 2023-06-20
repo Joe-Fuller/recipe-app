@@ -20,6 +20,17 @@ const commonStyles = StyleSheet.create({
     marginBottom: 16,
     width: "100%",
   },
+  removeButton: {
+    backgroundColor: "#f4511e",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginBottom: 16,
+    marginLeft: "auto",
+    width: "auto",
+    alignItems: "center",
+  },
+
   buttonText: {
     color: "white",
     fontSize: 16,
