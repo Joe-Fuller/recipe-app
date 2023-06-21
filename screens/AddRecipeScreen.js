@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import scrapeRecipeFromUrl from "../utils/scrapeRecipe";
 import commonStyles from "../styles/commonStyles";
@@ -15,6 +15,7 @@ import ErrorMessage from "../components/ErrorMessage";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
+  const theme = useTheme();
   const [url, setUrl] = useState("");
   const [isEmptyUrl, setIsEmptyUrl] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +74,11 @@ const AddRecipeScreen = () => {
           placeholder="Enter Recipe URL"
           value={url}
           onChangeText={setUrl}
-          style={[styles.input, isEmptyUrl && styles.errorInput]}
+          style={[
+            styles.input,
+            isEmptyUrl && styles.errorInput,
+            { color: theme.colors.text },
+          ]}
         />
         <TouchableOpacity style={styles.pasteButton} onPress={handlePasteURL}>
           <Text style={styles.pasteButtonText}>Paste</Text>
