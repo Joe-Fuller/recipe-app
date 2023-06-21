@@ -8,13 +8,14 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import sortIngredients from "../utils/sortIngredients";
 import RecipeStorage from "../storage/RecipeStorage";
 import Dialog from "react-native-dialog";
 
 const SingleRecipeScreen = (props) => {
   const navigation = useNavigation();
+  const theme = useTheme();
   const [recipe, setRecipe] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const recipeName = props.route.params;
@@ -60,19 +61,30 @@ const SingleRecipeScreen = (props) => {
           style={styles.image}
           resizeMode={"contain"}
         />
-        <Text style={styles.title}>{recipe.name}</Text>
-        <Text style={styles.subtitle}>{recipe.timeToCook}</Text>
+        <Text style={[styles.title, { color: theme.colors.text }]}>
+          {recipe.name}
+        </Text>
+        <Text style={[styles.subtitle, { color: theme.colors.text }]}>
+          {recipe.timeToCook}
+        </Text>
 
-        <Text style={styles.sectionTitle}>Ingredients:</Text>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+          Ingredients:
+        </Text>
         {sortIngredients(recipe.ingredients).map((ingredient, index) => (
           <Text
             key={index}
+            style={{ color: theme.colors.text }}
           >{`${ingredient.amount} ${ingredient.units} - ${ingredient.name}`}</Text>
         ))}
 
-        <Text style={styles.sectionTitle}>Instructions:</Text>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+          Instructions:
+        </Text>
         {recipe.instructions.map((instruction, index) => (
-          <Text key={index}>{`${index + 1}. ${instruction}`}</Text>
+          <Text key={index} style={{ color: theme.colors.text }}>{`${
+            index + 1
+          }. ${instruction}`}</Text>
         ))}
 
         <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
