@@ -1,9 +1,10 @@
 import { Image, Text, TouchableOpacity } from "react-native";
 import recipeCardStyles from "../styles/recipeCardStyles";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 const RecipeCard = ({ recipe }) => {
   const navigation = useNavigation();
+  const theme = useTheme();
 
   const navigateToRecipe = () => {
     navigation.navigate("SingleRecipe", recipe.name);
@@ -18,7 +19,11 @@ const RecipeCard = ({ recipe }) => {
         source={{ uri: recipe.imageFilePath }}
         style={recipeCardStyles.recipeImage}
       ></Image>
-      <Text style={recipeCardStyles.recipeTitle}>{recipe.name}</Text>
+      <Text
+        style={[recipeCardStyles.recipeTitle, { color: theme.colors.text }]}
+      >
+        {recipe.name}
+      </Text>
     </TouchableOpacity>
   );
 };
