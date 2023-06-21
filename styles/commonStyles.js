@@ -1,4 +1,5 @@
 import { StyleSheet, StatusBar } from "react-native";
+import { Appearance } from "react-native";
 
 const commonStyles = StyleSheet.create({
   container: {
