@@ -1,33 +1,16 @@
-import RNFS from "react-native-fs";
-
-const imagePath = `${RNFS.DocumentDirectoryPath}/images`;
-
-const createImageDirectory = async () => {
-  try {
-    await RNFS.mkdir(imagePath);
-    console.log("Image directory created successfully");
-  } catch (error) {
-    console.log("Failed to create image directory:", error);
-  }
-};
+import * as FileSystem from "expo-file-system";
 
 const downloadImage = async (imageUrl, imageName) => {
-  const destinationPath = `${imagePath}/${imageName}`;
+  console.log("1");
+  const downloadDest = `${FileSystem.documentDirectory}/${imageName}.jpg`;
+  console.log("in downloadImage");
 
   try {
-    const downloadResult = await RNFS.downloadFile({
-      fromUrl: imageUrl,
-      toFile: destinationPath,
-    });
-
-    if (downloadResult.statusCode === 200) {
-      console.log("Image downloaded successfully");
-    } else {
-      console.log("Failed to download image:", downloadResult.statusCode);
-    }
+    const { uri } = await FileSystem.downloadAsync(imageUrl, downloadDest);
+    console.log("Image downloaded:", uri);
   } catch (error) {
-    console.log("Error while downloading image:", error);
+    console.error("Failed to download image:", error);
   }
 };
 
-export default { createImageDirectory, downloadImage };
+export default downloadImage;
