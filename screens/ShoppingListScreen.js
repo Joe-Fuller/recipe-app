@@ -11,8 +11,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import Dialog from "react-native-dialog";
 import commonStyles from "../styles/commonStyles";
+import { useTheme } from "@react-navigation/native";
 
 const ShoppingListScreen = () => {
+  const theme = useTheme();
   const [shoppingList, setShoppingList] = useState([]);
 
   useEffect(() => {
@@ -118,7 +120,9 @@ const ShoppingListScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={commonStyles.title}>Shopping List</Text>
+      <Text style={[commonStyles.title, { color: theme.colors.text }]}>
+        Shopping List
+      </Text>
       <ScrollView style={styles.scrollContainer}>
         {shoppingList.map((item) => (
           <TouchableOpacity
@@ -128,7 +132,11 @@ const ShoppingListScreen = () => {
             onLongPress={() => handleEditItem(item)}
           >
             <View style={styles.itemDetailsContainer}>
-              <Text style={styles.itemIngredient}>{item.ingredient}</Text>
+              <Text
+                style={[styles.itemIngredient, { color: theme.colors.text }]}
+              >
+                {item.ingredient}
+              </Text>
               <Text style={styles.itemAmount}>
                 {item.amount} {item.units}
               </Text>
