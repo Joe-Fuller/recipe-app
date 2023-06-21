@@ -26,7 +26,7 @@ const HomeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
-      <Text style={commonStyles.title}>Welcome to Recipe App</Text>
+      <Text style={commonStyles.title}>Welcome to Imprecipe!</Text>
 
       <TouchableOpacity style={commonStyles.button} onPress={handleAllRecipes}>
         <Text style={commonStyles.buttonText}>View All Recipes</Text>
