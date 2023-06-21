@@ -1,7 +1,9 @@
 const cheerio = require("cheerio");
 const splitIngredientString = require("./splitIngredientString");
 const sortIngredients = require("./sortIngredients");
+const { createImageDirectory, downloadImage } = require("./downloadImage");
 const he = require("he");
+import RNFS from "react-native-fs";
 
 // Unit correlation mapping
 const unitCorrelation = {
@@ -128,7 +130,7 @@ async function scrapeRecipeFromUrl(url) {
 
     // Access the recipe data and decode HTML entities
     const recipeName = he.decode(recipeData.name);
-    let recipeImage = recipeData.image.url || recipeData.image;
+    let recipeImageUrl = recipeData.image.url || recipeData.image;
     const recipeIngredients = recipeData.recipeIngredient.map((ingredient) =>
       he.decode(ingredient)
     );
@@ -151,13 +153,19 @@ async function scrapeRecipeFromUrl(url) {
       recipeImage = recipeImage[0];
     }
 
+    // Download the image file
+    const imageFileName = `${recipeName}.jpg`;
+    const imageFilePath = `${RNFS.DocumentDirectoryPath}/${imageFileName}`;
+    await RNFS.downloadFile({ fromUrl: recipeImageUrl, toFile: imageFilePath })
+      .promise;
+
     // Create the recipe object
     const recipe = {
       name: recipeName,
       timeToCook: recipeTime,
       ingredients: sortedIngredients,
       instructions: recipeInstructions,
-      imageLink: recipeImage,
+      imageFilePath: imageFilePath,
     };
 
     return recipe;
