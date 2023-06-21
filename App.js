@@ -1,5 +1,9 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import AddRecipeScreen from "./screens/AddRecipeScreen";
@@ -10,12 +14,16 @@ import HomeScreen from "./screens/HomeScreen";
 import RecipeSelectionScreen from "./screens/RecipeSelectionScreen";
 import ShoppingListScreen from "./screens/ShoppingListScreen";
 import NavBar from "./components/NavBar";
+import { useColorScheme } from "react-native";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"

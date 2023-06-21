@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import commonStyles from "../styles/commonStyles";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const theme = useTheme();
 
   const handleAllRecipes = () => {
     navigation.navigate("Recipes");
@@ -26,7 +27,9 @@ const HomeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
-      <Text style={commonStyles.title}>Welcome to Imprecipe!</Text>
+      <Text style={[commonStyles.title, { color: theme.colors.text }]}>
+        Welcome to Imprecipe!
+      </Text>
 
       <TouchableOpacity style={commonStyles.button} onPress={handleAllRecipes}>
         <Text style={commonStyles.buttonText}>View All Recipes</Text>
