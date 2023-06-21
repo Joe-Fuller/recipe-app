@@ -26,7 +26,6 @@ const SingleRecipeScreen = (props) => {
   const fetchRecipeData = async () => {
     try {
       const recipeData = await RecipeStorage.getRecipe(recipeName);
-
       setRecipe(recipeData);
     } catch (error) {
       console.error("Error fetching recipe:", error);
@@ -57,7 +56,7 @@ const SingleRecipeScreen = (props) => {
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
         <Image
-          source={{ uri: recipe.imageLink }}
+          source={{ uri: recipe.imageFilePath }}
           style={styles.image}
           resizeMode={"contain"}
         />

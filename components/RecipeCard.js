@@ -15,7 +15,7 @@ const RecipeCard = ({ recipe }) => {
       onPress={() => navigateToRecipe()}
     >
       <Image
-        source={{ uri: recipe.imageLink }}
+        source={{ uri: recipe.imageFilePath }}
         style={recipeCardStyles.recipeImage}
       ></Image>
       <Text style={recipeCardStyles.recipeTitle}>{recipe.name}</Text>

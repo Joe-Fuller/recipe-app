@@ -121,7 +121,7 @@ const ConfirmRecipeScreen = (props) => {
       timeToCook,
       ingredients,
       instructions,
-      imageLink: recipe.imageLink,
+      imageFilePath: recipe.imageFilePath,
     });
 
     navigation.navigate("Recipes");
@@ -131,7 +131,7 @@ const ConfirmRecipeScreen = (props) => {
     <View contentContainerStyle={commonStyles.container}>
       <ScrollView style={styles.formContainer}>
         <Image
-          source={{ uri: recipe.imageLink }}
+          source={{ uri: recipe.imageFilePath }}
           style={styles.image}
           resizeMode={"contain"}
         />

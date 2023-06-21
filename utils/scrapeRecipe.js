@@ -2,6 +2,7 @@ const cheerio = require("cheerio");
 const splitIngredientString = require("./splitIngredientString");
 const sortIngredients = require("./sortIngredients");
 const he = require("he");
+import downloadImage from "./downloadImage";
 
 // Unit correlation mapping
 const unitCorrelation = {
@@ -128,7 +129,7 @@ async function scrapeRecipeFromUrl(url) {
 
     // Access the recipe data and decode HTML entities
     const recipeName = he.decode(recipeData.name);
-    let recipeImage = recipeData.image.url || recipeData.image;
+    let recipeImageUrl = recipeData.image.url || recipeData.image;
     const recipeIngredients = recipeData.recipeIngredient.map((ingredient) =>
       he.decode(ingredient)
     );
@@ -147,9 +148,11 @@ async function scrapeRecipeFromUrl(url) {
     const sortedIngredients = sortIngredients(aggregatedIngredients);
 
     // Make sure the image is a string, not an array
-    if (Array.isArray(recipeImage)) {
-      recipeImage = recipeImage[0];
+    if (Array.isArray(recipeImageUrl)) {
+      recipeImageUrl = recipeImageUrl[0];
     }
+
+    const recipeImageFilePath = await downloadImage(recipeImageUrl, recipeName);
 
     // Create the recipe object
     const recipe = {
@@ -157,7 +160,7 @@ async function scrapeRecipeFromUrl(url) {
       timeToCook: recipeTime,
       ingredients: sortedIngredients,
       instructions: recipeInstructions,
-      imageLink: recipeImage,
+      imageFilePath: recipeImageFilePath,
     };
 
     return recipe;
