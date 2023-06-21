@@ -9,12 +9,13 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
 import commonStyles from "../styles/commonStyles";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
+  const theme = useTheme();
 
   const recipe = props.route.params.recipe;
 
@@ -47,19 +48,19 @@ const ConfirmRecipeScreen = (props) => {
     return ingredients.map((ingredient, index) => (
       <View key={index} style={styles.ingredientContainer}>
         <TextInput
-          style={styles.amountInput}
+          style={[styles.amountInput, { color: theme.colors.text }]}
           placeholder="Amount"
           value={ingredient.amount}
           onChangeText={(text) => updateIngredient(index, "amount", text)}
         />
         <TextInput
-          style={styles.unitsInput}
+          style={[styles.unitsInput, { color: theme.colors.text }]}
           placeholder="Units"
           value={ingredient.units}
           onChangeText={(text) => updateIngredient(index, "units", text)}
         />
         <TextInput
-          style={styles.nameInput}
+          style={[styles.nameInput, { color: theme.colors.text }]}
           placeholder="Ingredient Name"
           value={ingredient.name}
           onChangeText={(text) => updateIngredient(index, "name", text)}
@@ -97,13 +98,19 @@ const ConfirmRecipeScreen = (props) => {
   const renderInstructions = () => {
     return instructions.map((instruction, index) => (
       <View key={index} style={styles.instructionItem}>
-        <Text style={styles.instructionIndex}>{index + 1}.</Text>
+        <Text style={[styles.instructionIndex, { color: theme.colors.text }]}>
+          {index + 1}.
+        </Text>
         <TextInput
           placeholder={`Step ${index + 1}`}
           value={instruction}
           onChangeText={(text) => updateInstruction(index, text)}
           multiline={true}
-          style={[styles.instructionText, { maxHeight: 15 * 20 }]}
+          style={[
+            styles.instructionText,
+            { maxHeight: 15 * 20 },
+            { color: theme.colors.text },
+          ]}
         />
         <TouchableOpacity
           style={commonStyles.removeButton}
@@ -138,16 +145,18 @@ const ConfirmRecipeScreen = (props) => {
         <TextInput
           value={recipeName}
           onChangeText={(text) => setRecipeName(text)}
-          style={styles.input}
+          style={[styles.input, { color: theme.colors.text }]}
         />
 
         <TextInput
           value={timeToCook}
           onChangeText={(text) => setTimeToCook(text)}
-          style={styles.input}
+          style={[styles.input, { color: theme.colors.text }]}
         />
 
-        <Text>Ingredients:</Text>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+          Ingredients:
+        </Text>
         {renderIngredients()}
         <TouchableOpacity
           style={commonStyles.button}
@@ -157,7 +166,9 @@ const ConfirmRecipeScreen = (props) => {
         </TouchableOpacity>
 
         <View style={styles.instructionsContainer}>
-          <Text style={styles.sectionTitle}>Instructions</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Instructions
+          </Text>
           {renderInstructions()}
         </View>
         <TouchableOpacity
