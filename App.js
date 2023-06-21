@@ -23,7 +23,7 @@ export default function App() {
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
 
   return (
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer theme={theme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
