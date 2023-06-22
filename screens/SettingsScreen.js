@@ -1,61 +1,58 @@
-import React, { useContext } from "react";
-import { View, Text, Switch, Slider, StyleSheet } from "react-native";
-import { ThemeContext, TextSizeContext } from "../contexts";
+import React, { useState, useEffect } from "react";
+import { View, Text, Switch, Slider } from "react-native";
+import { useTheme } from "@react-navigation/native";
+import { getSettings, setSetting } from "./SettingsStorage";
 
 const SettingsScreen = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const { textSize, setTextSize } = useContext(TextSizeContext);
+  const [theme, setTheme] = useState("");
+  const [textSize, setTextSize] = useState(16);
 
-  const handleThemeToggle = () => {
-    toggleTheme();
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    const settings = await getSettings();
+    if (settings) {
+      setTheme(settings.theme);
+      setTextSize(settings.textSize);
+    }
   };
 
-  const handleTextSizeChange = (value) => {
+  const handleThemeToggle = async () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    await setSetting("theme", newTheme);
+  };
+
+  const handleTextSizeChange = async (value) => {
     setTextSize(value);
+    await setSetting("textSize", value);
   };
+
+  const { colors } = useTheme();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Dark Mode</Text>
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
+      <Text style={{ color: colors.text, fontSize: textSize }}>Settings</Text>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={{ color: colors.text }}>Dark Mode</Text>
         <Switch value={theme === "dark"} onValueChange={handleThemeToggle} />
       </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Text Size</Text>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={{ color: colors.text }}>Text Size</Text>
         <Slider
           value={textSize}
           minimumValue={12}
           maximumValue={24}
           step={2}
-          onValueChange={handleTextSizeChange}
+          onSlidingComplete={handleTextSizeChange}
+          minimumTrackTintColor={colors.primary}
+          maximumTrackTintColor={colors.border}
         />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 24,
-  },
-  section: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    marginRight: 16,
-  },
-});
 
 export default SettingsScreen;
