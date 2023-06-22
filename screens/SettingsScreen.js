@@ -24,13 +24,13 @@ const SettingsScreen = () => {
 
   const handleThemeToggle = async () => {
     const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
     await setSetting("theme", newTheme);
+    setTheme(newTheme);
   };
 
   const handleTextSizeChange = async (value) => {
-    setTextSize(value);
     await setSetting("textSize", value);
+    setTextSize(value);
   };
 
   const { colors } = useTheme();
@@ -51,7 +51,7 @@ const SettingsScreen = () => {
       </View>
       <View style={[styles.settingContainer, { width: "100%" }]}>
         <Text style={[styles.settingLabel, { color: colors.text }]}>
-          Text Size: {settings.textSize}
+          Text Size: {textSize}
         </Text>
         <Slider
           value={textSize}
