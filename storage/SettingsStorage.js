@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const getSettings = async () => {
   try {
     const settings = await AsyncStorage.getItem("settings");
-    return value !== null ? JSON.parse(settings) : null;
+    return settings !== null ? JSON.parse(settings) : null;
   } catch (error) {
     console.error("Failed to retrieve settings:", error);
     return null;
