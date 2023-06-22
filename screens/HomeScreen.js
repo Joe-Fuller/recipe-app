@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import commonStyles from "../styles/commonStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
 import getDynamicStyles from "../styles/commonStyles";
 
@@ -14,8 +13,6 @@ const HomeScreen = () => {
   useEffect(() => {
     setCurrentSettings(settings);
   }, [settings, version]);
-
-  const { theme, textSize } = currentSettings;
 
   const handleAllRecipes = () => {
     navigation.navigate("Recipes");
