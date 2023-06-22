@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-} from "react-native";
-import { useNavigation, useTheme } from "@react-navigation/native";
+  useFocusEffect,
+  useNavigation,
+  useTheme,
+} from "@react-navigation/native";
 import commonStyles from "../styles/commonStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const theme = useTheme();
-  const { settings } = useContext(SettingsContext);
-  console.log(settings);
+  let { settings } = useContext(SettingsContext);
 
   const handleAllRecipes = () => {
     navigation.navigate("Recipes");
