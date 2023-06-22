@@ -33,7 +33,7 @@ const HomeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
-      <Text style={[commonStyles.title, { fontSize: textSize }]}>
+      <Text style={[commonStyles.title, { fontSize: textSize + 10 }]}>
         Welcome to Imprecipe!
       </Text>
 
