@@ -4,6 +4,7 @@ import { getSettings, setSetting } from "../storage/SettingsStorage";
 const SettingsContext = createContext();
 
 const SettingsProvider = ({ children }) => {
+  const [version, setVersion] = useState(0);
   const [settings, setSettings] = useState({
     textSize: 16,
     theme: "light",
@@ -24,10 +25,11 @@ const SettingsProvider = ({ children }) => {
     const updatedSettings = { ...settings, [setting]: value };
     await setSetting(setting, value);
     setSettings(updatedSettings);
+    setVersion(version + 1);
   };
 
   return (
-    <SettingsContext.Provider value={{ settings, updateSetting }}>
+    <SettingsContext.Provider value={{ settings, updateSetting, version }}>
       {children}
     </SettingsContext.Provider>
   );

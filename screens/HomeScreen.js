@@ -1,17 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import {
-  useFocusEffect,
-  useNavigation,
-  useTheme,
-} from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import commonStyles from "../styles/commonStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const theme = useTheme();
-  let { settings } = useContext(SettingsContext);
+  const { settings, version } = useContext(SettingsContext);
+  const [currentSettings, setCurrentSettings] = useState(settings);
+
+  useEffect(() => {
+    setCurrentSettings(settings);
+  }, [settings, version]);
+
+  const { theme, textSize } = currentSettings;
 
   const handleAllRecipes = () => {
     navigation.navigate("Recipes");
@@ -31,12 +33,7 @@ const HomeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
-      <Text
-        style={[
-          commonStyles.title,
-          { color: theme.colors.text, fontSize: settings.textSize },
-        ]}
-      >
+      <Text style={[commonStyles.title, { fontSize: textSize }]}>
         Welcome to Imprecipe!
       </Text>
 

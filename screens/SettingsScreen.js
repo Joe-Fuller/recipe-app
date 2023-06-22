@@ -8,7 +8,7 @@ import { SettingsContext } from "../contexts/SettingsContext";
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
   const [textSize, setTextSize] = useState(16);
-  const { settings } = useContext(SettingsContext);
+  const { settings, updateSetting } = useContext(SettingsContext);
 
   useEffect(() => {
     loadSettings();
@@ -24,12 +24,12 @@ const SettingsScreen = () => {
 
   const handleThemeToggle = async () => {
     const newTheme = theme === "dark" ? "light" : "dark";
-    await setSetting("theme", newTheme);
+    await updateSetting("theme", newTheme);
     setTheme(newTheme);
   };
 
   const handleTextSizeChange = async (value) => {
-    await setSetting("textSize", value);
+    await updateSetting("textSize", value);
     setTextSize(value);
   };
 
