@@ -16,8 +16,6 @@ import ShoppingListScreen from "./screens/ShoppingListScreen";
 import NavBar from "./components/NavBar";
 import { useColorScheme } from "react-native";
 import SettingsScreen from "./screens/SettingsScreen";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { TextSizeProvider } from "./contexts/TextSizeContext";
 
 const Stack = createStackNavigator();
 
@@ -26,54 +24,50 @@ export default function App() {
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
 
   return (
-    <ThemeProvider>
-      <TextSizeProvider>
-        <NavigationContainer theme={theme}>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="AddRecipe"
-              component={AddRecipeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ConfirmRecipe"
-              component={ConfirmRecipeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Recipes"
-              component={RecipesScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SingleRecipe"
-              component={SingleRecipeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="RecipeSelection"
-              component={RecipeSelectionScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ShoppingList"
-              component={ShoppingListScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Settings"
-              component={SettingsScreen}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-          <NavBar />
-        </NavigationContainer>
-      </TextSizeProvider>
-    </ThemeProvider>
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddRecipe"
+          component={AddRecipeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ConfirmRecipe"
+          component={ConfirmRecipeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Recipes"
+          component={RecipesScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SingleRecipe"
+          component={SingleRecipeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RecipeSelection"
+          component={RecipeSelectionScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ShoppingList"
+          component={ShoppingListScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+      <NavBar />
+    </NavigationContainer>
   );
 }
