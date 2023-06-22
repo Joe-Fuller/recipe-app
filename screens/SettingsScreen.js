@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Switch } from "react-native";
+import { View, Text, Switch, StyleSheet, StatusBar } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getSettings, setSetting } from "../storage/SettingsStorage";
 import Slider from "@react-native-community/slider";
@@ -34,14 +34,23 @@ const SettingsScreen = () => {
   const { colors } = useTheme();
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <Text style={{ color: colors.text, fontSize: textSize }}>Settings</Text>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={{ color: colors.text }}>Dark Mode</Text>
-        <Switch value={theme === "dark"} onValueChange={handleThemeToggle} />
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <Text style={[styles.title, { color: colors.text }]}>Settings</Text>
+      <View style={styles.settingContainer}>
+        <Text style={[styles.settingLabel, { color: colors.text }]}>
+          Dark Mode
+        </Text>
+        <Switch
+          value={theme === "dark"}
+          onValueChange={handleThemeToggle}
+          trackColor={{ false: colors.border, true: colors.primary }}
+          thumbColor={colors.text}
+        />
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={{ color: colors.text }}>Text Size</Text>
+      <View style={[styles.settingContainer, { width: "100%" }]}>
+        <Text style={[styles.settingLabel, { color: colors.text }]}>
+          Text Size
+        </Text>
         <Slider
           value={textSize}
           minimumValue={12}
@@ -50,10 +59,34 @@ const SettingsScreen = () => {
           onSlidingComplete={handleTextSizeChange}
           minimumTrackTintColor={colors.primary}
           maximumTrackTintColor={colors.border}
+          thumbTintColor={colors.primary}
+          style={{ flex: 1 }}
         />
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    marginTop: StatusBar.currentHeight,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  settingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  settingLabel: {
+    fontSize: 16,
+    marginRight: 8,
+  },
+});
 
 export default SettingsScreen;
