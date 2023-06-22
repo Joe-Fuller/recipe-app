@@ -3,11 +3,13 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import commonStyles from "../styles/commonStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
+import getDynamicStyles from "../styles/commonStyles";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { settings, version } = useContext(SettingsContext);
   const [currentSettings, setCurrentSettings] = useState(settings);
+  const commonStyles = getDynamicStyles(settings);
 
   useEffect(() => {
     setCurrentSettings(settings);
@@ -33,9 +35,7 @@ const HomeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
-      <Text style={[commonStyles.title, { fontSize: textSize + 10 }]}>
-        Welcome to Imprecipe!
-      </Text>
+      <Text style={[commonStyles.title]}>Welcome to Imprecipe!</Text>
 
       <TouchableOpacity style={commonStyles.button} onPress={handleAllRecipes}>
         <Text style={commonStyles.buttonText}>View All Recipes</Text>
