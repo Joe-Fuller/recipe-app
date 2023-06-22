@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Switch, StyleSheet, StatusBar } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getSettings, setSetting } from "../storage/SettingsStorage";
 import Slider from "@react-native-community/slider";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
   const [textSize, setTextSize] = useState(16);
+  const { settings } = useContext(SettingsContext);
 
   useEffect(() => {
     loadSettings();

@@ -21,7 +21,9 @@ const SettingsProvider = ({ children }) => {
   };
 
   const updateSetting = async (setting, value) => {
+    const updatedSettings = { ...settings, [setting]: value };
     await setSetting(setting, value);
+    setSettings(updatedSettings);
   };
 
   return (

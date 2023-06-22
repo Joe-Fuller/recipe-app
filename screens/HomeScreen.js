@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -8,10 +8,13 @@ import {
 } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import commonStyles from "../styles/commonStyles";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const theme = useTheme();
+  const { settings } = useContext(SettingsContext);
+  console.log(settings);
 
   const handleAllRecipes = () => {
     navigation.navigate("Recipes");
@@ -31,7 +34,12 @@ const HomeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
-      <Text style={[commonStyles.title, { color: theme.colors.text }]}>
+      <Text
+        style={[
+          commonStyles.title,
+          { color: theme.colors.text, fontSize: settings.textSize },
+        ]}
+      >
         Welcome to Imprecipe!
       </Text>
 
