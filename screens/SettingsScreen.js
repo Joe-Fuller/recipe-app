@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Switch, Slider } from "react-native";
+import { View, Text, Switch } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { getSettings, setSetting } from "./SettingsStorage";
+import { getSettings, setSetting } from "../storage/SettingsStorage";
+import Slider from "@react-native-community/slider";
 
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
