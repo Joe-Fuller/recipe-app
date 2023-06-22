@@ -12,7 +12,7 @@ export const getSettings = async () => {
 
 export const setSetting = async (setting, value) => {
   try {
-    const settings = await AsyncStorage.getSettings();
+    const settings = await getSettings();
     const updatedSettings = { ...settings, setting: value };
     await AsyncStorage.setItem("settings", JSON.stringify(updatedSettings));
     console.log(`Setting ${setting} updated successfully`);
