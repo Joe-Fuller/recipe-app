@@ -51,7 +51,7 @@ const SettingsScreen = () => {
       </View>
       <View style={[styles.settingContainer, { width: "100%" }]}>
         <Text style={[styles.settingLabel, { color: colors.text }]}>
-          Text Size
+          Text Size: {settings.textSize}
         </Text>
         <Slider
           value={textSize}
