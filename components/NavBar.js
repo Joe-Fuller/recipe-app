@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import navBarStyles from "../styles/navBarStyles";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const NavBar = () => {
   const navigation = useNavigation();
+  const { settings } = useContext(SettingsContext);
+  const styles = navBarStyles(settings);
 
   const navigateToHome = () => {
     navigation.navigate("Home");
@@ -19,18 +22,15 @@ const NavBar = () => {
   };
 
   return (
-    <View style={navBarStyles.container}>
-      <TouchableOpacity onPress={navigateToHome} style={navBarStyles.button}>
-        <Text style={navBarStyles.buttonText}>Home</Text>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={navigateToHome} style={styles.button}>
+        <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={navigateToRecipes} style={navBarStyles.button}>
-        <Text style={navBarStyles.buttonText}>Recipes</Text>
+      <TouchableOpacity onPress={navigateToRecipes} style={styles.button}>
+        <Text style={styles.buttonText}>Recipes</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={navigateToShoppingList}
-        style={navBarStyles.button}
-      >
-        <Text style={navBarStyles.buttonText}>Shopping List</Text>
+      <TouchableOpacity onPress={navigateToShoppingList} style={styles.button}>
+        <Text style={styles.buttonText}>Shopping List</Text>
       </TouchableOpacity>
     </View>
   );
