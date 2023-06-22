@@ -25,6 +25,10 @@ const HomeScreen = () => {
     navigation.navigate("RecipeSelection");
   };
 
+  const handleSettings = () => {
+    navigation.navigate("Settings");
+  };
+
   return (
     <View style={commonStyles.container}>
       <Text style={[commonStyles.title, { color: theme.colors.text }]}>
@@ -44,6 +48,10 @@ const HomeScreen = () => {
         onPress={handleMakeAShoppingList}
       >
         <Text style={commonStyles.buttonText}>Make A Shopping List</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={commonStyles.button} onPress={handleSettings}>
+        <Text style={commonStyles.buttonText}>Settings</Text>
       </TouchableOpacity>
     </View>
   );
