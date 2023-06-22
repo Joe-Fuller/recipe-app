@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Image,
@@ -6,18 +6,26 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  StatusBar,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import sortIngredients from "../utils/sortIngredients";
 import RecipeStorage from "../storage/RecipeStorage";
 import Dialog from "react-native-dialog";
+import { SettingsContext } from "../contexts/SettingsContext";
+import recipeScreenStyles from "../styles/recipeScreenStyles";
 
 const SingleRecipeScreen = (props) => {
   const navigation = useNavigation();
   const [recipe, setRecipe] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
   const recipeName = props.route.params;
+  const { settings, version } = useContext(SettingsContext);
+  const [currentSettings, setCurrentSettings] = useState(settings);
+  const styles = recipeScreenStyles(settings);
+
+  useEffect(() => {
+    setCurrentSettings(settings);
+  }, [settings, version]);
 
   useEffect(() => {
     fetchRecipeData();
@@ -67,12 +75,15 @@ const SingleRecipeScreen = (props) => {
         {sortIngredients(recipe.ingredients).map((ingredient, index) => (
           <Text
             key={index}
+            style={styles.text}
           >{`${ingredient.amount} ${ingredient.units} - ${ingredient.name}`}</Text>
         ))}
 
         <Text style={styles.sectionTitle}>Instructions:</Text>
         {recipe.instructions.map((instruction, index) => (
-          <Text key={index}>{`${index + 1}. ${instruction}`}</Text>
+          <Text key={index} style={styles.text}>
+            {`${index + 1}. ${instruction}`}
+          </Text>
         ))}
 
         <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
@@ -97,49 +108,5 @@ const SingleRecipeScreen = (props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    marginTop: StatusBar.currentHeight,
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
-  },
-  subtitle: {
-    fontSize: 18,
-    marginBottom: 16,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  button: {
-    backgroundColor: "#f4511e",
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 16,
-    marginBottom: 50,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  image: {
-    flex: 1,
-    width: "100%",
-    height: 200,
-  },
-});
 
 export default SingleRecipeScreen;
