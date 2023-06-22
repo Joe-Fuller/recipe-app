@@ -1,10 +1,13 @@
 import { Image, Text, TouchableOpacity } from "react-native";
 import recipeCardStyles from "../styles/recipeCardStyles";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import { useContext } from "react";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const RecipeCard = ({ recipe }) => {
   const navigation = useNavigation();
-  const theme = useTheme();
+  const { settings } = useContext(SettingsContext);
+  const styles = recipeCardStyles(settings);
 
   const navigateToRecipe = () => {
     navigation.navigate("SingleRecipe", recipe.name);
@@ -12,18 +15,14 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <TouchableOpacity
-      style={recipeCardStyles.recipeContainer}
+      style={styles.recipeContainer}
       onPress={() => navigateToRecipe()}
     >
       <Image
         source={{ uri: recipe.imageFilePath }}
-        style={recipeCardStyles.recipeImage}
+        style={styles.recipeImage}
       ></Image>
-      <Text
-        style={[recipeCardStyles.recipeTitle, { color: theme.colors.text }]}
-      >
-        {recipe.name}
-      </Text>
+      <Text style={styles.recipeTitle}>{recipe.name}</Text>
     </TouchableOpacity>
   );
 };

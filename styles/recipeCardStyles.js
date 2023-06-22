@@ -15,7 +15,7 @@ const recipeCardStyles = (settings) => {
       marginBottom: 8,
     },
     recipeTitle: {
-      fontSize: 16,
+      fontSize: settings.textSize + 8,
       fontWeight: "bold",
       textAlign: "center",
     },
