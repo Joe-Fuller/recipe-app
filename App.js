@@ -15,6 +15,7 @@ import RecipeSelectionScreen from "./screens/RecipeSelectionScreen";
 import ShoppingListScreen from "./screens/ShoppingListScreen";
 import NavBar from "./components/NavBar";
 import { useColorScheme } from "react-native";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,11 @@ export default function App() {
         <Stack.Screen
           name="ShoppingList"
           component={ShoppingListScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
