@@ -14,6 +14,17 @@ function splitIngredientString(ingredientString) {
     return { name, amount, units };
   }
 
+  // special case: "garlic clove(s)"
+  if (
+    ingredientString.includes("garlic") &&
+    ingredientString.includes("clove")
+  ) {
+    amount = ingredientString.match(/\d+/)[0];
+    units = "clove";
+    name = "garlic";
+    return { name, amount, units };
+  }
+
   // Check for units
   for (const [unitKey, unitValues] of Object.entries(unitCorrelation)) {
     const foundUnit = unitValues.find((unit) =>
