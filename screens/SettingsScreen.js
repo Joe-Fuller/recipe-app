@@ -97,7 +97,7 @@ const SettingsScreen = () => {
         ></Dialog.Button>
         <Dialog.Button
           label="Cancel"
-          onPress={() => setDialogVisible(false)}
+          onPress={() => setConfirmCancelVisible(false)}
         ></Dialog.Button>
       </Dialog.Container>
     </View>
