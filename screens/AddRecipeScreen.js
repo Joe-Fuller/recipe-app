@@ -43,7 +43,7 @@ const AddRecipeScreen = () => {
       setIsError(true);
       console.error("Failed to add recipe:", error);
     } finally {
-      setIsError(true);
+      setIsError(false);
       setIsLoading(false);
     }
   };
