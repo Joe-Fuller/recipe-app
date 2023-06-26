@@ -3,14 +3,7 @@ const splitIngredientString = require("./splitIngredientString");
 const sortIngredients = require("./sortIngredients");
 const he = require("he");
 import downloadImage from "./downloadImage";
-
-// Unit correlation mapping
-const unitCorrelation = {
-  tsp: ["tsp", "tsps", "teaspoon", "teaspoons"],
-  tbsp: ["tbsp", "tbsps", "tablespoon", "tablespoons"],
-  cup: ["cup", "cups"],
-  // Add more unit correlations as needed
-};
+import { unitCorrelation } from "../constants/units";
 
 // Helper function to find the correlated unit for a given unit
 function findCorrelatedUnit(unit) {
