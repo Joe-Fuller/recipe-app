@@ -41,12 +41,13 @@ function splitIngredientString(ingredientString) {
 
   // Split remaining string into amount and ingredient
   const parts = ingredientString.split(/\s+/);
-  const amountMatch = parts[0].match(/^(\d+(\.\d+)?|\d+\/\d+)$/);
-  if (amountMatch) {
-    amount = amountMatch[0];
-    parts.shift();
+  let split = 0;
+  while (parts[split].match(/\d/)) {
+    split++;
   }
-  name = parts.join(" ");
+
+  amount = parts.slice(0, split).join(" ");
+  name = parts.slice(split).join(" ");
 
   // This removes the 's' that sometimes remains after parsing e.g. cup instead of cups
   name = name.replace(/^s\s/, "");
