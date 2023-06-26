@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, FlatList, StyleSheet, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
-import commonStyles from "../styles/commonStyles";
+import getDynamicStyles from "../styles/commonStyles";
 import RecipeCard from "../components/RecipeCard";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const RecipesScreen = () => {
   const navigation = useNavigation();
   const [recipes, setRecipes] = useState([]);
+  const { settings } = useContext(SettingsContext);
+  const commonStyles = getDynamicStyles(settings);
 
   useEffect(() => {
     const onFocus = navigation.addListener("focus", () => {
