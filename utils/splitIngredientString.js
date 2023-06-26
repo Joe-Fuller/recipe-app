@@ -48,6 +48,9 @@ function splitIngredientString(ingredientString) {
   }
   name = parts.join(" ");
 
+  // This removes the 's' that sometimes remains after parsing e.g. cup instead of cups
+  name = name.replace(/^s\s/, "");
+
   return { amount, units, name };
 }
 
