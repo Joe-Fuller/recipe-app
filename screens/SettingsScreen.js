@@ -81,10 +81,10 @@ const SettingsScreen = () => {
         />
       </View>
       <TouchableOpacity
-        style={commonStyles.button}
+        style={styles.scaryButton}
         onPress={() => setConfirmCancelVisible(true)}
       >
-        <Text style={commonStyles.buttonText}>Reset Data</Text>
+        <Text style={commonStyles.buttonText}>!Reset Data!</Text>
       </TouchableOpacity>
       <Dialog.Container visible={confirmCancelVisible}>
         <Dialog.Title>Reset All Data?</Dialog.Title>
@@ -123,6 +123,16 @@ const styles = StyleSheet.create({
   settingLabel: {
     fontSize: 16,
     marginRight: 8,
+  },
+  scaryButton: {
+    backgroundColor: "#f70000",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 16,
+    marginTop: 100,
+    width: "100%",
+    borderWidth: 2,
+    borderColor: "000000",
   },
 });
 
