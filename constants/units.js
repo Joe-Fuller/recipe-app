@@ -16,7 +16,7 @@ export const unitCorrelation = {
 
   // Weight units
   mg: ["mg", "milligram", "milligrams"],
-  g: ["g", "gram", "grams"],
+  g: ["g ", "gram", "grams"],
   kg: ["kg", "kilogram", "kilograms"],
   lb: ["lb", "pound", "pounds"],
   oz_weight: ["oz", "ounce", "ounces"],
@@ -32,7 +32,7 @@ export const unitCorrelation = {
   // Length units
   inch: ["inch", "inches"],
   cm: ["cm", "centimeter", "centimeters"],
-  m: ["m", "meter", "meters"],
+  m: ["m ", "meter", "meters"],
   ft: ["ft", "foot", "feet"],
   yard: ["yard", "yards"],
 };
