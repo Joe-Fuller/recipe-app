@@ -11,14 +11,17 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import RecipeStorage from "../storage/RecipeStorage";
-import commonStyles from "../styles/commonStyles";
+import getDynamicStyles from "../styles/commonStyles";
 import recipeCardStyles from "../styles/recipeCardStyles";
 import RecipeCard from "../components/RecipeCard";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const RecipeSelectionScreen = () => {
   const navigation = useNavigation();
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
+  const { settings } = useContext(SettingsContext);
+  const commonStyles = getDynamicStyles(settings);
 
   useEffect(() => {
     fetchRecipeData();
