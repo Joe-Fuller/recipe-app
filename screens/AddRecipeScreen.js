@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   TextInput,
@@ -9,9 +9,10 @@ import {
 import { useNavigation, useTheme } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import scrapeRecipeFromUrl from "../utils/scrapeRecipe";
-import commonStyles from "../styles/commonStyles";
+import getDynamicStyles from "../styles/commonStyles";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
@@ -20,6 +21,8 @@ const AddRecipeScreen = () => {
   const [isEmptyUrl, setIsEmptyUrl] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const { settings } = useContext(SettingsContext);
+  const commonStyles = getDynamicStyles(settings);
 
   const handleAddRecipe = async () => {
     setIsLoading(true);
