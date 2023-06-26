@@ -5,6 +5,7 @@ import { getSettings, setSetting } from "../storage/SettingsStorage";
 import Slider from "@react-native-community/slider";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AllStorage from "../storage/AllStorage";
 
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
@@ -37,7 +38,14 @@ const SettingsScreen = () => {
 
   const { colors } = useTheme();
 
-  const handleResetDataButton = () => {};
+  const handleResetDataButton = async () => {
+    try {
+      await AllStorage.resetData();
+    } catch (error) {
+      console.log("Error deleting all data:", error);
+    }
+    setConfirmCancelVisible(false);
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
