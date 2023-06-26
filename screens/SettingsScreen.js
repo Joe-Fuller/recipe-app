@@ -4,11 +4,13 @@ import { useTheme } from "@react-navigation/native";
 import { getSettings, setSetting } from "../storage/SettingsStorage";
 import Slider from "@react-native-community/slider";
 import { SettingsContext } from "../contexts/SettingsContext";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
   const [textSize, setTextSize] = useState(16);
   const { settings, updateSetting } = useContext(SettingsContext);
+  const [confirmCancelVisible, setConfirmCancelVisible] = useState(false);
 
   useEffect(() => {
     loadSettings();
@@ -34,6 +36,8 @@ const SettingsScreen = () => {
   };
 
   const { colors } = useTheme();
+
+  const handleResetDataButton = () => {};
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -65,6 +69,24 @@ const SettingsScreen = () => {
           style={{ flex: 1 }}
         />
       </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setConfirmCancelVisible(true)}
+      >
+        Reset Data
+      </TouchableOpacity>
+      <Dialog.Container visible={confirmCancelVisible}>
+        <Dialog.Title>Reset All Data?</Dialog.Title>
+        <Dialog.Text>Warning: This will delete all your data</Dialog.Text>
+        <Dialog.Button
+          label="Reset Data"
+          onPress={handleResetData}
+        ></Dialog.Button>
+        <Dialog.Button
+          label="Cancel"
+          onPress={() => setDialogVisible(false)}
+        ></Dialog.Button>
+      </Dialog.Container>
     </View>
   );
 };
