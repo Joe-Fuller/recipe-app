@@ -7,12 +7,14 @@ import { SettingsContext } from "../contexts/SettingsContext";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AllStorage from "../storage/AllStorage";
 import Dialog from "react-native-dialog";
+import getDynamicStyles from "../styles/commonStyles";
 
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
   const [textSize, setTextSize] = useState(16);
   const { settings, updateSetting } = useContext(SettingsContext);
   const [confirmCancelVisible, setConfirmCancelVisible] = useState(false);
+  const commonStyles = getDynamicStyles(settings);
 
   useEffect(() => {
     loadSettings();
@@ -79,10 +81,10 @@ const SettingsScreen = () => {
         />
       </View>
       <TouchableOpacity
-        style={styles.button}
+        style={commonStyles.button}
         onPress={() => setConfirmCancelVisible(true)}
       >
-        <Text style={styles.buttonText}>Reset Data</Text>
+        <Text style={commonStyles.buttonText}>Reset Data</Text>
       </TouchableOpacity>
       <Dialog.Container visible={confirmCancelVisible}>
         <Dialog.Title>Reset All Data?</Dialog.Title>
