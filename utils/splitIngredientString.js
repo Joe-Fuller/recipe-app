@@ -1,3 +1,5 @@
+import { unitCorrelation } from "../constants/units";
+
 function splitIngredientString(ingredientString) {
   ingredientString = ingredientString.trim("");
   let name = "";
