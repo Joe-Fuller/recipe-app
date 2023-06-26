@@ -12,7 +12,7 @@ export const unitCorrelation = {
   qt: ["qt", "quart", "quarts"],
   gal: ["gal", "gallon", "gallons"],
   ml: ["ml", "milliliter", "milliliters"],
-  l: ["l", "liter", "liters"],
+  litre: ["litre", "litres", "liter", "liters"],
 
   // Weight units
   mg: ["mg", "milligram", "milligrams"],
