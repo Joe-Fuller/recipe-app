@@ -1,4 +1,5 @@
 function splitIngredientString(ingredientString) {
+  ingredientString = ingredientString.trim("");
   let name = "";
   let amount = "";
   let units = "";
