@@ -82,7 +82,7 @@ const SettingsScreen = () => {
         style={styles.button}
         onPress={() => setConfirmCancelVisible(true)}
       >
-        Reset Data
+        <Text style={styles.buttonText}>Reset Data</Text>
       </TouchableOpacity>
       <Dialog.Container visible={confirmCancelVisible}>
         <Dialog.Title>Reset All Data?</Dialog.Title>
