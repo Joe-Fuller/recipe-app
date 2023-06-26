@@ -10,12 +10,15 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import Dialog from "react-native-dialog";
-import commonStyles from "../styles/commonStyles";
+import getDynamicStyles from "../styles/commonStyles";
 import { useTheme } from "@react-navigation/native";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const ShoppingListScreen = () => {
   const theme = useTheme();
   const [shoppingList, setShoppingList] = useState([]);
+  const { settings } = useContext(SettingsContext);
+  const commonStyles = getDynamicStyles(settings);
 
   useEffect(() => {
     const fetchShoppingList = async () => {
