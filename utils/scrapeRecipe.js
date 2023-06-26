@@ -47,7 +47,7 @@ function aggregateIngredientAmounts(ingredients) {
 
 const combineTime = (prepTime, cookTime) => {
   if (!(prepTime && cookTime)) {
-    return "Enter Cooking Time";
+    return "";
   }
   // Regular expression to extract hours and minutes from time strings
   const timeRegex = /PT(\d+H)?(\d+M)?/;
