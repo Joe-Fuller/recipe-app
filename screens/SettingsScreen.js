@@ -86,7 +86,9 @@ const SettingsScreen = () => {
       </TouchableOpacity>
       <Dialog.Container visible={confirmCancelVisible}>
         <Dialog.Title>Reset All Data?</Dialog.Title>
-        <Dialog.Text>Warning: This will delete all your data</Dialog.Text>
+        <Dialog.Description>
+          Warning: This will delete all your data
+        </Dialog.Description>
         <Dialog.Button
           label="Reset Data"
           onPress={handleResetData}
