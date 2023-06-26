@@ -53,6 +53,9 @@ function aggregateIngredientAmounts(ingredients) {
 }
 
 const combineTime = (prepTime, cookTime) => {
+  if (!(prepTime && cookTime)) {
+    return "Enter Cooking Time";
+  }
   // Regular expression to extract hours and minutes from time strings
   const timeRegex = /PT(\d+H)?(\d+M)?/;
 
@@ -117,6 +120,64 @@ function findScriptWithSchema($) {
   return null;
 }
 
+// Function to find the script tag with the desired schema
+function tryHarder($) {
+  // So far only tested for olivewoodvegan
+
+  const recipeData = {
+    name: null,
+    timeToCook: null,
+    recipeIngredient: null,
+    recipeInstructions: null,
+    image: null,
+  };
+
+  // NAME
+  const name = $("h1").text();
+  recipeData.name = name;
+
+  // INGREDIENTS
+  const lists = $("ul, ol");
+
+  const ingredients = [];
+
+  lists.each((index, element) => {
+    const listItems = $(element).children("li");
+
+    listItems.each((index, listItem) => {
+      const text = $(listItem).text();
+      ingredients.push(text);
+    });
+  });
+
+  recipeData.recipeIngredient = ingredients;
+
+  // INSTRUCTIONS
+  const instructions = [];
+  const regex = /^\d+\. /;
+
+  $("p, li").each((index, element) => {
+    const text = $(element).text().trim();
+    if (regex.test(text)) {
+      const instruction = text.replace(regex, "");
+      instructions.push(instruction);
+    }
+  });
+
+  recipeData.recipeInstructions = instructions;
+
+  // IMAGE
+  let image = "";
+  const firstImage = $("img").first();
+  if (firstImage.length > 0) {
+    image = firstImage.data("src");
+  }
+
+  recipeData.image = image;
+
+  return recipeData;
+}
+
 async function scrapeRecipeFromUrl(url) {
   try {
     const response = await fetch(url);
@@ -125,7 +186,11 @@ async function scrapeRecipeFromUrl(url) {
 
     const $ = cheerio.load(html);
 
-    const recipeData = findScriptWithSchema($);
+    const recipeData = findScriptWithSchema($) || tryHarder($);
+
+    if (!recipeData) {
+      console.log("frick no recipe data");
+    }
 
     // Access the recipe data and decode HTML entities
     const recipeName = he.decode(recipeData.name);
@@ -134,7 +199,8 @@ async function scrapeRecipeFromUrl(url) {
       he.decode(ingredient)
     );
     const recipeInstructions = recipeData.recipeInstructions.map(
-      (instruction) => he.decode(instruction.text)
+      (instruction) =>
+        instruction.text ? he.decode(instruction.text) : instruction
     );
     const recipeTime = combineTime(recipeData.prepTime, recipeData.cookTime);
 
