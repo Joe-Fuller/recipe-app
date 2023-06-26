@@ -11,11 +11,14 @@ import {
 } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
-import commonStyles from "../styles/commonStyles";
+import getDynamicStyles from "../styles/commonStyles";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
   const theme = useTheme();
+  const { settings } = useContext(SettingsContext);
+  const commonStyles = getDynamicStyles(settings);
 
   const recipe = props.route.params.recipe;
 
