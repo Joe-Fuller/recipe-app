@@ -6,6 +6,7 @@ import Slider from "@react-native-community/slider";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AllStorage from "../storage/AllStorage";
+import Dialog from "react-native-dialog";
 
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
