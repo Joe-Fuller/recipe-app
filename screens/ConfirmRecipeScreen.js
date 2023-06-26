@@ -154,7 +154,12 @@ const ConfirmRecipeScreen = (props) => {
         <TextInput
           value={timeToCook}
           onChangeText={(text) => setTimeToCook(text)}
-          style={[styles.input, { color: theme.colors.text }]}
+          defaultValue="Enter Cooking Time"
+          style={[
+            styles.input,
+            { color: theme.colors.text },
+            timeToCook === "" && { borderColor: "red", borderWidth: 2 },
+          ]}
         />
 
         <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
