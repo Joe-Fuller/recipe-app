@@ -45,6 +45,7 @@ const recipeScreenStyles = (settings) => {
     },
     text: {
       fontSize: settings.textSize,
+      marginBottom: 10,
     },
   });
 };
