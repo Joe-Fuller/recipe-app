@@ -38,7 +38,7 @@ const SettingsScreen = () => {
 
   const { colors } = useTheme();
 
-  const handleResetDataButton = async () => {
+  const handleResetData = async () => {
     try {
       await AllStorage.resetData();
     } catch (error) {
