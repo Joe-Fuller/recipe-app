@@ -94,7 +94,7 @@ const RecipeSelectionScreen = () => {
 
   const searchRecipes = (searchString) => {
     return recipes.filter((recipe) => {
-      return recipe.name.includes(searchString);
+      return recipe.name.toLowerCase().includes(searchString.toLowerCase());
     });
   };
 
