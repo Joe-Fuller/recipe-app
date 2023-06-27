@@ -8,7 +8,7 @@ export const unitCorrelation = {
   tsp: ["tsp", "tsps", "teaspoon", "teaspoons"],
   tbsp: ["tbsp", "tbsps", "tablespoon", "tablespoons"],
   cup: ["cup", "cups"],
-  oz: ["oz", "ounce", "ounces"],
+  "oz ": ["oz ", "ounce", "ounces"],
   fl_oz: ["fl oz", "fluid ounce", "fluid ounces"],
   pt: ["pt", "pint", "pints"],
   qt: ["qt", "quart", "quarts"],
