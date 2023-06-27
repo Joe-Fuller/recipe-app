@@ -184,8 +184,8 @@ const ingredientDatabase = {
     "tomato puree",
     "coconut milk",
     "all purpose flour",
-    "all-purpose flour",
     "macaroni",
+    "oil",
   ],
   spices: [
     "cumin",
