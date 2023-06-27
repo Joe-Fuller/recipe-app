@@ -155,6 +155,7 @@ const ConfirmRecipeScreen = (props) => {
           value={timeToCook}
           onChangeText={(text) => setTimeToCook(text)}
           placeholder="Enter Cooking Time"
+          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           style={[
             styles.input,
             timeToCook === "" && { borderColor: "red", borderWidth: 2 },
