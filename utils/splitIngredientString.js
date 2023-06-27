@@ -3,6 +3,7 @@ import { unitCorrelation } from "../constants/units";
 
 function splitIngredientString(ingredientString) {
   ingredientString = ingredientString.trim("");
+  ingredientString = ingredientString.toLowerCase();
 
   // Replace some annoying special fraction characters
   ingredientString = ingredientString.replace(/½/g, "1/2");
