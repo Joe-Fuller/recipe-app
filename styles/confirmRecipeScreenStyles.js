@@ -5,36 +5,39 @@ const confirmRecipeScreenStyles = (settings) => {
     formContainer: {
       width: "100%",
       borderWidth: 1,
-      borderColor: "#ccc",
-      borderRadius: 4,
       padding: 10,
       marginTop: StatusBar.currentHeight,
     },
     container: {
       flex: 1,
-      backgroundColor: "#fff",
       alignItems: "center",
       justifyContent: "space-between",
       padding: 16,
+      backgroundColor: settings.theme === "dark" ? "black" : "white",
     },
     ingredientContainer: {
       flexDirection: "row",
       alignItems: "center",
       marginBottom: 8,
     },
+    input: {
+      color: settings.theme === "dark" ? "white" : "black",
+    },
     amountInput: {
       width: 50,
       marginRight: 8,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     unitsInput: {
       width: 50,
       marginRight: 8,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     nameInput: {
       flex: 1,
       marginRight: 8,
+      color: settings.theme === "dark" ? "white" : "black",
     },
-
     instructionsContainer: {
       marginTop: 16,
     },
@@ -42,6 +45,7 @@ const confirmRecipeScreenStyles = (settings) => {
       fontSize: 18,
       fontWeight: "bold",
       marginBottom: 8,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     instructionItem: {
       flexDirection: "row",
@@ -52,10 +56,12 @@ const confirmRecipeScreenStyles = (settings) => {
       width: 32,
       marginRight: 8,
       textAlign: "right",
+      color: settings.theme === "dark" ? "white" : "black",
     },
     instructionText: {
       flex: 1,
       marginRight: 8,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     image: {
       flex: 1,
