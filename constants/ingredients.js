@@ -29,6 +29,11 @@ const ingredientDatabase = {
     "ginger",
     "pumpkin",
     "sweet potato",
+    "cilantro",
+    "coriander",
+    "red onion",
+    "white onion",
+    "red cabbage",
   ],
   fruits: [
     "apple",
@@ -153,6 +158,8 @@ const ingredientDatabase = {
     "lemon juice",
     "vanilla bean paste",
     "vanilla",
+    "black beans",
+    "lime juice",
   ],
   spices: [
     "cumin",
@@ -186,6 +193,7 @@ const ingredientDatabase = {
     "smoked paprika",
     "cayenne",
     "red pepper flakes",
+    "ground chipotle",
   ],
   condiments: [
     "ketchup",
