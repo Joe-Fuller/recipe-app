@@ -120,7 +120,7 @@ const ShoppingListScreen = () => {
       <ScrollView style={styles.scrollContainer}>
         {shoppingList.map((item) => (
           <TouchableOpacity
-            key={item.ingredient}
+            key={item.ingredient + item.units}
             style={styles.itemContainer}
             onPress={() => toggleCheckbox(item)}
             onLongPress={() => handleEditItem(item)}
