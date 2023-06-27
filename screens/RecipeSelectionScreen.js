@@ -3,17 +3,14 @@ import {
   View,
   Text,
   FlatList,
-  StyleSheet,
   TouchableOpacity,
-  Image,
-  StatusBar,
+  TextInput,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import RecipeStorage from "../storage/RecipeStorage";
 import getDynamicStyles from "../styles/commonStyles";
 import recipesScreenStyles from "../styles/recipesScreenStyles";
-import recipeCardStyles from "../styles/recipeCardStyles";
 import RecipeCard from "../components/RecipeCard";
 import { SettingsContext } from "../contexts/SettingsContext";
 
@@ -24,6 +21,7 @@ const RecipeSelectionScreen = () => {
   const { settings } = useContext(SettingsContext);
   const commonStyles = getDynamicStyles(settings);
   const styles = recipesScreenStyles(settings);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchRecipeData();
@@ -94,11 +92,23 @@ const RecipeSelectionScreen = () => {
     );
   };
 
+  const searchRecipes = (searchString) => {
+    return recipes.filter((recipe) => {
+      return recipe.name.includes(searchString);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={commonStyles.title}>Recipes:</Text>
+      <TextInput
+        placeholder="Search"
+        value={searchTerm}
+        onChangeText={setSearchTerm}
+        style={styles.input}
+      ></TextInput>
       <FlatList
-        data={recipes}
+        data={searchRecipes(searchTerm)}
         renderItem={renderRecipeCard}
         keyExtractor={(item) => item.name.toString()}
         numColumns={2}
