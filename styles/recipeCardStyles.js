@@ -18,6 +18,7 @@ const recipeCardStyles = (settings) => {
       fontSize: settings.textSize + 8,
       fontWeight: "bold",
       textAlign: "center",
+      color: settings.theme === "dark" ? "white" : "black",
     },
   });
 };
