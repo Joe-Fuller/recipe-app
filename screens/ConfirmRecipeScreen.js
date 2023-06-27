@@ -55,6 +55,7 @@ const ConfirmRecipeScreen = (props) => {
           placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           value={ingredient.amount}
           onChangeText={(text) => updateIngredient(index, "amount", text)}
+          autoCapitalize="none"
         />
         <TextInput
           style={styles.unitsInput}
@@ -62,6 +63,7 @@ const ConfirmRecipeScreen = (props) => {
           placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           value={ingredient.units}
           onChangeText={(text) => updateIngredient(index, "units", text)}
+          autoCapitalize="none"
         />
         <TextInput
           style={styles.nameInput}
@@ -69,6 +71,7 @@ const ConfirmRecipeScreen = (props) => {
           placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           value={ingredient.name}
           onChangeText={(text) => updateIngredient(index, "name", text)}
+          autoCapitalize="none"
         />
         <TouchableOpacity
           style={commonStyles.removeButton}
