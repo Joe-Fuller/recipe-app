@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import RecipeStorage from "../storage/RecipeStorage";
 import getDynamicStyles from "../styles/commonStyles";
+import recipesScreenStyles from "../styles/recipesScreenStyles";
 import recipeCardStyles from "../styles/recipeCardStyles";
 import RecipeCard from "../components/RecipeCard";
 import { SettingsContext } from "../contexts/SettingsContext";
@@ -22,6 +23,7 @@ const RecipeSelectionScreen = () => {
   const [selectedRecipes, setSelectedRecipes] = useState([]);
   const { settings } = useContext(SettingsContext);
   const commonStyles = getDynamicStyles(settings);
+  const styles = recipesScreenStyles(settings);
 
   useEffect(() => {
     fetchRecipeData();
@@ -116,13 +118,5 @@ const RecipeSelectionScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    marginTop: StatusBar.currentHeight,
-  },
-});
 
 export default RecipeSelectionScreen;
