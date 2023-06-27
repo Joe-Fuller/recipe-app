@@ -1,24 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  StatusBar,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ShoppingListStorage from "../storage/ShoppingListStorage";
 import Dialog from "react-native-dialog";
 import getDynamicStyles from "../styles/commonStyles";
-import { useTheme } from "@react-navigation/native";
+import shoppingListScreenStyles from "../styles/shoppingListStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
 
 const ShoppingListScreen = () => {
-  const theme = useTheme();
   const [shoppingList, setShoppingList] = useState([]);
   const { settings } = useContext(SettingsContext);
   const commonStyles = getDynamicStyles(settings);
+  const styles = shoppingListScreenStyles(settings);
 
   useEffect(() => {
     const fetchShoppingList = async () => {
@@ -123,9 +116,7 @@ const ShoppingListScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={[commonStyles.title, { color: theme.colors.text }]}>
-        Shopping List
-      </Text>
+      <Text style={commonStyles.title}>Shopping List</Text>
       <ScrollView style={styles.scrollContainer}>
         {shoppingList.map((item) => (
           <TouchableOpacity
@@ -135,11 +126,7 @@ const ShoppingListScreen = () => {
             onLongPress={() => handleEditItem(item)}
           >
             <View style={styles.itemDetailsContainer}>
-              <Text
-                style={[styles.itemIngredient, { color: theme.colors.text }]}
-              >
-                {item.ingredient}
-              </Text>
+              <Text style={styles.itemIngredient}>{item.ingredient}</Text>
               <Text style={styles.itemAmount}>
                 {item.amount} {item.units}
               </Text>
@@ -188,42 +175,5 @@ const ShoppingListScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    marginTop: StatusBar.currentHeight,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  itemContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  checkboxContainer: {
-    marginLeft: 16,
-  },
-  itemDetailsContainer: {
-    flex: 1,
-    marginRight: 16,
-  },
-  itemIngredient: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  itemAmount: {
-    fontSize: 14,
-    color: "#808080",
-  },
-});
 
 export default ShoppingListScreen;
