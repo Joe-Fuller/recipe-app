@@ -195,6 +195,7 @@ const ingredientDatabase = {
     "cayenne",
     "red pepper flakes",
     "ground chipotle",
+    "curry leaves",
   ],
   condiments: [
     "ketchup",
