@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import scrapeRecipeFromUrl from "../utils/scrapeRecipe";
 import getDynamicStyles from "../styles/commonStyles";
+import addRecipeScreenStyles from "../styles/addRecipeScreenStyles";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 import { SettingsContext } from "../contexts/SettingsContext";
@@ -22,6 +23,7 @@ const AddRecipeScreen = () => {
   const [isError, setIsError] = useState(false);
   const { settings } = useContext(SettingsContext);
   const commonStyles = getDynamicStyles(settings);
+  const styles = addRecipeScreenStyles(settings);
 
   const handleAddRecipe = async () => {
     setIsLoading(true);
@@ -88,39 +90,5 @@ const AddRecipeScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "#000",
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 0,
-  },
-  errorInput: {
-    borderColor: "red",
-    borderWidth: 2,
-  },
-  pasteButton: {
-    backgroundColor: "#f4511e",
-    padding: 10,
-    borderRadius: 5,
-    height: 50,
-    marginLeft: 2,
-  },
-  pasteButtonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    lineHeight: 26,
-  },
-});
 
 export default AddRecipeScreen;
