@@ -6,6 +6,7 @@ import getDynamicStyles from "../styles/commonStyles";
 import recipesScreenStyles from "../styles/recipesScreenStyles";
 import RecipeCard from "../components/RecipeCard";
 import { SettingsContext } from "../contexts/SettingsContext";
+import { TextInput } from "react-native-gesture-handler";
 
 const RecipesScreen = () => {
   const navigation = useNavigation();
@@ -13,6 +14,7 @@ const RecipesScreen = () => {
   const { settings } = useContext(SettingsContext);
   const commonStyles = getDynamicStyles(settings);
   const styles = recipesScreenStyles(settings);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const onFocus = navigation.addListener("focus", () => {
@@ -31,11 +33,23 @@ const RecipesScreen = () => {
     return <RecipeCard recipe={item} />;
   };
 
+  const searchRecipes = (searchString) => {
+    return recipes.filter((recipe) => {
+      return recipe.name.includes(searchString);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={commonStyles.title}>Recipes:</Text>
+      <TextInput
+        placeholder="Search"
+        value={searchTerm}
+        onChangeText={setSearchTerm}
+        style={styles.input}
+      ></TextInput>
       <FlatList
-        data={recipes}
+        data={searchRecipes(searchTerm)}
         renderItem={renderRecipeCard}
         keyExtractor={(item) => item.name.toString()}
         numColumns={2}
