@@ -43,7 +43,7 @@ function splitIngredientString(ingredientString) {
   // Split remaining string into amount and ingredient
   const parts = ingredientString.split(/\s+/);
   let split = 0;
-  while (parts[split].match(/\d/)) {
+  while (parts[split].match(/\d½¼/)) {
     split++;
   }
 
