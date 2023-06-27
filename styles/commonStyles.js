@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet } from "react-native";
 
 const getDynamicStyles = (settings) => {
   return StyleSheet.create({
@@ -7,7 +7,6 @@ const getDynamicStyles = (settings) => {
       justifyContent: "center",
       alignItems: "center",
       padding: 16,
-      marginTop: StatusBar.currentHeight,
       backgroundColor: settings.theme === "dark" ? "black" : "white",
     },
     title: {

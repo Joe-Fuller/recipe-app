@@ -1,11 +1,10 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet } from "react-native";
 
 const confirmRecipeScreenStyles = (settings) => {
   return StyleSheet.create({
     formContainer: {
       width: "100%",
       padding: 10,
-      marginTop: StatusBar.currentHeight,
     },
     container: {
       flex: 1,

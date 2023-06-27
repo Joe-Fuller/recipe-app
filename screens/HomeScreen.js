@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { SettingsContext } from "../contexts/SettingsContext";
 import getDynamicStyles from "../styles/commonStyles";
@@ -32,6 +32,7 @@ const HomeScreen = () => {
 
   return (
     <View style={commonStyles.container}>
+      <StatusBar></StatusBar>
       <Text style={[commonStyles.title]}>Welcome to Imprecipe!</Text>
 
       <TouchableOpacity style={commonStyles.button} onPress={handleAllRecipes}>

@@ -1,11 +1,10 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet } from "react-native";
 
 const recipesScreenStyles = (settings) => {
   return StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
-      marginTop: StatusBar.currentHeight,
       backgroundColor: settings.theme === "dark" ? "black" : "white",
     },
     inputContainer: {
