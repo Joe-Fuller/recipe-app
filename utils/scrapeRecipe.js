@@ -199,13 +199,13 @@ async function scrapeRecipeFromUrl(url) {
     const recipeTime = combineTime(recipeData.prepTime, recipeData.cookTime);
 
     // Extract ingredients
-    const ingredients = [];
+    const ingredients = {};
     recipeIngredients.forEach((ingredient) => {
-      ingredients.push(splitIngredientString(ingredient));
+      ingredients[ingredient] = splitIngredientString(ingredient);
     });
 
-    const aggregatedIngredients = aggregateIngredientAmounts(ingredients);
-    const sortedIngredients = sortIngredients(aggregatedIngredients);
+    // const aggregatedIngredients = aggregateIngredientAmounts(ingredients);
+    // const sortedIngredients = sortIngredients(aggregatedIngredients);
 
     // Make sure the image is a string, not an array
     if (Array.isArray(recipeImageUrl)) {
@@ -218,7 +218,7 @@ async function scrapeRecipeFromUrl(url) {
     const recipe = {
       name: recipeName,
       timeToCook: recipeTime,
-      ingredients: sortedIngredients,
+      ingredients: recipeIngredients,
       instructions: recipeInstructions,
       imageFilePath: recipeImageFilePath,
     };
