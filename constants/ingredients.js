@@ -114,6 +114,7 @@ const ingredientDatabase = {
     "brie cheese",
     "swiss cheese",
     "provolone cheese",
+    "spread",
   ],
   pantry: [
     "rice",
@@ -161,6 +162,7 @@ const ingredientDatabase = {
     "vanilla",
     "black beans",
     "lime juice",
+    "baking soda",
   ],
   spices: [
     "cumin",
