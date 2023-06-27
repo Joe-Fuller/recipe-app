@@ -47,9 +47,9 @@ const ConfirmRecipeScreen = (props) => {
   };
 
   // Helper function to handle removing ingredient
-  const removeIngredient = (index) => {
-    const updatedIngredients = [...ingredients];
-    updatedIngredients.splice(index, 1);
+  const removeIngredient = (ingredientKey) => {
+    const updatedIngredients = { ...ingredients };
+    delete updatedIngredients[ingredientKey];
     setIngredients(updatedIngredients);
   };
 
@@ -102,7 +102,7 @@ const ConfirmRecipeScreen = (props) => {
             />
             <TouchableOpacity
               style={commonStyles.removeButton}
-              onPress={() => removeIngredient(index)}
+              onPress={() => removeIngredient(ingredientKey)}
             >
               <Text style={commonStyles.buttonText}>X</Text>
             </TouchableOpacity>
