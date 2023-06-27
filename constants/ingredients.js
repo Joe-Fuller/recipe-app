@@ -61,6 +61,7 @@ const ingredientDatabase = {
     "date",
     "passion fruit",
     "dragon fruit",
+    "raspberries",
   ],
   proteins: [
     "chicken",
