@@ -29,7 +29,7 @@ const ConfirmRecipeScreen = (props) => {
   const [ingredients, setIngredients] = useState(recipe.ingredients);
   const [instructions, setInstructions] = useState(recipe.instructions);
 
-  const [viewOriginalIngredients, setViewOriginalIngredients] = useState(true);
+  const [viewOriginalIngredients, setViewOriginalIngredients] = useState(false);
 
   // Helper function to handle adding new ingredient
   const addIngredient = () => {

@@ -38,7 +38,10 @@ const AddRecipeScreen = () => {
 
       if (recipe) {
         // Go to ConfirmRecipeScreen
-        navigation.navigate("ConfirmRecipe", { recipe });
+        navigation.navigate("ConfirmRecipe", {
+          recipe,
+          hasOriginalIngredients: true,
+        });
       }
     } catch (error) {
       setIsError(true);
