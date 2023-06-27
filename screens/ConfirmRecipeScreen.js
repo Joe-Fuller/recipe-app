@@ -191,11 +191,9 @@ const ConfirmRecipeScreen = (props) => {
       Object.values(ingredients)
     );
 
-    console.log(aggregatedIngredients);
-
     await RecipeStorage.saveRecipe(recipeName, {
       timeToCook,
-      ingredients: Object.values(ingredients),
+      ingredients: aggregatedIngredients,
       instructions,
       imageFilePath: recipe.imageFilePath,
     });
