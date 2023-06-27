@@ -8,11 +8,13 @@ const getDynamicStyles = (settings) => {
       alignItems: "center",
       padding: 16,
       marginTop: StatusBar.currentHeight,
+      backgroundColor: settings.theme === "dark" ? "black" : "white",
     },
     title: {
       fontSize: settings.textSize + 10,
       fontWeight: "bold",
       marginBottom: 32,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     button: {
       backgroundColor: "#f4511e",
@@ -32,7 +34,7 @@ const getDynamicStyles = (settings) => {
       alignItems: "center",
     },
     buttonText: {
-      color: "white",
+      color: settings.theme === "dark" ? "white" : "black",
       fontSize: settings.textSize,
       fontWeight: "bold",
       textAlign: "center",
