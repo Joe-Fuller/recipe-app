@@ -75,7 +75,7 @@ function findScriptWithSchema($) {
 // Function to find the script tag with the desired schema
 function tryHarder($) {
   // So far only tested for olivewoodvegan
-
+  console.log("trying harder");
   const recipeData = {
     name: null,
     timeToCook: null,
@@ -89,32 +89,46 @@ function tryHarder($) {
   recipeData.name = name;
 
   // INGREDIENTS
-  const lists = $("ul, ol");
-
   const ingredients = [];
-
-  lists.each((index, element) => {
-    const listItems = $(element).children("li");
-
-    listItems.each((index, listItem) => {
-      const text = $(listItem).text();
-      ingredients.push(text);
-    });
+  $('[itemprop="recipeIngredient"]').each((index, element) => {
+    const ingredient = $(element).attr("content");
+    ingredients.push(ingredient);
   });
+
+  if (ingredients.length === 0) {
+    // Get everything that is a list item
+    const lists = $("ul, ol");
+
+    lists.each((index, element) => {
+      const listItems = $(element).children("li");
+
+      listItems.each((index, listItem) => {
+        const text = $(listItem).text();
+        ingredients.push(text);
+      });
+    });
+  }
 
   recipeData.recipeIngredient = ingredients;
 
   // INSTRUCTIONS
   const instructions = [];
-  const regex = /^\d+\. /;
-
-  $("p, li").each((index, element) => {
-    const text = $(element).text().trim();
-    if (regex.test(text)) {
-      const instruction = text.replace(regex, "");
-      instructions.push(instruction);
-    }
+  $('[itemprop="recipeInstruction"]').each((index, element) => {
+    const instruction = $(element).attr("content");
+    instructions.push(instruction);
   });
+
+  if (instructions.length === 0) {
+    const regex = /^\d+\. /;
+
+    $("p, li").each((index, element) => {
+      const text = $(element).text().trim();
+      if (regex.test(text)) {
+        const instruction = text.replace(regex, "");
+        instructions.push(instruction);
+      }
+    });
+  }
 
   recipeData.recipeInstructions = instructions;
 
