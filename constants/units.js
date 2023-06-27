@@ -1,6 +1,7 @@
 export const unitCorrelation = {
   // Odd Cookery Units
   thumb: ["thumb"],
+  "can ": ["can ", "400g can", "15-16oz can"],
 
   // Volume units
   tsp: ["tsp", "tsps", "teaspoon", "teaspoons"],
