@@ -6,6 +6,7 @@ const recipeScreenStyles = (settings) => {
       flex: 1,
       padding: 16,
       marginTop: StatusBar.currentHeight,
+      backgroundColor: settings.theme === "dark" ? "black" : "white",
     },
     scrollContainer: {
       flex: 1,
@@ -14,16 +15,19 @@ const recipeScreenStyles = (settings) => {
       fontSize: settings.textSize + 10,
       fontWeight: "bold",
       marginBottom: 16,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     subtitle: {
       fontSize: settings.textSize,
       marginBottom: 16,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     sectionTitle: {
       fontSize: settings.textSize + 4,
       fontWeight: "bold",
       marginTop: 16,
       marginBottom: 8,
+      color: settings.theme === "dark" ? "white" : "black",
     },
     button: {
       backgroundColor: "#f4511e",
@@ -46,6 +50,7 @@ const recipeScreenStyles = (settings) => {
     text: {
       fontSize: settings.textSize,
       marginBottom: 10,
+      color: settings.theme === "dark" ? "white" : "black",
     },
   });
 };
