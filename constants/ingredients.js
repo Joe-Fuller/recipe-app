@@ -147,6 +147,10 @@ const ingredientDatabase = {
     "canned soup",
     "dried herbs",
     "spaghetti sauce",
+    "cornflour",
+    "corn flour",
+    "corn starch",
+    "lemon juice",
   ],
   spices: [
     "cumin",
@@ -242,6 +246,7 @@ const ingredientDatabase = {
     "sesame seeds",
     "flaxseeds",
     "chia seeds",
+    "flaked almonds",
   ],
   sweeteners: [
     "sugar",
@@ -256,6 +261,8 @@ const ingredientDatabase = {
     "coconut sugar",
     "date syrup",
     "monk fruit sweetener",
+    "caster sugar",
+    "icing sugar",
   ],
   beverages: [
     "water",
