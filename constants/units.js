@@ -2,12 +2,13 @@ export const unitCorrelation = {
   // Odd Cookery Units
   thumb: ["thumb"],
   "can ": ["can ", "400g can", "15-16oz can"],
-  leaves: ["leaves"],
 
   // Volume units
   tsp: ["tsp", "tsps", "teaspoon", "teaspoons"],
   tbsp: ["tbsp", "tbsps", "tablespoon", "tablespoons"],
   cup: ["cup", "cups"],
+  // Leaves is a weird unit but I need to check cups before leaves so it's down here
+  leaves: ["leaves"],
   "oz ": ["oz ", "ounce", "ounces"],
   fl_oz: ["fl oz", "fluid ounce", "fluid ounces"],
   pt: ["pt", "pint", "pints"],
