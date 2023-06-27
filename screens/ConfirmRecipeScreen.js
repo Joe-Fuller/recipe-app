@@ -4,21 +4,20 @@ import {
   Text,
   TextInput,
   ScrollView,
-  StyleSheet,
   Image,
-  StatusBar,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
 import getDynamicStyles from "../styles/commonStyles";
+import confirmRecipeScreenStyles from "../styles/confirmRecipeScreenStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
-  const theme = useTheme();
   const { settings } = useContext(SettingsContext);
   const commonStyles = getDynamicStyles(settings);
+  const styles = confirmRecipeScreenStyles(settings);
 
   const recipe = props.route.params.recipe;
 
@@ -51,19 +50,19 @@ const ConfirmRecipeScreen = (props) => {
     return ingredients.map((ingredient, index) => (
       <View key={index} style={styles.ingredientContainer}>
         <TextInput
-          style={[styles.amountInput, { color: theme.colors.text }]}
+          style={styles.amountInput}
           placeholder="Amount"
           value={ingredient.amount}
           onChangeText={(text) => updateIngredient(index, "amount", text)}
         />
         <TextInput
-          style={[styles.unitsInput, { color: theme.colors.text }]}
+          style={styles.unitsInput}
           placeholder="Units"
           value={ingredient.units}
           onChangeText={(text) => updateIngredient(index, "units", text)}
         />
         <TextInput
-          style={[styles.nameInput, { color: theme.colors.text }]}
+          style={styles.nameInput}
           placeholder="Ingredient Name"
           value={ingredient.name}
           onChangeText={(text) => updateIngredient(index, "name", text)}
@@ -101,19 +100,13 @@ const ConfirmRecipeScreen = (props) => {
   const renderInstructions = () => {
     return instructions.map((instruction, index) => (
       <View key={index} style={styles.instructionItem}>
-        <Text style={[styles.instructionIndex, { color: theme.colors.text }]}>
-          {index + 1}.
-        </Text>
+        <Text style={styles.instructionIndex}>{index + 1}.</Text>
         <TextInput
           placeholder={`Step ${index + 1}`}
           value={instruction}
           onChangeText={(text) => updateInstruction(index, text)}
           multiline={true}
-          style={[
-            styles.instructionText,
-            { maxHeight: 15 * 20 },
-            { color: theme.colors.text },
-          ]}
+          style={[styles.instructionText, { maxHeight: 15 * 20 }]}
         />
         <TouchableOpacity
           style={commonStyles.removeButton}
@@ -148,7 +141,7 @@ const ConfirmRecipeScreen = (props) => {
         <TextInput
           value={recipeName}
           onChangeText={(text) => setRecipeName(text)}
-          style={[styles.input, { color: theme.colors.text }]}
+          style={styles.input}
         />
 
         <TextInput
@@ -157,14 +150,11 @@ const ConfirmRecipeScreen = (props) => {
           placeholder="Enter Cooking Time"
           style={[
             styles.input,
-            { color: theme.colors.text },
             timeToCook === "" && { borderColor: "red", borderWidth: 2 },
           ]}
         />
 
-        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-          Ingredients:
-        </Text>
+        <Text style={styles.sectionTitle}>Ingredients:</Text>
         {renderIngredients()}
         <TouchableOpacity
           style={commonStyles.button}
@@ -174,9 +164,7 @@ const ConfirmRecipeScreen = (props) => {
         </TouchableOpacity>
 
         <View style={styles.instructionsContainer}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-            Instructions
-          </Text>
+          <Text style={styles.sectionTitle}>Instructions</Text>
           {renderInstructions()}
         </View>
         <TouchableOpacity
@@ -185,83 +173,15 @@ const ConfirmRecipeScreen = (props) => {
         >
           <Text style={commonStyles.buttonText}>Add Instruction</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity
-          style={commonStyles.button}
-          onPress={handleConfirmRecipe}
-        >
-          <Text style={commonStyles.buttonText}>Save Recipe</Text>
-        </TouchableOpacity>
       </ScrollView>
+      <TouchableOpacity
+        style={commonStyles.button}
+        onPress={handleConfirmRecipe}
+      >
+        <Text style={commonStyles.buttonText}>Save Recipe</Text>
+      </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  formContainer: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
-    padding: 10,
-    marginTop: StatusBar.currentHeight,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 16,
-  },
-  ingredientContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  amountInput: {
-    width: 50,
-    marginRight: 8,
-  },
-  unitsInput: {
-    width: 50,
-    marginRight: 8,
-  },
-  nameInput: {
-    flex: 1,
-    marginRight: 8,
-  },
-
-  instructionsContainer: {
-    marginTop: 16,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  instructionItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  instructionIndex: {
-    width: 32,
-    marginRight: 8,
-    textAlign: "right",
-  },
-  instructionText: {
-    flex: 1,
-    marginRight: 8,
-  },
-  image: {
-    flex: 1,
-    width: "100%",
-    height: 200,
-  },
-  buttonContainer: {
-    marginTop: 16,
-    marginBottom: 50,
-  },
-});
 
 export default ConfirmRecipeScreen;
