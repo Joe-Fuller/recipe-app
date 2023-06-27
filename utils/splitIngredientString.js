@@ -33,7 +33,7 @@ function splitIngredientString(ingredientString) {
     if (foundUnit) {
       units = unitKey;
       ingredientString = ingredientString
-        .replace(new RegExp(foundUnit, "gi"), "")
+        .replace(new RegExp(foundUnit, "i"), " ")
         .trim();
       break;
     }
