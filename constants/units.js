@@ -29,11 +29,4 @@ export const unitCorrelation = {
   package: ["package", "packages"],
   can: ["can", "cans"],
   jar: ["jar", "jars"],
-
-  // Length units
-  inch: ["inch", "inches"],
-  cm: ["cm", "centimeter", "centimeters"],
-  m: ["m ", "meter", "meters"],
-  ft: ["ft", "foot", "feet"],
-  yard: ["yard", "yards"],
 };
