@@ -3,6 +3,11 @@ import { unitCorrelation } from "../constants/units";
 
 function splitIngredientString(ingredientString) {
   ingredientString = ingredientString.trim("");
+
+  // Replace some annoying special fraction characters
+  ingredientString = ingredientString.replace(/½/g, "1/2");
+  ingredientString = ingredientString.replace(/¼/g, "1/4");
+
   let name = "";
   let amount = "";
   let units = "";
@@ -43,7 +48,7 @@ function splitIngredientString(ingredientString) {
   // Split remaining string into amount and ingredient
   const parts = ingredientString.split(/\s+/);
   let split = 0;
-  while (parts[split].match(/[\d½¼]/)) {
+  while (parts[split].match(/\d/)) {
     split++;
   }
 
