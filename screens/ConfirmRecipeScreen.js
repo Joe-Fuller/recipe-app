@@ -12,6 +12,7 @@ import RecipeStorage from "../storage/RecipeStorage";
 import getDynamicStyles from "../styles/commonStyles";
 import confirmRecipeScreenStyles from "../styles/confirmRecipeScreenStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
+import { unitCorrelation } from "../constants/units";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
@@ -142,8 +143,56 @@ const ConfirmRecipeScreen = (props) => {
     ));
   };
 
+  // Helper function to add up ingredient amounts
+  function aggregateIngredientAmounts(ingredients) {
+    const aggregatedIngredients = [];
+    const ingredientMap = new Map();
+
+    for (const ingredient of ingredients) {
+      const key = `${ingredient.name} ${findCorrelatedUnit(ingredient.units)}`;
+      const existingIngredient = ingredientMap.get(key);
+
+      if (existingIngredient) {
+        existingIngredient.amount = (
+          parseFloat(eval(existingIngredient.amount)) +
+          parseFloat(eval(ingredient.amount))
+        ).toString();
+      } else {
+        ingredientMap.set(key, {
+          ...ingredient,
+
+          amount: ingredient.amount.toString(),
+          units: findCorrelatedUnit(ingredient.units),
+        });
+      }
+    }
+
+    for (const [, value] of ingredientMap) {
+      aggregatedIngredients.push(value);
+    }
+
+    return aggregatedIngredients;
+  }
+
+  // Helper function to find the correlated unit for a given unit
+  function findCorrelatedUnit(unit) {
+    for (const [baseUnit, correlatedUnits] of Object.entries(unitCorrelation)) {
+      if (correlatedUnits.includes(unit.toLowerCase())) {
+        return baseUnit;
+      }
+    }
+    return unit; // If no correlation is found, return the original unit
+  }
+
   // Update Recipe Logic
   const handleConfirmRecipe = async () => {
+    // Aggregate ingredients
+    const aggregatedIngredients = aggregateIngredientAmounts(
+      Object.values(ingredients)
+    );
+
+    console.log(aggregatedIngredients);
+
     await RecipeStorage.saveRecipe(recipeName, {
       timeToCook,
       ingredients: Object.values(ingredients),
