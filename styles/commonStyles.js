@@ -20,7 +20,7 @@ const getDynamicStyles = (settings) => {
       backgroundColor: "#f4511e",
       padding: 10,
       borderRadius: 5,
-      marginBottom: 16,
+      margin: 10,
       width: "100%",
     },
     removeButton: {
