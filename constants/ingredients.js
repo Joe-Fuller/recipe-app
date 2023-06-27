@@ -151,6 +151,8 @@ const ingredientDatabase = {
     "corn flour",
     "corn starch",
     "lemon juice",
+    "vanilla bean paste",
+    "vanilla",
   ],
   spices: [
     "cumin",
