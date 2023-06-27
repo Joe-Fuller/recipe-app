@@ -6,13 +6,13 @@ const settingsScreenStyles = (settings) => {
       flex: 1,
       padding: 16,
       marginTop: StatusBar.currentHeight,
-      backgroundColor: settings.theme === "dark" ? "black" : "white",
+      backgroundColor: settings.theme === "dark" ? "#1a1a1a" : "#ffffff",
     },
     title: {
-      fontSize: 24,
+      fontSize: settings.textSize + 10,
       fontWeight: "bold",
       marginBottom: 16,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: settings.theme === "dark" ? "#ffffff" : "#000000",
     },
     settingContainer: {
       flexDirection: "row",
@@ -20,18 +20,19 @@ const settingsScreenStyles = (settings) => {
       marginBottom: 16,
     },
     settingLabel: {
-      fontSize: 16,
+      fontSize: settings.textSize,
       marginRight: 8,
+      color: settings.theme === "dark" ? "#ffffff" : "#000000",
     },
     scaryButton: {
-      backgroundColor: "#f70000",
+      backgroundColor: "#ff0000",
       padding: 10,
       borderRadius: 5,
       marginBottom: 16,
       marginTop: 100,
       width: "100%",
       borderWidth: 2,
-      borderColor: "000000",
+      borderColor: "#000000",
     },
   });
 };
