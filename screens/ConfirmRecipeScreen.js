@@ -14,6 +14,7 @@ import getDynamicStyles from "../styles/commonStyles";
 import confirmRecipeScreenStyles from "../styles/confirmRecipeScreenStyles";
 import { SettingsContext } from "../contexts/SettingsContext";
 import { unitCorrelation } from "../constants/units";
+import colours from "../styles/colours";
 
 const ConfirmRecipeScreen = (props) => {
   const navigation = useNavigation();
@@ -74,7 +75,7 @@ const ConfirmRecipeScreen = (props) => {
             <TextInput
               style={styles.amountInput}
               placeholder="Amount"
-              placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+              placeholderTextColor={colours[settings.theme].subtext}
               value={ingredientValue.amount}
               onChangeText={(text) =>
                 updateIngredient(ingredientKey, "amount", text)
@@ -84,7 +85,7 @@ const ConfirmRecipeScreen = (props) => {
             <TextInput
               style={styles.unitsInput}
               placeholder="Units"
-              placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+              placeholderTextColor={colours[settings.theme].subtext}
               value={ingredientValue.units}
               onChangeText={(text) =>
                 updateIngredient(ingredientKey, "units", text)
@@ -94,7 +95,7 @@ const ConfirmRecipeScreen = (props) => {
             <TextInput
               style={styles.nameInput}
               placeholder="Ingredient Name"
-              placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+              placeholderTextColor={colours[settings.theme].subtext}
               value={ingredientValue.name}
               onChangeText={(text) =>
                 updateIngredient(ingredientKey, "name", text)
@@ -139,7 +140,7 @@ const ConfirmRecipeScreen = (props) => {
         <Text style={styles.instructionIndex}>{index + 1}.</Text>
         <TextInput
           placeholder={`Step ${index + 1}`}
-          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+          placeholderTextColor={colours[settings.theme].subtext}
           value={instruction}
           onChangeText={(text) => updateInstruction(index, text)}
           multiline={true}
@@ -231,7 +232,7 @@ const ConfirmRecipeScreen = (props) => {
           value={timeToCook}
           onChangeText={(text) => setTimeToCook(text)}
           placeholder="Enter Cooking Time"
-          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+          placeholderTextColor={colours[settings.theme].subtext}
           style={[
             styles.input,
             timeToCook === "" && { borderColor: "red", borderWidth: 2 },

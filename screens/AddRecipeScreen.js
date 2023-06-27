@@ -14,6 +14,7 @@ import addRecipeScreenStyles from "../styles/addRecipeScreenStyles";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 import { SettingsContext } from "../contexts/SettingsContext";
+import colours from "../styles/colours";
 
 const AddRecipeScreen = () => {
   const navigation = useNavigation();
@@ -79,6 +80,7 @@ const AddRecipeScreen = () => {
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Enter Recipe URL"
+          placeholderTextColor={colours[settings.theme].subtext}
           value={url}
           onChangeText={setUrl}
           style={[styles.input, isEmptyUrl && styles.errorInput]}
