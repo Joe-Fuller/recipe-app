@@ -28,13 +28,17 @@ const ConfirmRecipeScreen = (props) => {
 
   // Helper function to handle adding new ingredient
   const addIngredient = () => {
-    setIngredients([...ingredients, { name: "", amount: "", units: "" }]);
+    const ingredientNo = Object.keys(ingredients).length + 1;
+    setIngredients({
+      ...ingredients,
+      ["Ingredient " + ingredientNo]: { name: "", amount: "", units: "" },
+    });
   };
 
   // Helper function to handle updating ingredient
-  const updateIngredient = (index, field, value) => {
-    const updatedIngredients = [...ingredients];
-    updatedIngredients[index][field] = value;
+  const updateIngredient = (ingredientKey, field, value) => {
+    const updatedIngredients = { ...ingredients };
+    updatedIngredients[ingredientKey][field] = value;
     setIngredients(updatedIngredients);
   };
 
@@ -59,7 +63,9 @@ const ConfirmRecipeScreen = (props) => {
               placeholder="Amount"
               placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
               value={ingredientValue.amount}
-              onChangeText={(text) => updateIngredient(index, "amount", text)}
+              onChangeText={(text) =>
+                updateIngredient(ingredientKey, "amount", text)
+              }
               autoCapitalize="none"
             />
             <TextInput
@@ -67,7 +73,9 @@ const ConfirmRecipeScreen = (props) => {
               placeholder="Units"
               placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
               value={ingredientValue.units}
-              onChangeText={(text) => updateIngredient(index, "units", text)}
+              onChangeText={(text) =>
+                updateIngredient(ingredientKey, "units", text)
+              }
               autoCapitalize="none"
             />
             <TextInput
@@ -75,7 +83,9 @@ const ConfirmRecipeScreen = (props) => {
               placeholder="Ingredient Name"
               placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
               value={ingredientValue.name}
-              onChangeText={(text) => updateIngredient(index, "name", text)}
+              onChangeText={(text) =>
+                updateIngredient(ingredientKey, "name", text)
+              }
               autoCapitalize="none"
             />
             <TouchableOpacity
