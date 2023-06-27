@@ -4,7 +4,6 @@ const confirmRecipeScreenStyles = (settings) => {
   return StyleSheet.create({
     formContainer: {
       width: "100%",
-      borderWidth: 1,
       padding: 10,
       marginTop: StatusBar.currentHeight,
     },
@@ -84,6 +83,16 @@ const confirmRecipeScreenStyles = (settings) => {
     buttonContainer: {
       marginTop: 16,
       marginBottom: 50,
+    },
+    settingContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 16,
+    },
+    settingLabel: {
+      fontSize: settings.textSize,
+      marginRight: 8,
+      color: settings.theme === "dark" ? "#ffffff" : "#000000",
     },
   });
 };

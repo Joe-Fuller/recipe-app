@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Switch,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
@@ -26,6 +27,8 @@ const ConfirmRecipeScreen = (props) => {
   const [timeToCook, setTimeToCook] = useState(recipe.timeToCook);
   const [ingredients, setIngredients] = useState(recipe.ingredients);
   const [instructions, setInstructions] = useState(recipe.instructions);
+
+  const [viewOriginalIngredients, setViewOriginalIngredients] = useState(true);
 
   // Helper function to handle adding new ingredient
   const addIngredient = () => {
@@ -54,10 +57,18 @@ const ConfirmRecipeScreen = (props) => {
   const renderIngredients = () => {
     return Object.entries(ingredients).map(
       ([ingredientKey, ingredientValue], index) => (
-        <View key={index} style={styles.ingredientContainer}>
-          <View style={styles.ingredientKeyContainer}>
-            <Text style={styles.ingredientKeyText}>{ingredientKey}</Text>
-          </View>
+        <View
+          key={index}
+          style={[
+            styles.ingredientContainer,
+            { borderWidth: viewOriginalIngredients ? 1 : 0 },
+          ]}
+        >
+          {viewOriginalIngredients ? (
+            <View style={styles.ingredientKeyContainer}>
+              <Text style={styles.ingredientKeyText}>{ingredientKey}</Text>
+            </View>
+          ) : null}
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.amountInput}
@@ -246,6 +257,15 @@ const ConfirmRecipeScreen = (props) => {
           <Text style={commonStyles.buttonText}>Add Instruction</Text>
         </TouchableOpacity>
       </ScrollView>
+      <View style={styles.settingContainer}>
+        <Text style={styles.settingLabel}>View Original Ingredients</Text>
+        <Switch
+          value={viewOriginalIngredients}
+          onValueChange={() => {
+            setViewOriginalIngredients(!viewOriginalIngredients);
+          }}
+        />
+      </View>
       <TouchableOpacity
         style={commonStyles.button}
         onPress={handleConfirmRecipe}
