@@ -72,6 +72,14 @@ function splitIngredientString(ingredientString) {
   // This avoids e.g. corn instead of corn starch
   if (matches.length > 0) {
     console.log("Matching: ", name);
+
+    // Special Case: Jam
+    if (matches.includes("jam")) {
+      console.log("matched with: jam (special case)");
+      name = "jam";
+      return { amount, units, name };
+    }
+
     name = matches.reduce((longest, current) => {
       return current.length > longest.length ? current : longest;
     }, "");
