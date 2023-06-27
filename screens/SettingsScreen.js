@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, Switch, StyleSheet, StatusBar } from "react-native";
+import { View, Text, Switch } from "react-native";
 import { getSettings, setSetting } from "../storage/SettingsStorage";
 import Slider from "@react-native-community/slider";
 import { SettingsContext } from "../contexts/SettingsContext";
@@ -7,6 +7,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AllStorage from "../storage/AllStorage";
 import Dialog from "react-native-dialog";
 import getDynamicStyles from "../styles/commonStyles";
+import settingsScreenStyles from "../styles/settingsScreenStyles";
 
 const SettingsScreen = () => {
   const [theme, setTheme] = useState("");
@@ -14,6 +15,7 @@ const SettingsScreen = () => {
   const { settings, updateSetting } = useContext(SettingsContext);
   const [confirmCancelVisible, setConfirmCancelVisible] = useState(false);
   const commonStyles = getDynamicStyles(settings);
+  const styles = settingsScreenStyles(settings);
 
   useEffect(() => {
     loadSettings();
@@ -88,37 +90,5 @@ const SettingsScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    marginTop: StatusBar.currentHeight,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
-  },
-  settingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  settingLabel: {
-    fontSize: 16,
-    marginRight: 8,
-  },
-  scaryButton: {
-    backgroundColor: "#f70000",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 16,
-    marginTop: 100,
-    width: "100%",
-    borderWidth: 2,
-    borderColor: "000000",
-  },
-});
 
 export default SettingsScreen;
