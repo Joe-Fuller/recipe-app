@@ -3,48 +3,6 @@ const splitIngredientString = require("./splitIngredientString");
 const sortIngredients = require("./sortIngredients");
 const he = require("he");
 import downloadImage from "./downloadImage";
-import { unitCorrelation } from "../constants/units";
-
-// Helper function to find the correlated unit for a given unit
-function findCorrelatedUnit(unit) {
-  for (const [baseUnit, correlatedUnits] of Object.entries(unitCorrelation)) {
-    if (correlatedUnits.includes(unit.toLowerCase())) {
-      return baseUnit;
-    }
-  }
-  return unit; // If no correlation is found, return the original unit
-}
-
-// Helper function to add up ingredient amounts
-function aggregateIngredientAmounts(ingredients) {
-  const aggregatedIngredients = [];
-  const ingredientMap = new Map();
-
-  for (const ingredient of ingredients) {
-    const key = `${ingredient.name} ${findCorrelatedUnit(ingredient.units)}`;
-    const existingIngredient = ingredientMap.get(key);
-
-    if (existingIngredient) {
-      existingIngredient.amount = (
-        parseFloat(eval(existingIngredient.amount)) +
-        parseFloat(eval(ingredient.amount))
-      ).toString();
-    } else {
-      ingredientMap.set(key, {
-        ...ingredient,
-
-        amount: ingredient.amount.toString(),
-        units: findCorrelatedUnit(ingredient.units),
-      });
-    }
-  }
-
-  for (const [, value] of ingredientMap) {
-    aggregatedIngredients.push(value);
-  }
-
-  return aggregatedIngredients;
-}
 
 const combineTime = (prepTime, cookTime) => {
   if (!(prepTime && cookTime)) {
@@ -203,9 +161,6 @@ async function scrapeRecipeFromUrl(url) {
     recipeIngredients.forEach((ingredient) => {
       ingredients[ingredient] = splitIngredientString(ingredient);
     });
-
-    // const aggregatedIngredients = aggregateIngredientAmounts(ingredients);
-    // const sortedIngredients = sortIngredients(aggregatedIngredients);
 
     // Make sure the image is a string, not an array
     if (Array.isArray(recipeImageUrl)) {
