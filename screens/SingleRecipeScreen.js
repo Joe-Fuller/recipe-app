@@ -36,6 +36,7 @@ const SingleRecipeScreen = (props) => {
   const handleEditRecipe = () => {
     navigation.navigate("ConfirmRecipe", {
       recipe,
+      hasOriginalIngredients: false,
     });
   };
 

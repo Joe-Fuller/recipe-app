@@ -22,6 +22,7 @@ const ConfirmRecipeScreen = (props) => {
   const styles = confirmRecipeScreenStyles(settings);
 
   const recipe = props.route.params.recipe;
+  const hasOriginalIngredients = props.route.params.hasOriginalIngredients;
 
   const [recipeName, setRecipeName] = useState(recipe.name);
   const [timeToCook, setTimeToCook] = useState(recipe.timeToCook);
@@ -257,15 +258,17 @@ const ConfirmRecipeScreen = (props) => {
           <Text style={commonStyles.buttonText}>Add Instruction</Text>
         </TouchableOpacity>
       </ScrollView>
-      <View style={styles.settingContainer}>
-        <Text style={styles.settingLabel}>View Original Ingredients</Text>
-        <Switch
-          value={viewOriginalIngredients}
-          onValueChange={() => {
-            setViewOriginalIngredients(!viewOriginalIngredients);
-          }}
-        />
-      </View>
+      {hasOriginalIngredients ? (
+        <View style={styles.settingContainer}>
+          <Text style={styles.settingLabel}>View Original Ingredients</Text>
+          <Switch
+            value={viewOriginalIngredients}
+            onValueChange={() => {
+              setViewOriginalIngredients(!viewOriginalIngredients);
+            }}
+          />
+        </View>
+      ) : null}
       <TouchableOpacity
         style={commonStyles.button}
         onPress={handleConfirmRecipe}
