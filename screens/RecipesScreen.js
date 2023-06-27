@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import RecipeStorage from "../storage/RecipeStorage";
 import getDynamicStyles from "../styles/commonStyles";
+import recipesScreenStyles from "../styles/recipesScreenStyles";
 import RecipeCard from "../components/RecipeCard";
 import { SettingsContext } from "../contexts/SettingsContext";
 
@@ -11,6 +12,7 @@ const RecipesScreen = () => {
   const [recipes, setRecipes] = useState([]);
   const { settings } = useContext(SettingsContext);
   const commonStyles = getDynamicStyles(settings);
+  const styles = recipesScreenStyles(settings);
 
   useEffect(() => {
     const onFocus = navigation.addListener("focus", () => {
@@ -41,13 +43,5 @@ const RecipesScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    marginTop: StatusBar.currentHeight,
-  },
-});
 
 export default RecipesScreen;
