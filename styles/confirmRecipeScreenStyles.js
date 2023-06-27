@@ -16,11 +16,24 @@ const confirmRecipeScreenStyles = (settings) => {
       backgroundColor: settings.theme === "dark" ? "black" : "white",
     },
     ingredientContainer: {
+      marginBottom: 8,
+      borderWidth: 1,
+      borderColor: settings.theme === "dark" ? "white" : "black",
+      padding: 8,
+    },
+    ingredientKeyContainer: {
+      marginBottom: 4,
+    },
+    ingredientKeyText: {
+      color: settings.theme === "dark" ? "white" : "black",
+    },
+    inputContainer: {
       flexDirection: "row",
       alignItems: "center",
-      marginBottom: 8,
     },
     input: {
+      flex: 1,
+      marginRight: 8,
       color: settings.theme === "dark" ? "white" : "black",
     },
     amountInput: {

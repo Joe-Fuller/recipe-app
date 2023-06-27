@@ -47,40 +47,47 @@ const ConfirmRecipeScreen = (props) => {
 
   // Render ingredient inputs
   const renderIngredients = () => {
-    return ingredients.map((ingredient, index) => (
-      <View key={index} style={styles.ingredientContainer}>
-        <TextInput
-          style={styles.amountInput}
-          placeholder="Amount"
-          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
-          value={ingredient.amount}
-          onChangeText={(text) => updateIngredient(index, "amount", text)}
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.unitsInput}
-          placeholder="Units"
-          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
-          value={ingredient.units}
-          onChangeText={(text) => updateIngredient(index, "units", text)}
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.nameInput}
-          placeholder="Ingredient Name"
-          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
-          value={ingredient.name}
-          onChangeText={(text) => updateIngredient(index, "name", text)}
-          autoCapitalize="none"
-        />
-        <TouchableOpacity
-          style={commonStyles.removeButton}
-          onPress={() => removeIngredient(index)}
-        >
-          <Text style={commonStyles.buttonText}>X</Text>
-        </TouchableOpacity>
-      </View>
-    ));
+    return Object.entries(ingredients).map(
+      ([ingredientKey, ingredientValue], index) => (
+        <View key={index} style={styles.ingredientContainer}>
+          <View style={styles.ingredientKeyContainer}>
+            <Text style={styles.ingredientKeyText}>{ingredientKey}</Text>
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.amountInput}
+              placeholder="Amount"
+              placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+              value={ingredientValue.amount}
+              onChangeText={(text) => updateIngredient(index, "amount", text)}
+              autoCapitalize="none"
+            />
+            <TextInput
+              style={styles.unitsInput}
+              placeholder="Units"
+              placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+              value={ingredientValue.units}
+              onChangeText={(text) => updateIngredient(index, "units", text)}
+              autoCapitalize="none"
+            />
+            <TextInput
+              style={styles.nameInput}
+              placeholder="Ingredient Name"
+              placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
+              value={ingredientValue.name}
+              onChangeText={(text) => updateIngredient(index, "name", text)}
+              autoCapitalize="none"
+            />
+            <TouchableOpacity
+              style={commonStyles.removeButton}
+              onPress={() => removeIngredient(index)}
+            >
+              <Text style={commonStyles.buttonText}>X</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+    );
   };
 
   // Helper function to handle adding new instruction

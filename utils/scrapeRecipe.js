@@ -218,7 +218,7 @@ async function scrapeRecipeFromUrl(url) {
     const recipe = {
       name: recipeName,
       timeToCook: recipeTime,
-      ingredients: recipeIngredients,
+      ingredients: ingredients,
       instructions: recipeInstructions,
       imageFilePath: recipeImageFilePath,
     };
