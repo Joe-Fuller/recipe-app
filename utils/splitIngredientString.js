@@ -71,6 +71,8 @@ function splitIngredientString(ingredientString) {
       return current.length > longest.length ? current : longest;
     }, "");
     console.log("matched with: ", name);
+  } else {
+    console.log("No match found for: ", name);
   }
 
   return { amount, units, name };
