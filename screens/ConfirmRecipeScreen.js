@@ -52,18 +52,21 @@ const ConfirmRecipeScreen = (props) => {
         <TextInput
           style={styles.amountInput}
           placeholder="Amount"
+          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           value={ingredient.amount}
           onChangeText={(text) => updateIngredient(index, "amount", text)}
         />
         <TextInput
           style={styles.unitsInput}
           placeholder="Units"
+          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           value={ingredient.units}
           onChangeText={(text) => updateIngredient(index, "units", text)}
         />
         <TextInput
           style={styles.nameInput}
           placeholder="Ingredient Name"
+          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           value={ingredient.name}
           onChangeText={(text) => updateIngredient(index, "name", text)}
         />
@@ -103,6 +106,7 @@ const ConfirmRecipeScreen = (props) => {
         <Text style={styles.instructionIndex}>{index + 1}.</Text>
         <TextInput
           placeholder={`Step ${index + 1}`}
+          placeholderTextColor={settings.theme === "dark" ? "#aaa" : "#ccc"}
           value={instruction}
           onChangeText={(text) => updateInstruction(index, text)}
           multiline={true}
@@ -131,7 +135,7 @@ const ConfirmRecipeScreen = (props) => {
   };
 
   return (
-    <View contentContainerStyle={commonStyles.container}>
+    <View style={styles.container}>
       <ScrollView style={styles.formContainer}>
         <Image
           source={{ uri: recipe.imageFilePath }}
