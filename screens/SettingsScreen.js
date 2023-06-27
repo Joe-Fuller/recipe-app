@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Switch, StyleSheet, StatusBar } from "react-native";
-import { useTheme } from "@react-navigation/native";
 import { getSettings, setSetting } from "../storage/SettingsStorage";
 import Slider from "@react-native-community/slider";
 import { SettingsContext } from "../contexts/SettingsContext";
@@ -39,8 +38,6 @@ const SettingsScreen = () => {
     setTextSize(value);
   };
 
-  const { colors } = useTheme();
-
   const handleResetData = async () => {
     try {
       await AllStorage.resetData();
@@ -51,32 +48,20 @@ const SettingsScreen = () => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.title, { color: colors.text }]}>Settings</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Settings</Text>
       <View style={styles.settingContainer}>
-        <Text style={[styles.settingLabel, { color: colors.text }]}>
-          Dark Mode
-        </Text>
-        <Switch
-          value={theme === "dark"}
-          onValueChange={handleThemeToggle}
-          trackColor={{ false: colors.border, true: colors.primary }}
-          thumbColor={colors.text}
-        />
+        <Text style={styles.settingLabel}>Dark Mode</Text>
+        <Switch value={theme === "dark"} onValueChange={handleThemeToggle} />
       </View>
       <View style={[styles.settingContainer, { width: "100%" }]}>
-        <Text style={[styles.settingLabel, { color: colors.text }]}>
-          Text Size: {textSize}
-        </Text>
+        <Text style={styles.settingLabel}>Text Size: {textSize}</Text>
         <Slider
           value={textSize}
           minimumValue={12}
           maximumValue={24}
           step={2}
           onSlidingComplete={handleTextSizeChange}
-          minimumTrackTintColor={colors.primary}
-          maximumTrackTintColor={colors.border}
-          thumbTintColor={colors.primary}
           style={{ flex: 1 }}
         />
       </View>
