@@ -91,6 +91,8 @@ const ingredientDatabase = {
     "venison",
     "crab",
     "lobster",
+    "extra firm tofu",
+    "firm tofu",
   ],
   dairy: [
     "milk",
@@ -176,6 +178,10 @@ const ingredientDatabase = {
     "orzo",
     "vegetable broth",
     "nutritional yeast",
+    "miso paste",
+    "coconut cream",
+    "tomato paste",
+    "tomato puree",
   ],
   spices: [
     "cumin",
@@ -212,6 +218,9 @@ const ingredientDatabase = {
     "ground chipotle",
     "curry leaves",
     "salt and pepper",
+    "kaffir lime leaves",
+    "chilli flakes",
+    "garam masala",
   ],
   condiments: [
     "ketchup",
