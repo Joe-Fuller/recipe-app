@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colours from "./colours";
 
 const getDynamicStyles = (settings) => {
   return StyleSheet.create({
@@ -7,23 +8,23 @@ const getDynamicStyles = (settings) => {
       justifyContent: "center",
       alignItems: "center",
       padding: 16,
-      backgroundColor: settings.theme === "dark" ? "black" : "white",
+      backgroundColor: colours[settings.theme].background,
     },
     title: {
       fontSize: settings.textSize + 10,
       fontWeight: "bold",
       marginBottom: 32,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     button: {
-      backgroundColor: "#f4511e",
+      backgroundColor: colours[settings.theme].button,
       padding: 10,
       borderRadius: 5,
       margin: 10,
       width: "100%",
     },
     removeButton: {
-      backgroundColor: "#f4511e",
+      backgroundColor: colours[settings.theme].button,
       paddingVertical: 5,
       paddingHorizontal: 10,
       borderRadius: 5,
@@ -33,7 +34,7 @@ const getDynamicStyles = (settings) => {
       alignItems: "center",
     },
     buttonText: {
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
       fontSize: settings.textSize,
       fontWeight: "bold",
       textAlign: "center",

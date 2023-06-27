@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
+import colours from "./colours";
 
 const recipesScreenStyles = (settings) => {
   return StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
-      backgroundColor: settings.theme === "dark" ? "black" : "white",
+      backgroundColor: colours[settings.theme].background,
     },
     inputContainer: {
       flexDirection: "row",
@@ -15,11 +16,11 @@ const recipesScreenStyles = (settings) => {
     input: {
       fontSize: settings.textSize,
       borderWidth: 1,
-      borderColor: settings.theme === "dark" ? "#fff" : "#000",
+      borderColor: colours[settings.theme].subtext,
       borderRadius: 5,
       padding: 10,
       marginRight: 0,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
   });
 };

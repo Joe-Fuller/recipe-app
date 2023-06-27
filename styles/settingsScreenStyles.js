@@ -1,17 +1,18 @@
 import { StyleSheet } from "react-native";
+import colours from "./colours";
 
 const settingsScreenStyles = (settings) => {
   return StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
-      backgroundColor: settings.theme === "dark" ? "#1a1a1a" : "#ffffff",
+      backgroundColor: colours[settings.theme].background,
     },
     title: {
       fontSize: settings.textSize + 10,
       fontWeight: "bold",
       marginBottom: 16,
-      color: settings.theme === "dark" ? "#ffffff" : "#000000",
+      color: colours[settings.theme].text,
     },
     settingContainer: {
       flexDirection: "row",
@@ -21,10 +22,10 @@ const settingsScreenStyles = (settings) => {
     settingLabel: {
       fontSize: settings.textSize,
       marginRight: 8,
-      color: settings.theme === "dark" ? "#ffffff" : "#000000",
+      color: colours[settings.theme].text,
     },
     scaryButton: {
-      backgroundColor: "#ff0000",
+      backgroundColor: colours[settings.theme].button,
       padding: 10,
       borderRadius: 5,
       marginBottom: 16,

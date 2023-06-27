@@ -1,17 +1,18 @@
 import { StyleSheet } from "react-native";
+import colours from "./colours";
 
 const shoppingListScreenStyles = (settings) => {
   return StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
-      backgroundColor: settings.theme === "dark" ? "black" : "white",
+      backgroundColor: colours[settings.theme].background,
     },
     title: {
       fontSize: settings.textSize + 10,
       fontWeight: "bold",
       marginBottom: 16,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     scrollContainer: {
       flex: 1,
@@ -32,11 +33,11 @@ const shoppingListScreenStyles = (settings) => {
     itemIngredient: {
       fontSize: settings.textSize,
       fontWeight: "bold",
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     itemAmount: {
       fontSize: settings.textSize - 2,
-      color: settings.theme === "dark" ? "#A9A9A9" : "#808080",
+      color: colours[settings.theme].subtext,
     },
   });
 };

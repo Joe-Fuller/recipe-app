@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colours from "./colours";
 
 const confirmRecipeScreenStyles = (settings) => {
   return StyleSheet.create({
@@ -11,19 +12,19 @@ const confirmRecipeScreenStyles = (settings) => {
       alignItems: "center",
       justifyContent: "space-between",
       padding: 16,
-      backgroundColor: settings.theme === "dark" ? "black" : "white",
+      backgroundColor: colours[settings.theme].background,
     },
     ingredientContainer: {
       marginBottom: 8,
       borderWidth: 1,
-      borderColor: settings.theme === "dark" ? "white" : "black",
+      borderColor: colours[settings.theme].subtext,
       padding: 8,
     },
     ingredientKeyContainer: {
       marginBottom: 4,
     },
     ingredientKeyText: {
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     inputContainer: {
       flexDirection: "row",
@@ -32,22 +33,22 @@ const confirmRecipeScreenStyles = (settings) => {
     input: {
       flex: 1,
       marginRight: 8,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     amountInput: {
-      width: 50,
+      width: 30,
       marginRight: 8,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     unitsInput: {
-      width: 50,
+      width: 40,
       marginRight: 8,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     nameInput: {
       flex: 1,
       marginRight: 8,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     instructionsContainer: {
       marginTop: 16,
@@ -56,7 +57,7 @@ const confirmRecipeScreenStyles = (settings) => {
       fontSize: 18,
       fontWeight: "bold",
       marginBottom: 8,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     instructionItem: {
       flexDirection: "row",
@@ -67,12 +68,12 @@ const confirmRecipeScreenStyles = (settings) => {
       width: 32,
       marginRight: 8,
       textAlign: "right",
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     instructionText: {
       flex: 1,
       marginRight: 8,
-      color: settings.theme === "dark" ? "white" : "black",
+      color: colours[settings.theme].text,
     },
     image: {
       flex: 1,
@@ -91,7 +92,7 @@ const confirmRecipeScreenStyles = (settings) => {
     settingLabel: {
       fontSize: settings.textSize,
       marginRight: 8,
-      color: settings.theme === "dark" ? "#ffffff" : "#000000",
+      color: colours[settings.theme].text,
     },
   });
 };

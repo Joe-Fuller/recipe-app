@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colours from "./colours";
 
 const navBarStyles = (settings) => {
   return StyleSheet.create({
@@ -7,7 +8,7 @@ const navBarStyles = (settings) => {
       justifyContent: "space-around",
       alignItems: "center",
       height: 60,
-      backgroundColor: "#2c3e50",
+      backgroundColor: colours[settings.theme].button,
     },
     button: {
       paddingHorizontal: 16,
@@ -16,7 +17,7 @@ const navBarStyles = (settings) => {
     buttonText: {
       fontSize: settings.textSize,
       fontWeight: "bold",
-      color: "#ffffff",
+      color: colours[settings.theme].text,
     },
   });
 };
