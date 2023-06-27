@@ -182,6 +182,10 @@ const ingredientDatabase = {
     "coconut cream",
     "tomato paste",
     "tomato puree",
+    "coconut milk",
+    "all purpose flour",
+    "all-purpose flour",
+    "macaroni",
   ],
   spices: [
     "cumin",
@@ -221,6 +225,7 @@ const ingredientDatabase = {
     "kaffir lime leaves",
     "chilli flakes",
     "garam masala",
+    "black pepper",
   ],
   condiments: [
     "ketchup",
@@ -248,6 +253,9 @@ const ingredientDatabase = {
     "fish sauce",
     "mirin",
     "oyster sauce",
+    "dijon mustard",
+    "american mustard",
+    "english mustard",
   ],
   grains: [
     "quinoa",
@@ -267,6 +275,7 @@ const ingredientDatabase = {
     "sorghum",
     "spelt",
     "rye",
+    "bread",
   ],
   nuts: [
     "almonds",
