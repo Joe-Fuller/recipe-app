@@ -146,7 +146,7 @@ const ConfirmRecipeScreen = (props) => {
   const handleConfirmRecipe = async () => {
     await RecipeStorage.saveRecipe(recipeName, {
       timeToCook,
-      ingredients,
+      ingredients: Object.values(ingredients),
       instructions,
       imageFilePath: recipe.imageFilePath,
     });
