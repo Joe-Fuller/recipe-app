@@ -34,6 +34,7 @@ const ingredientDatabase = {
     "red onion",
     "white onion",
     "red cabbage",
+    "shallot",
   ],
   fruits: [
     "apple",
@@ -171,6 +172,10 @@ const ingredientDatabase = {
     "cider vinegar",
     "vanilla pod",
     "golden caster sugar",
+    "capers",
+    "orzo",
+    "vegetable broth",
+    "nutritional yeast",
   ],
   spices: [
     "cumin",
@@ -206,6 +211,7 @@ const ingredientDatabase = {
     "red pepper flakes",
     "ground chipotle",
     "curry leaves",
+    "salt and pepper",
   ],
   condiments: [
     "ketchup",
