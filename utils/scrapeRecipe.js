@@ -26,7 +26,8 @@ function aggregateIngredientAmounts(ingredients) {
 
     if (existingIngredient) {
       existingIngredient.amount = (
-        parseFloat(existingIngredient.amount) + parseFloat(ingredient.amount)
+        parseFloat(eval(existingIngredient.amount)) +
+        parseFloat(eval(ingredient.amount))
       ).toString();
     } else {
       ingredientMap.set(key, {
