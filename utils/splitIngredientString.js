@@ -63,14 +63,16 @@ function splitIngredientString(ingredientString) {
   const matches = [];
   for (const category of Object.values(ingredientDatabase)) {
     for (const ingredient of category) {
-      if (name.includes(ingredient)) {
-        matches.push(ingredient);
+      const match = RegExp(ingredient).exec(name);
+      if (match) {
+        matches.push([match.index, match[0]]);
       }
     }
   }
 
   // If there are any ingredient matches, find the longest one
   // This avoids e.g. corn instead of corn starch
+  // UPDATE: Finds the earliest ingredient match, if there are multiple selects the longest
   if (matches.length > 0) {
     console.log("Matching: ", name);
 
@@ -81,9 +83,16 @@ function splitIngredientString(ingredientString) {
       return { amount, units, name };
     }
 
-    name = matches.reduce((longest, current) => {
-      return current.length > longest.length ? current : longest;
-    }, "");
+    let minIndex = 999;
+    matches.forEach(([index, ingredient]) => {
+      if (index < minIndex) {
+        minIndex = index;
+        name = ingredient;
+      } else if (index === minIndex && ingredient.length > name.length) {
+        name = ingredient;
+      }
+    });
+
     console.log("matched with: ", name);
   } else {
     console.log("No match found for: ", name);
